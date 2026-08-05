@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ME MIND Y — Original Series</title>
+<meta name="description" content="ME MIND Y Original Series. Editing, motion graphics and colour by Chawit Phechamnong.">
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+    @font-face {
+        font-family: 'SF Pro Local';
+        src: url('SF-Pro.ttf') format('truetype-variations'),
+             url('SF-Pro.ttf') format('truetype');
+        font-weight: 1 1000;
+        font-stretch: 30% 150%;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    :root {
+        --font-sf: 'SF Pro Local', -apple-system, BlinkMacSystemFont, 'Inter', 'Noto Sans Thai', sans-serif;
+        --ink: #16161a;
+        --fog: #7b7b82;
+        --paper: #f4f4f5;
+        /* own accent rather than a copy of anyone else's CTA colour */
+        --blue: #16161a;
+    }
+
+    * { font-style: normal; }
+    html { scroll-behavior: smooth; }
+    body {
+        font-family: var(--font-sf);
+        background: #ffffff;
+        color: var(--ink);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        overflow-x: hidden;
+    }
+    ::selection { background: var(--ink); color: #fff; }
+
+    .font-display { font-weight: 700; letter-spacing: -0.035em; }
+    .font-label {
+        font-weight: 500;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+    }
+
+    .buy-btn:hover { background: #2e2e35; transform: scale(1.04); }
+
+    /* ---- reveal ---- */
+    .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 1s cubic-bezier(.16,1,.3,1), transform 1s cubic-bezier(.16,1,.3,1);
+    }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: .1s; }
+    .d2 { transition-delay: .2s; }
+    .d3 { transition-delay: .3s; }
+    @media (prefers-reduced-motion: reduce) {
+        .reveal { transition: none !important; opacity: 1 !important; transform: none !important; }
+        html { scroll-behavior: auto; }
+    }
+
+    /* ---- hero: full-bleed video with overlaid copy ---- */
+    .hero-stage {
+        height: 100vh;
+        min-height: 560px;
+    }
+    .hero-video {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+    /* dark wash bottom-left so the headline stays readable */
+    .hero-scrim {
+        position: absolute;
+        inset: 0;
+        background:
+            linear-gradient(to top, rgba(0,0,0,.72) 0%, rgba(0,0,0,.30) 38%, transparent 68%),
+            linear-gradient(to right, rgba(0,0,0,.45) 0%, transparent 55%);
+        pointer-events: none;
+    }
+    .hero-copy {
+        position: absolute;
+        left: 24px;
+        bottom: 34px;
+        z-index: 10;
+        color: #fff;
+        max-width: 760px;
+        text-shadow: 0 2px 24px rgba(0,0,0,.35);
+    }
+    @media (min-width: 768px) {
+        .hero-copy { left: 56px; bottom: 56px; }
+    }
+
+    /* circular play/pause control */
+    .vid-ctrl {
+        position: absolute;
+        top: 26px;
+        right: 26px;
+        width: 44px;
+        height: 44px;
+        border-radius: 9999px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255,255,255,0.30);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border: 1px solid rgba(255,255,255,0.35);
+        color: #fff;
+        z-index: 20;
+        transition: background-color .3s ease, transform .3s cubic-bezier(.16,1,.3,1);
+    }
+    .vid-ctrl:hover { background: rgba(255,255,255,0.45); transform: scale(1.07); }
+
+    /* ---- sticky contact bar ---- */
+    .buy-bar {
+        position: fixed;
+        left: 50%;
+        bottom: 24px;
+        transform: translateX(-50%) translateY(0);
+        z-index: 60;
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        padding: 10px 10px 10px 24px;
+        border-radius: 9999px;
+        background: rgba(255,255,255,0.82);
+        backdrop-filter: saturate(180%) blur(20px);
+        -webkit-backdrop-filter: saturate(180%) blur(20px);
+        border: 1px solid rgba(0,0,0,0.07);
+        box-shadow: 0 12px 34px rgba(0,0,0,0.14);
+        transition: transform .45s cubic-bezier(.16,1,.3,1), opacity .35s ease;
+    }
+    .buy-bar.is-hidden {
+        transform: translateX(-50%) translateY(160%);
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    /* ---- episode accordion + clip cover ---- */
+    .ep-layout {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 32px;
+        align-items: start;
+    }
+    @media (min-width: 940px) {
+        .ep-layout {
+            grid-template-columns: minmax(300px, 400px) 1fr;
+            gap: 56px;
+            align-items: center;
+        }
+    }
+
+    .ep-list { display: flex; flex-direction: column; gap: 10px; }
+
+    .ep-item {
+        border-radius: 18px;
+        background: #ececee;
+        overflow: hidden;
+        transition: background-color .45s cubic-bezier(.16,1,.3,1);
+    }
+    .ep-item.is-open { background: #e4e4e8; }
+    .ep-item.is-active { background: #16161a; color: #fff; }
+
+    .ep-head {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 15px 22px;
+        background: none;
+        border: 0;
+        cursor: pointer;
+        text-align: left;
+        color: inherit;
+        font-size: 16px;
+        font-weight: 600;
+    }
+    .ep-plus {
+        width: 26px; height: 26px;
+        flex: none;
+        border-radius: 9999px;
+        border: 1.5px solid currentColor;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: .55;
+        /* the + rotates into an × as it opens */
+        transition: transform .45s cubic-bezier(.16,1,.3,1), opacity .35s ease;
+    }
+    .ep-plus svg { width: 13px; height: 13px; }
+    .ep-item.is-open .ep-plus { transform: rotate(135deg); opacity: 1; }
+
+    /* grid-rows 0fr -> 1fr animates height smoothly without hard-coding a value */
+    .ep-panel {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows .5s cubic-bezier(.16,1,.3,1);
+    }
+    .ep-item.is-open .ep-panel { grid-template-rows: 1fr; }
+    .ep-panel-in {
+        overflow: hidden;
+        padding: 0 22px;
+        font-size: 14px;
+        line-height: 1.75;
+        opacity: 0;
+        transition: opacity .4s ease .05s, padding .5s cubic-bezier(.16,1,.3,1);
+        color: rgba(0,0,0,.62);
+    }
+    .ep-item.is-open .ep-panel-in { opacity: 1; padding-bottom: 18px; }
+    .ep-item.is-active .ep-panel-in { color: rgba(255,255,255,.75); }
+    .ep-item.is-active .ep-panel-in strong { color: #fff; }
+
+    /* ---- clip cover ---- */
+    .ep-stage { width: 100%; }
+    .ep-cover {
+        position: relative;
+        display: block;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        border: 0;
+        padding: 0;
+        border-radius: 20px;
+        overflow: hidden;
+        background: #000;
+        cursor: pointer;
+        box-shadow: 0 18px 44px rgba(0,0,0,.18);
+    }
+    @media (min-width: 900px) { .ep-cover { border-radius: 24px; } }
+    .ep-cover img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        /* cross-fade when switching episodes */
+        transition: opacity .4s ease, transform .8s cubic-bezier(.16,1,.3,1);
+    }
+    .ep-cover.is-swapping img { opacity: 0; }
+    .ep-cover:hover img { transform: scale(1.04); }
+
+    .ep-play {
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        width: 72px; height: 72px;
+        border-radius: 9999px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255,255,255,.92);
+        color: #16161a;
+        box-shadow: 0 10px 30px rgba(0,0,0,.3);
+        transition: transform .35s cubic-bezier(.16,1,.3,1), background-color .3s ease;
+    }
+    .ep-play svg { width: 24px; height: 24px; margin-left: 4px; }
+    .ep-cover:hover .ep-play {
+        background: #fff;
+        transform: translate(-50%, -50%) scale(1.08);
+    }
+    .ep-cover iframe {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+    }
+
+    .ep-caption {
+        margin-top: 14px;
+        font-size: 13px;
+        color: var(--fog);
+        transition: opacity .3s ease;
+    }
+
+    /* ---- Floating navbar ---- */
+    .floating-nav {
+        position: fixed;
+        top: 18px;
+        left: 50%;
+        transform: translateX(-50%) translateY(0);
+        z-index: 60;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        max-width: calc(100vw - 24px);
+        padding: 7px 8px 7px 16px;
+        border-radius: 9999px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        background: rgba(10, 10, 10, 0.72);
+        backdrop-filter: saturate(180%) blur(18px);
+        -webkit-backdrop-filter: saturate(180%) blur(18px);
+        box-shadow: 0 2px 6px rgba(0,0,0,0.06),
+                    0 12px 34px rgba(0,0,0,0.28);
+        opacity: 1;
+        transition: transform .45s cubic-bezier(.16,1,.3,1),
+                    opacity .35s ease,
+                    background-color .4s ease,
+                    border-color .4s ease,
+                    box-shadow .4s ease;
+    }
+    /* hidden while scrolling down */
+    .floating-nav.is-hidden {
+        transform: translateX(-50%) translateY(-140%);
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .fn-brand {
+        font-weight: 600;
+        font-size: 15px;
+        letter-spacing: -0.02em;
+        color: #f5f5f7;
+        padding-right: 4px;
+        transition: opacity .3s ease;
+    }
+    .fn-brand:hover { opacity: 0.7; }
+
+    .fn-sep {
+        width: 1px;
+        height: 18px;
+        background: rgba(255,255,255,0.16);
+        margin: 0 6px 0 2px;
+    }
+
+    .fn-item {
+        display: inline-flex;
+        align-items: center;
+        padding: 8px 14px;
+        border-radius: 9999px;
+        font-size: 13px;
+        font-weight: 450;
+        color: #c8c8cc;
+        white-space: nowrap;
+        transition: color .3s ease, background-color .3s ease;
+    }
+    .fn-item:hover { color: #ffffff; background: rgba(255,255,255,0.09); }
+
+    /* text-only nav: tighten the padding so every label still fits on small screens */
+    @media (max-width: 720px) {
+        .floating-nav { gap: 0; padding: 6px; }
+        .fn-brand { padding-left: 8px; font-size: 14px; }
+        .fn-sep { margin: 0 4px 0 2px; }
+        .fn-item { padding: 8px 9px; font-size: 12px; }
+        .fn-cta { padding: 8px 12px; font-size: 12px; margin-left: 2px; }
+    }
+    @media (max-width: 460px) {
+        .fn-brand, .fn-sep { display: none; }
+        .fn-item { padding: 8px 8px; font-size: 11.5px; }
+    }
+
+    .fn-cta {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        padding: 8px 16px;
+        margin-left: 4px;
+        border-radius: 9999px;
+        font-size: 13px;
+        font-weight: 550;
+        color: #1d1d1f;
+        background: #ffffff;
+        white-space: nowrap;
+        overflow: hidden;
+        transition: transform .35s cubic-bezier(.16,1,.3,1);
+    }
+    .fn-cta:hover { transform: scale(1.04); }
+    .fn-cta-glow {
+        position: absolute;
+        left: 12%; right: 12%; bottom: -1px;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, #2997ff, transparent);
+    }
+
+    /* light variant while the nav sits over the white cover */
+    .floating-nav.nav-on-light {
+        background: rgba(255, 255, 255, 0.78);
+        border-color: rgba(0, 0, 0, 0.08);
+        box-shadow: 0 2px 6px rgba(0,0,0,0.04),
+                    0 12px 30px rgba(0,0,0,0.10);
+    }
+    .floating-nav.nav-on-light .fn-brand { color: #1d1d1f; }
+    .floating-nav.nav-on-light .fn-sep   { background: rgba(0,0,0,0.12); }
+    .floating-nav.nav-on-light .fn-item  { color: #424245; }
+    .floating-nav.nav-on-light .fn-item:hover { color: #1d1d1f; background: rgba(0,0,0,0.05); }
+    .floating-nav.nav-on-light .fn-cta   { color: #ffffff; background: #1d1d1f; }
+
+    @media (prefers-reduced-motion: reduce) {
+        .floating-nav { transition: none; }
+    }
+    /* ---- clips: real YouTube thumbnail, swaps to the player on click ---- */
+    .vplay {
+        position: relative;
+        display: block;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        border: 0;
+        padding: 0;
+        border-radius: 18px;
+        overflow: hidden;
+        background: #000;
+        cursor: pointer;
+        transition: transform .5s cubic-bezier(.16,1,.3,1), box-shadow .5s ease;
+    }
+    @media (min-width: 900px) {
+        .vplay { border-radius: 22px; }
+        .vplay.is-feature { border-radius: 26px; }
+    }
+    .vplay img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform .8s cubic-bezier(.16,1,.3,1), filter .5s ease;
+    }
+    .vplay:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 22px 48px rgba(0,0,0,.28);
+    }
+    .vplay:hover img { transform: scale(1.04); filter: brightness(.92); }
+
+    .vplay-btn {
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        width: 64px; height: 64px;
+        border-radius: 9999px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0,0,0,.55);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,.35);
+        color: #fff;
+        transition: background-color .35s ease, transform .35s cubic-bezier(.16,1,.3,1);
+    }
+    .vplay-btn svg { width: 22px; height: 22px; margin-left: 3px; }
+    .vplay:hover .vplay-btn {
+        background: rgba(0,0,0,.72);
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+
+</style>
+</head>
+<body>
+
+<!-- FLOATING NAVBAR -->
+<nav id="navbar" class="floating-nav nav-on-light" aria-label="Main">
+    <a href="index.html" class="fn-brand">Jess.</a>
+    <span class="fn-sep" aria-hidden="true"></span>
+    <a href="#work" class="fn-item"><span>รีแอคชั่น</span></a>
+    <a href="#games" class="fn-item"><span>คลิปเกม</span></a>
+    <a href="xebis.html" class="fn-item"><span>XEBIS</span></a>
+    <a href="mailto:Jesschavit@gmail.com" class="fn-cta">
+        <span>ติดต่อ</span>
+        <span class="fn-cta-glow" aria-hidden="true"></span>
+    </a>
+</nav>
+
+<!-- HERO — full-bleed teaser with overlaid copy -->
+<header id="teaser" class="hero-stage relative w-full overflow-hidden bg-black">
+    <img class="hero-video" src="memindy-hero.jpg" alt="ME MIND Y — More Than Her project">
+
+    <!-- keeps the headline legible over the footage -->
+    <div class="hero-scrim" aria-hidden="true"></div>
+
+
+
+    <!-- headline, bottom-left -->
+    <div class="hero-copy">
+        <p class="text-[19px] md:text-[26px] font-medium mb-3">ME MIND Y</p>
+        <h1 class="font-display text-[26px] sm:text-[36px] md:text-[46px] leading-[1.14] max-w-[20ch]">
+            AI GIRL<br>Original Series
+        </h1>
+    </div>
+</header>
+
+<!-- WORK — episode accordion on the left, clip cover on the right -->
+<section id="work" class="bg-[var(--paper)] px-4 sm:px-6 py-16 md:py-24">
+    <div class="max-w-[1180px] mx-auto">
+
+        <div class="reveal mb-10 md:mb-14 px-2">
+            <p class="font-label text-[10px] text-[var(--fog)] mb-4">รีแอคชั่น · AI Girl Series</p>
+            <h2 class="font-display text-[28px] md:text-[44px] leading-[1.15]">
+                REACTION | จะ Gen จนกว่าจะเจอ
+            </h2>
+        </div>
+
+        <div class="reveal d1 ep-layout">
+
+            <!-- accordion -->
+            <div class="ep-list" id="epList">
+                <div class="ep-item is-open" data-ep="0" data-id="kOps0IATjL8">
+                    <button type="button" class="ep-head" aria-expanded="true">
+                        <span class="ep-plus" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 6v12M6 12h12"/></svg>
+                        </span>
+                        <span class="ep-title">EP.1</span>
+                    </button>
+                    <div class="ep-panel">
+                        <div class="ep-panel-in">
+                            <strong>EP.1</strong> เปิดซีรีส์ด้วยการทำความรู้จักตัวละคร
+                            วางจังหวะการตัดให้คนดูจับอารมณ์ได้ตั้งแต่ต้น
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ep-item" data-ep="1" data-id="5crhZaO-a1g">
+                    <button type="button" class="ep-head" aria-expanded="false">
+                        <span class="ep-plus" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 6v12M6 12h12"/></svg>
+                        </span>
+                        <span class="ep-title">EP.2</span>
+                    </button>
+                    <div class="ep-panel">
+                        <div class="ep-panel-in">
+                            <strong>EP.2</strong> เก็บรีแอคชันสดของแต่ละคน
+                            ตัดสลับมุมกล้องให้เห็นปฏิกิริยาครบทุกจังหวะสำคัญ
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ep-item" data-ep="2" data-id="J5UCy8XhEsI">
+                    <button type="button" class="ep-head" aria-expanded="false">
+                        <span class="ep-plus" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 6v12M6 12h12"/></svg>
+                        </span>
+                        <span class="ep-title">EP.3</span>
+                    </button>
+                    <div class="ep-panel">
+                        <div class="ep-panel-in">
+                            <strong>EP.3</strong> ใส่กราฟิกและซับไตเติลประกอบ
+                            วางตำแหน่งให้อ่านง่ายโดยไม่บังใบหน้าตัวละคร
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ep-item" data-ep="3" data-id="hUk_HaHT3DI">
+                    <button type="button" class="ep-head" aria-expanded="false">
+                        <span class="ep-plus" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 6v12M6 12h12"/></svg>
+                        </span>
+                        <span class="ep-title">EP.4</span>
+                    </button>
+                    <div class="ep-panel">
+                        <div class="ep-panel-in">
+                            <strong>EP.4</strong> คุมโทนสีให้สม่ำเสมอทั้งตอน
+                            แม้ฟุตเทจจะมาจากหลายกล้องและหลายสภาพแสง
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ep-item" data-ep="4" data-id="8s4rK2wJYmE">
+                    <button type="button" class="ep-head" aria-expanded="false">
+                        <span class="ep-plus" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 6v12M6 12h12"/></svg>
+                        </span>
+                        <span class="ep-title">EP.5</span>
+                    </button>
+                    <div class="ep-panel">
+                        <div class="ep-panel-in">
+                            <strong>EP.5</strong> ปิดซีรีส์ด้วยการสรุปเรื่องราว
+                            เร่งจังหวะการตัดในช่วงท้ายให้จบอย่างมีพลัง
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- clip cover -->
+            <div class="ep-stage">
+                <button type="button" class="ep-cover" id="epCover" aria-label="เล่นวิดีโอ">
+                    <img id="epThumb" src="https://i.ytimg.com/vi/kOps0IATjL8/maxresdefault.jpg"
+                         onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/kOps0IATjL8/hqdefault.jpg'"
+                         alt="" draggable="false">
+                    <span class="ep-play" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg>
+                    </span>
+                </button>
+                <p class="ep-caption" id="epCaption">REACTION | AI Girl Series จะ Gen จนกว่าจะเจอ EP.1</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- GAME CLIPS -->
+<section id="games" class="bg-white px-4 sm:px-6 py-16 md:py-24">
+    <div class="max-w-[1180px] mx-auto">
+
+        <div class="reveal mb-10 md:mb-14 px-2">
+            <p class="font-label text-[10px] text-[var(--fog)] mb-4">คลิปเกม</p>
+            <h2 class="font-display text-[28px] md:text-[44px] leading-[1.15]">Game Clips</h2>
+        </div>
+
+        <div class="reveal d1 grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
+            <button type="button" class="vplay" data-id="WTqkUA-kT0I" aria-label="เล่นวิดีโอ">
+                <img src="https://i.ytimg.com/vi/WTqkUA-kT0I/maxresdefault.jpg"
+                     onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/WTqkUA-kT0I/hqdefault.jpg'"
+                     alt="" loading="lazy" draggable="false">
+                <span class="vplay-btn" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg>
+                </span>
+            </button>
+
+            <button type="button" class="vplay" data-id="njunU10JeSc" aria-label="เล่นวิดีโอ">
+                <img src="https://i.ytimg.com/vi/njunU10JeSc/maxresdefault.jpg"
+                     onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/njunU10JeSc/hqdefault.jpg'"
+                     alt="" loading="lazy" draggable="false">
+                <span class="vplay-btn" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg>
+                </span>
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-[var(--paper)] px-6 py-12 text-[12px] text-[var(--fog)]">
+    <div class="max-w-[1060px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+        <p>&copy; 2026 Chawit Phechamnong · ผลงานร่วมกับ ME MIND Y</p>
+        <div class="flex flex-wrap justify-center gap-6">
+            <a href="https://www.behance.net/gallery/247977675/Portfolio-Mrchawit" target="_blank" rel="noopener" class="hover:text-[var(--ink)] transition-colors">Behance</a>
+            <a href="https://www.linkedin.com/in/mr-chawit-phechamnong-76a877404/" target="_blank" rel="noopener" class="hover:text-[var(--ink)] transition-colors">LinkedIn</a>
+        </div>
+    </div>
+</footer>
+
+<!-- STICKY BAR -->
+<div id="buyBar" class="buy-bar">
+    <div class="text-left leading-tight">
+        <p class="font-label text-[9px] text-[var(--fog)]">ME MIND Y</p>
+        <p class="text-[13px] font-semibold">AI GIRL Series</p>
+    </div>
+    <a href="mailto:Jesschavit@gmail.com" class="buy-btn px-5 py-2.5 text-[13px] font-medium whitespace-nowrap">ติดต่องาน</a>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // game clips: thumbnail -> player on click
+        document.querySelectorAll('.vplay').forEach(btn => {
+            const vid = btn.dataset.id;
+            btn.addEventListener('click', () => {
+                const embeddable = location.protocol === 'http:' || location.protocol === 'https:';
+                if (!embeddable) {
+                    window.open('https://www.youtube.com/watch?v=' + vid, '_blank', 'noopener');
+                    return;
+                }
+                if (btn.dataset.loaded) return;
+                btn.dataset.loaded = '1';
+
+                const f = document.createElement('iframe');
+                f.src = 'https://www.youtube-nocookie.com/embed/' + vid +
+                        '?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+                f.title = 'คลิปเกม';
+                f.allow = 'autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+                f.referrerPolicy = 'strict-origin-when-cross-origin';
+                f.allowFullscreen = true;
+                btn.innerHTML = '';
+                btn.appendChild(f);
+                btn.style.cursor = 'default';
+            });
+        });
+
+
+        // Floating navbar: hide on scroll down, reveal on scroll up
+        const navbar = document.getElementById('navbar');
+        if (navbar) {
+            let navLastY = window.scrollY;
+            const TOP_ZONE = 80, DELTA = 6;
+            const navScroll = () => {
+                const y = window.scrollY;
+                if (y <= TOP_ZONE) navbar.classList.remove('is-hidden');
+                else if (Math.abs(y - navLastY) > DELTA) navbar.classList.toggle('is-hidden', y > navLastY);
+                navLastY = y;
+            };
+            navScroll();
+            window.addEventListener('scroll', navScroll, { passive: true });
+            navbar.querySelectorAll('a').forEach(a =>
+                a.addEventListener('click', () => navbar.classList.remove('is-hidden'))
+            );
+        }
+
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // scroll reveal
+        const reveals = document.querySelectorAll('.reveal');
+        if (reduced) {
+            reveals.forEach(el => el.classList.add('active'));
+        } else {
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) { e.target.classList.add('active'); io.unobserve(e.target); }
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -70px 0px' });
+            reveals.forEach(el => io.observe(el));
+        }
+
+        // ---- episode accordion + clip cover ----
+        const epList    = document.getElementById('epList');
+        const epCover   = document.getElementById('epCover');
+        const epThumb   = document.getElementById('epThumb');
+        const epCaption = document.getElementById('epCaption');
+
+        if (epList && epCover) {
+            const items = Array.from(epList.querySelectorAll('.ep-item'));
+            // YouTube needs a real origin; off the disk (file://) it errors, so open a tab instead
+            const canEmbed = location.protocol === 'http:' || location.protocol === 'https:';
+            let current = 0;
+
+            const coverMarkup = (id) =>
+                '<img id="epThumb" src="https://i.ytimg.com/vi/' + id + '/maxresdefault.jpg"' +
+                ' onerror="this.onerror=null;this.src=\'https://i.ytimg.com/vi/' + id + '/hqdefault.jpg\'"' +
+                ' alt="" draggable="false">' +
+                '<span class="ep-play" aria-hidden="true">' +
+                '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg></span>';
+
+            const select = (i) => {
+                if (i === current && !epCover.dataset.playing) return;
+                current = i;
+
+                items.forEach((it, k) => {
+                    const open = k === i;
+                    it.classList.toggle('is-open', open);
+                    it.classList.toggle('is-active', open);
+                    it.querySelector('.ep-head').setAttribute('aria-expanded', String(open));
+                });
+
+                const id = items[i].dataset.id;
+
+                // fade the cover out, swap the artwork, fade back in
+                epCover.classList.add('is-swapping');
+                epCaption.style.opacity = '0';
+                setTimeout(() => {
+                    epCover.innerHTML = coverMarkup(id);
+                    delete epCover.dataset.playing;
+                    epCover.style.cursor = 'pointer';
+                    epCaption.textContent =
+                        'REACTION | AI Girl Series จะ Gen จนกว่าจะเจอ EP.' + (i + 1);
+                    epCover.classList.remove('is-swapping');
+                    epCaption.style.opacity = '1';
+                }, 260);
+            };
+
+            items.forEach((item, i) => {
+                item.querySelector('.ep-head').addEventListener('click', () => select(i));
+            });
+
+            epCover.addEventListener('click', () => {
+                const id = items[current].dataset.id;
+
+                if (!canEmbed) {
+                    window.open('https://www.youtube.com/watch?v=' + id, '_blank', 'noopener');
+                    return;
+                }
+                if (epCover.dataset.playing) return;
+                epCover.dataset.playing = '1';
+
+                const frame = document.createElement('iframe');
+                frame.src = 'https://www.youtube-nocookie.com/embed/' + id +
+                            '?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+                frame.title = 'REACTION | AI Girl Series EP.' + (current + 1);
+                frame.allow = 'autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+                frame.referrerPolicy = 'strict-origin-when-cross-origin';
+                frame.allowFullscreen = true;
+
+                epCover.innerHTML = '';
+                epCover.appendChild(frame);
+                epCover.style.cursor = 'default';
+            });
+
+            if (!canEmbed) epCover.setAttribute('title', 'เปิดใน YouTube');
+        }
+
+        // sticky bar hides while scrolling down
+        const bar = document.getElementById('buyBar');
+        let lastY = window.scrollY;
+        const onScroll = () => {
+            const y = window.scrollY;
+            if (y < 200) bar.classList.add('is-hidden');
+            else if (Math.abs(y - lastY) > 6) bar.classList.toggle('is-hidden', y > lastY);
+            lastY = y;
+        };
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
+    });
+</script>
+
+</body>
+</html>

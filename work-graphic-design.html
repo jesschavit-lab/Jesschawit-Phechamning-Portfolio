@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Graphic Design — Chawit Phechamnong</title>
+<meta name="description" content="ออกแบบโปสเตอร์ คีย์วิชวล และงานกราฟิกสำหรับแคมเปญและอีเวนต์">
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+    @font-face {
+        font-family: 'SF Pro Local';
+        src: url('SF-Pro.ttf') format('truetype-variations'),
+             url('SF-Pro.ttf') format('truetype');
+        font-weight: 1 1000;
+        font-stretch: 30% 150%;
+        font-style: normal;
+        font-display: swap;
+    }
+    :root {
+        --font-sf: 'SF Pro Local', -apple-system, BlinkMacSystemFont, 'Inter', 'Noto Sans Thai', sans-serif;
+        --ink: #16161a;
+        --fog: #7b7b82;
+        --paper: #f4f4f5;
+    }
+    * { font-style: normal; }
+    html { scroll-behavior: smooth; }
+    body {
+        font-family: var(--font-sf);
+        background: #ffffff;
+        color: var(--ink);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    ::selection { background: var(--ink); color: #fff; }
+    .font-display { font-weight: 700; letter-spacing: -0.035em; }
+    .font-label { font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; }
+
+    .top-bar {
+        position: sticky; top: 0; z-index: 50;
+        background: rgba(255,255,255,0.75);
+        backdrop-filter: saturate(180%) blur(20px);
+        -webkit-backdrop-filter: saturate(180%) blur(20px);
+        border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+    .top-bar a { transition: opacity .3s ease; }
+    .top-bar a:hover { opacity: .6; }
+
+    /* ---- work items ---- */
+    .work-media {
+        position: relative;
+        border-radius: 20px;
+        overflow: hidden;
+        background: #000;
+        aspect-ratio: 16 / 9;
+        box-shadow: 0 18px 44px rgba(0,0,0,.16);
+    }
+    .work-media.is-poster { aspect-ratio: 3 / 4; }
+    .work-media img { width:100%; height:100%; object-fit:cover; display:block; }
+    .work-media video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+    /* dim while paused so the button reads */
+    .work-media::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(0,0,0,.20);
+        opacity: 1;
+        pointer-events: none;
+        transition: opacity .4s ease;
+    }
+    .work-media.is-playing::after { opacity: 0; }
+    .work-media.is-poster::after { opacity: 0; }
+
+    .work-play {
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        width: 72px; height: 72px;
+        border-radius: 9999px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255,255,255,.92);
+        border: none;
+        color: #16161a;
+        cursor: pointer;
+        z-index: 5;
+        box-shadow: 0 10px 30px rgba(0,0,0,.3);
+        transition: transform .35s cubic-bezier(.16,1,.3,1), opacity .35s ease, background-color .3s ease;
+    }
+    .work-play svg { width: 24px; height: 24px; }
+    .work-play .ic-play { margin-left: 4px; }
+    .work-play:hover { background: #fff; transform: translate(-50%, -50%) scale(1.08); }
+    .work-media.is-playing .work-play { opacity: 0; }
+    .work-media.is-playing:hover .work-play { opacity: 1; }
+    .hidden { display: none; }
+    /* ---- Floating navbar ---- */
+    .floating-nav {
+        position: fixed;
+        top: 18px;
+        left: 50%;
+        transform: translateX(-50%) translateY(0);
+        z-index: 60;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        max-width: calc(100vw - 24px);
+        padding: 7px 8px 7px 16px;
+        border-radius: 9999px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        background: rgba(10, 10, 10, 0.72);
+        backdrop-filter: saturate(180%) blur(18px);
+        -webkit-backdrop-filter: saturate(180%) blur(18px);
+        box-shadow: 0 2px 6px rgba(0,0,0,0.06),
+                    0 12px 34px rgba(0,0,0,0.28);
+        opacity: 1;
+        transition: transform .45s cubic-bezier(.16,1,.3,1),
+                    opacity .35s ease,
+                    background-color .4s ease,
+                    border-color .4s ease,
+                    box-shadow .4s ease;
+    }
+    /* hidden while scrolling down */
+    .floating-nav.is-hidden {
+        transform: translateX(-50%) translateY(-140%);
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .fn-brand {
+        font-weight: 600;
+        font-size: 15px;
+        letter-spacing: -0.02em;
+        color: #f5f5f7;
+        padding-right: 4px;
+        transition: opacity .3s ease;
+    }
+    .fn-brand:hover { opacity: 0.7; }
+
+    .fn-sep {
+        width: 1px;
+        height: 18px;
+        background: rgba(255,255,255,0.16);
+        margin: 0 6px 0 2px;
+    }
+
+    .fn-item {
+        display: inline-flex;
+        align-items: center;
+        padding: 8px 14px;
+        border-radius: 9999px;
+        font-size: 13px;
+        font-weight: 450;
+        color: #c8c8cc;
+        white-space: nowrap;
+        transition: color .3s ease, background-color .3s ease;
+    }
+    .fn-item:hover { color: #ffffff; background: rgba(255,255,255,0.09); }
+
+    /* text-only nav: tighten the padding so every label still fits on small screens */
+    @media (max-width: 720px) {
+        .floating-nav { gap: 0; padding: 6px; }
+        .fn-brand { padding-left: 8px; font-size: 14px; }
+        .fn-sep { margin: 0 4px 0 2px; }
+        .fn-item { padding: 8px 9px; font-size: 12px; }
+        .fn-cta { padding: 8px 12px; font-size: 12px; margin-left: 2px; }
+    }
+    @media (max-width: 460px) {
+        .fn-brand, .fn-sep { display: none; }
+        .fn-item { padding: 8px 8px; font-size: 11.5px; }
+    }
+
+    .fn-cta {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        padding: 8px 16px;
+        margin-left: 4px;
+        border-radius: 9999px;
+        font-size: 13px;
+        font-weight: 550;
+        color: #1d1d1f;
+        background: #ffffff;
+        white-space: nowrap;
+        overflow: hidden;
+        transition: transform .35s cubic-bezier(.16,1,.3,1);
+    }
+    .fn-cta:hover { transform: scale(1.04); }
+    .fn-cta-glow {
+        position: absolute;
+        left: 12%; right: 12%; bottom: -1px;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, #2997ff, transparent);
+    }
+
+    /* light variant while the nav sits over the white cover */
+    .floating-nav.nav-on-light {
+        background: rgba(255, 255, 255, 0.78);
+        border-color: rgba(0, 0, 0, 0.08);
+        box-shadow: 0 2px 6px rgba(0,0,0,0.04),
+                    0 12px 30px rgba(0,0,0,0.10);
+    }
+    .floating-nav.nav-on-light .fn-brand { color: #1d1d1f; }
+    .floating-nav.nav-on-light .fn-sep   { background: rgba(0,0,0,0.12); }
+    .floating-nav.nav-on-light .fn-item  { color: #424245; }
+    .floating-nav.nav-on-light .fn-item:hover { color: #1d1d1f; background: rgba(0,0,0,0.05); }
+    .floating-nav.nav-on-light .fn-cta   { color: #ffffff; background: #1d1d1f; }
+
+    @media (prefers-reduced-motion: reduce) {
+        .floating-nav { transition: none; }
+    }
+</style>
+</head>
+<body>
+
+<!-- FLOATING NAVBAR -->
+<nav id="navbar" class="floating-nav nav-on-light" aria-label="Main">
+    <a href="index.html" class="fn-brand">Jess.</a>
+    <span class="fn-sep" aria-hidden="true"></span>
+    <a href="index.html#expertise" class="fn-item"><span>ความเชี่ยวชาญ</span></a>
+    <a href="mailto:Jesschavit@gmail.com" class="fn-cta">
+        <span>ติดต่อ</span>
+        <span class="fn-cta-glow" aria-hidden="true"></span>
+    </a>
+</nav>
+
+<header class="max-w-[1024px] mx-auto px-6 pt-20 pb-14 md:pt-28 md:pb-20">
+    <p class="font-label text-[11px] text-[var(--fog)] mb-5">Graphic Design</p>
+    <h1 class="font-display text-[36px] sm:text-5xl md:text-[64px] leading-[1.1] mb-6">กราฟิกที่สื่อสารได้ทันที</h1>
+    <p class="text-lg md:text-xl text-[var(--fog)] max-w-2xl leading-relaxed">ออกแบบโปสเตอร์ คีย์วิชวล และงานกราฟิกสำหรับแคมเปญและอีเวนต์</p>
+</header>
+
+<!-- work -->
+<main class="max-w-[1024px] mx-auto px-6 pb-24 md:pb-32">
+    <div class="grid grid-cols-1 gap-8 md:gap-10">
+
+        <figure class="work-item">
+            <div class="work-media" data-clip>
+                <video src="gfx-work-campaign.mp4" poster="gfx-work-campaign-poster.jpg"
+                       muted loop playsinline preload="none"></video>
+                <button type="button" class="work-play" aria-label="เล่นวิดีโอ" aria-pressed="false">
+                    <svg class="ic-play" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg>
+                    <svg class="ic-pause hidden" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1.2"/><rect x="14" y="4" width="4" height="16" rx="1.2"/></svg>
+                </button>
+            </div>
+            <figcaption class="mt-4">
+                <p class="font-label text-[10px] text-[var(--fog)] mb-2">Campaign Graphics</p>
+                <p class="text-[15px] md:text-[17px] leading-relaxed text-[var(--fog)]">
+                    <strong class="text-[var(--ink)] font-semibold">งานกราฟิกแคมเปญ</strong>
+                    ชุดภาพประชาสัมพันธ์สำหรับแคมเปญ ออกแบบให้อ่านข้อมูลสำคัญได้ครบในภาพเดียว
+                </p>
+            </figcaption>
+        </figure>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-10">
+            <figure class="work-item">
+                <div class="work-media is-poster">
+                    <img src="gfx-poster-alters.jpg" alt="alters — OUT OF NOWHERE poster" loading="lazy">
+                </div>
+                <figcaption class="mt-4">
+                    <p class="font-label text-[10px] text-[var(--fog)] mb-2">Key Visual</p>
+                    <p class="text-[15px] md:text-[17px] leading-relaxed text-[var(--fog)]">
+                        <strong class="text-[var(--ink)] font-semibold">alters — OUT OF NOWHERE</strong>
+                        โปสเตอร์อีเวนต์ให้กับ XEBIS Entertainment วางไทโปกราฟีและพื้นผิวให้ได้อารมณ์ดิบ
+                    </p>
+                </figcaption>
+            </figure>
+
+            <figure class="work-item">
+                <div class="work-media" data-clip>
+                    <video src="gfx-work-collage.mp4" poster="gfx-work-collage-poster.jpg"
+                           muted loop playsinline preload="none"></video>
+                    <button type="button" class="work-play" aria-label="เล่นวิดีโอ" aria-pressed="false">
+                        <svg class="ic-play" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg>
+                        <svg class="ic-pause hidden" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1.2"/><rect x="14" y="4" width="4" height="16" rx="1.2"/></svg>
+                    </button>
+                </div>
+                <figcaption class="mt-4">
+                    <p class="font-label text-[10px] text-[var(--fog)] mb-2">Poster Series</p>
+                    <p class="text-[15px] md:text-[17px] leading-relaxed text-[var(--fog)]">
+                        <strong class="text-[var(--ink)] font-semibold">ชุดโปสเตอร์</strong>
+                        รวมงานออกแบบโปสเตอร์หลายชิ้น คุมสไตล์ให้อยู่ในตระกูลเดียวกัน
+                    </p>
+                </figcaption>
+            </figure>
+        </div>
+    </div>
+</main>
+
+<footer class="bg-[var(--paper)] px-6 py-12 text-[12px] text-[var(--fog)]">
+    <div class="max-w-[1024px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+        <p>&copy; 2026 Chawit Phechamnong</p>
+        <div class="flex flex-wrap justify-center gap-6">
+            <a href="index.html" class="hover:text-[var(--ink)] transition-colors">พอร์ตโฟลิโอ</a>
+            <a href="https://www.behance.net/gallery/247977675/Portfolio-Mrchawit" target="_blank" rel="noopener" class="hover:text-[var(--ink)] transition-colors">Behance</a>
+            <a href="https://www.linkedin.com/in/mr-chawit-phechamnong-76a877404/" target="_blank" rel="noopener" class="hover:text-[var(--ink)] transition-colors">LinkedIn</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+        // work clips: centre button toggles playback
+        document.querySelectorAll('[data-clip]').forEach(box => {
+            const video = box.querySelector('video');
+            const btn   = box.querySelector('.work-play');
+            const play  = box.querySelector('.ic-play');
+            const pause = box.querySelector('.ic-pause');
+            if (!video || !btn) return;
+
+            const paint = () => {
+                const on = !video.paused;
+                box.classList.toggle('is-playing', on);
+                play.classList.toggle('hidden', on);
+                pause.classList.toggle('hidden', !on);
+                btn.setAttribute('aria-pressed', String(on));
+                btn.setAttribute('aria-label', on ? 'หยุดวิดีโอชั่วคราว' : 'เล่นวิดีโอ');
+            };
+
+            btn.addEventListener('click', () => { video.paused ? video.play() : video.pause(); });
+            video.addEventListener('play', paint);
+            video.addEventListener('pause', paint);
+            paint();
+
+            // stop decoding once it scrolls away
+            new IntersectionObserver(([e]) => {
+                if (!e.isIntersecting && !video.paused) video.pause();
+            }, { threshold: 0.15 }).observe(video);
+        });
+
+        // Floating navbar: hide on scroll down, reveal on scroll up
+        const navbar = document.getElementById('navbar');
+        if (navbar) {
+            let navLastY = window.scrollY;
+            const TOP_ZONE = 80, DELTA = 6;
+            const navScroll = () => {
+                const y = window.scrollY;
+                if (y <= TOP_ZONE) navbar.classList.remove('is-hidden');
+                else if (Math.abs(y - navLastY) > DELTA) navbar.classList.toggle('is-hidden', y > navLastY);
+                navLastY = y;
+            };
+            navScroll();
+            window.addEventListener('scroll', navScroll, { passive: true });
+            navbar.querySelectorAll('a').forEach(a =>
+                a.addEventListener('click', () => navbar.classList.remove('is-hidden'))
+            );
+        }
+});
+</script>
+</body>
+</html>

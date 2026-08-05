@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jess. — Portfolio</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Inter (Latin) + Noto Sans Thai (Thai script) — body fallback -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* SF Pro is a variable font — axes: wght 1–1000, wdth 30–150, opsz 17–28.
+           The ranges must be declared or the browser won't reach the heavy weights. */
+        @font-face {
+            font-family: 'SF Pro Local';
+            src: url('SF-Pro.ttf') format('truetype-variations'),
+                 url('SF-Pro.ttf') format('truetype');
+            font-weight: 1 1000;
+            font-stretch: 30% 150%;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        :root {
+            --bg: #000000;
+            --surface: #1d1d1f;
+            --text-primary: #f5f5f7;
+            --text-secondary: #86868b;
+            --text-tertiary: #6e6e73;
+            --hairline: rgba(255, 255, 255, 0.08);
+            --accent: #2997ff;
+            /* SF Pro everywhere; Noto Sans Thai only catches Thai glyphs SF Pro doesn't cover */
+            --font-sf: 'SF Pro Local', -apple-system, BlinkMacSystemFont, 'Inter', 'Noto Sans Thai', sans-serif;
+            --font-display: var(--font-sf);
+            --font-label: var(--font-sf);
+        }
+
+        * { font-style: normal; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-primary);
+            font-family: 'SF Pro Local', -apple-system, BlinkMacSystemFont, 'Inter', 'Noto Sans Thai', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        h1, h2, h3 {
+            font-family: 'SF Pro Local', -apple-system, BlinkMacSystemFont, 'Inter', 'Noto Sans Thai', sans-serif;
+            letter-spacing: -0.03em;
+        }
+
+        /* Big cinematic headlines */
+        .font-display {
+            font-family: var(--font-sf);
+            letter-spacing: -0.03em;
+            font-weight: 700;
+        }
+
+        /* Small eyebrow / sub-heading labels — generously spaced so it never crowds */
+        .font-label {
+            font-family: var(--font-sf);
+            letter-spacing: 0.12em !important;
+            font-weight: 500;
+        }
+
+        /* Thai copy: SF Pro leads, Noto Sans Thai fills in the Thai glyphs */
+        .font-thai {
+            font-family: var(--font-sf);
+            letter-spacing: 0 !important;
+        }
+
+        ::selection {
+            background-color: var(--text-primary);
+            color: #000000;
+        }
+
+        a:focus-visible, button:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 4px;
+            border-radius: 4px;
+        }
+
+        /* Reveal animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .delay-100 { transition-delay: 0.1s; }
+        .delay-200 { transition-delay: 0.2s; }
+        .delay-300 { transition-delay: 0.3s; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { transition: none !important; opacity: 1 !important; transform: none !important; }
+            html { scroll-behavior: auto; }
+        }
+
+        /* ---- Floating navbar ---- */
+        .floating-nav {
+            position: fixed;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%) translateY(0);
+            z-index: 60;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            max-width: calc(100vw - 24px);
+            padding: 7px 8px 7px 16px;
+            border-radius: 9999px;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            background: rgba(10, 10, 10, 0.72);
+            backdrop-filter: saturate(180%) blur(18px);
+            -webkit-backdrop-filter: saturate(180%) blur(18px);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06),
+                        0 12px 34px rgba(0,0,0,0.28);
+            opacity: 1;
+            transition: transform .45s cubic-bezier(.16,1,.3,1),
+                        opacity .35s ease,
+                        background-color .4s ease,
+                        border-color .4s ease,
+                        box-shadow .4s ease;
+        }
+        /* hidden while scrolling down */
+        .floating-nav.is-hidden {
+            transform: translateX(-50%) translateY(-140%);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .fn-brand {
+            font-weight: 600;
+            font-size: 15px;
+            letter-spacing: -0.02em;
+            color: #f5f5f7;
+            padding-right: 4px;
+            transition: opacity .3s ease;
+        }
+        .fn-brand:hover { opacity: 0.7; }
+
+        .fn-sep {
+            width: 1px;
+            height: 18px;
+            background: rgba(255,255,255,0.16);
+            margin: 0 6px 0 2px;
+        }
+
+        .fn-item {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 14px;
+            border-radius: 9999px;
+            font-size: 13px;
+            font-weight: 450;
+            color: #c8c8cc;
+            white-space: nowrap;
+            transition: color .3s ease, background-color .3s ease;
+        }
+        .fn-item:hover { color: #ffffff; background: rgba(255,255,255,0.09); }
+
+        /* text-only nav: tighten the padding so every label still fits on small screens */
+        @media (max-width: 720px) {
+            .floating-nav { gap: 0; padding: 6px; }
+            .fn-brand { padding-left: 8px; font-size: 14px; }
+            .fn-sep { margin: 0 4px 0 2px; }
+            .fn-item { padding: 8px 9px; font-size: 12px; }
+            .fn-cta { padding: 8px 12px; font-size: 12px; margin-left: 2px; }
+        }
+        @media (max-width: 460px) {
+            .fn-brand, .fn-sep { display: none; }
+            .fn-item { padding: 8px 8px; font-size: 11.5px; }
+        }
+
+        .fn-cta {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 16px;
+            margin-left: 4px;
+            border-radius: 9999px;
+            font-size: 13px;
+            font-weight: 550;
+            color: #1d1d1f;
+            background: #ffffff;
+            white-space: nowrap;
+            overflow: hidden;
+            transition: transform .35s cubic-bezier(.16,1,.3,1);
+        }
+        .fn-cta:hover { transform: scale(1.04); }
+        .fn-cta-glow {
+            position: absolute;
+            left: 12%; right: 12%; bottom: -1px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #2997ff, transparent);
+        }
+
+        /* light variant while the nav sits over the white cover */
+        .floating-nav.nav-on-light {
+            background: rgba(255, 255, 255, 0.78);
+            border-color: rgba(0, 0, 0, 0.08);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04),
+                        0 12px 30px rgba(0,0,0,0.10);
+        }
+        .floating-nav.nav-on-light .fn-brand { color: #1d1d1f; }
+        .floating-nav.nav-on-light .fn-sep   { background: rgba(0,0,0,0.12); }
+        .floating-nav.nav-on-light .fn-item  { color: #424245; }
+        .floating-nav.nav-on-light .fn-item:hover { color: #1d1d1f; background: rgba(0,0,0,0.05); }
+        .floating-nav.nav-on-light .fn-cta   { color: #ffffff; background: #1d1d1f; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .floating-nav { transition: none; }
+        }
+
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .hero-accent {
+            background: linear-gradient(180deg, #ffffff 0%, #a1a1a6 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .glow-button {
+            position: relative;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+        }
+        .glow-button::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 9999px;
+            padding: 1px;
+            background: linear-gradient(to right, #ffffff, #555555);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            opacity: 0.4;
+            transition: opacity 0.3s ease;
+        }
+        .glow-button:hover::after { opacity: 1; }
+
+        /* ---- COVER (white editorial) — scoped to the hero only ---- */
+        .hero-light {
+            background: #ffffff;
+            color: #1d1d1f;
+        }
+        .hero-light ::selection { background: #1d1d1f; color: #ffffff; }
+
+        /* character stage */
+        #charStage { position: relative; }
+        #charStage .base { display: block; width: 100%; height: auto; }
+
+        /* ---- Wordmark: outlined text, gradient revealed by the cursor ---- */
+        .hero-word-svg {
+            width: 100%;
+            height: auto;
+            display: block;
+            overflow: visible;
+        }
+        .hw-text {
+            /* SF Pro only — no fallback, so the wordmark can never render in a substitute face */
+            font-family: 'SF Pro Local', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-weight: 800;
+            /* drive the variable axes directly: heavy weight, slightly wide, display optical size */
+            font-variation-settings: 'wght' 800, 'wdth' 105, 'opsz' 28;
+            /* sized so the natural width is already close to textLength —
+               that way "spacing" only nudges the tracking and never squeezes a glyph */
+            font-size: 52px;
+            text-anchor: middle;
+            dominant-baseline: middle;
+        }
+        /* faint permanent outline */
+        .hw-base {
+            fill: transparent;
+            stroke: #e3e3e7;
+            stroke-width: 0.55;
+            vector-effect: non-scaling-stroke;
+        }
+        /* colourful layer, only visible through the cursor mask */
+        .hw-reveal {
+            fill: transparent;
+            stroke: url(#hwGradient);
+            stroke-width: 0.9;
+            mask: url(#hwMask);
+            opacity: 0;
+            transition: opacity .35s ease;
+        }
+        #heroWord:hover .hw-reveal { opacity: 1; }
+
+        /* ---- Apple-style slider (Expertise) ---- */
+        .ap-track { scroll-behavior: smooth; }
+        .ap-slide { height: 460px; }
+        @media (min-width: 640px) { .ap-slide { height: 540px; } }
+        @media (min-width: 768px) { .ap-slide { height: 620px; } }
+
+        /* play / pause — round light button with a dark glyph */
+        .ap-ctrl {
+            background: #ebebef;
+            color: #55555c;
+            border: none;
+            cursor: pointer;
+            transition: background-color .3s ease, transform .3s cubic-bezier(.16,1,.3,1);
+        }
+        .ap-ctrl:hover { background: #e0e0e6; color: #1d1d1f; transform: scale(1.06); }
+        .ap-ctrl:active { transform: scale(.96); }
+
+        /* dot track — separate light pill beside the button */
+        .ap-dots {
+            background: #ebebef;
+            border: none;
+        }
+
+        /* dots: small grey circles; the active one stretches into a dark bar */
+        .exp-dot {
+            width: 7px;
+            height: 7px;
+            border: none;
+            padding: 0;
+            border-radius: 9999px;
+            background: #b6b6bd;
+            cursor: pointer;
+            transition: width .45s cubic-bezier(.16,1,.3,1), background-color .3s ease;
+        }
+        .exp-dot:hover { background: #8e8e96; }
+        .exp-dot.is-active {
+            width: 34px;
+            background: #55555c;
+        }
+
+        /* "ดูผลงาน" — solid dark pill so it reads clearly over any slide image */
+        .slide-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 13px 26px;
+            border-radius: 9999px;
+            background: #1d1d1f;
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 600;
+            line-height: 1;
+            white-space: nowrap;
+            border: 1px solid rgba(255,255,255,0.16);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.22),
+                        0 0 0 1px rgba(0,0,0,0.04);
+            transition: transform .35s cubic-bezier(.16,1,.3,1),
+                        background-color .3s ease,
+                        box-shadow .35s ease,
+                        gap .3s cubic-bezier(.16,1,.3,1);
+        }
+        .slide-cta:hover {
+            background: #000000;
+            transform: translateY(-2px) scale(1.03);
+            gap: 12px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.3);
+        }
+        .slide-cta:active { transform: translateY(0) scale(.98); }
+        .slide-cta svg { flex: none; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .exp-dot, .ap-ctrl, .slide-cta { transition: none; }
+        }
+
+        /* ---- Spotlight glow card (vanilla port of GlowCard / spotlight-card.tsx) ----
+           Pointer position is published as --x/--xp/--y/--yp on :root, and the hue is
+           derived from --base + (--xp * --spread), exactly as in the React original. */
+        [data-glow] {
+            --radius: 32;
+            --border: 2;
+            --backdrop: hsl(0 0% 60% / 0.10);
+            --backup-border: var(--backdrop);
+            --size: 320;
+            --outer: 1;
+            --border-size: calc(var(--border, 2) * 1px);
+            --spotlight-size: calc(var(--size, 150) * 1px);
+            --hue: calc(var(--base) + (var(--xp, 0) * var(--spread, 0)));
+
+            position: relative;
+            border-radius: calc(var(--radius) * 1px);
+            border: var(--border-size) solid var(--backup-border);
+            background-image: radial-gradient(
+                var(--spotlight-size) var(--spotlight-size) at
+                calc(var(--x, 0) * 1px) calc(var(--y, 0) * 1px),
+                hsl(var(--hue, 210) calc(var(--saturation, 100) * 1%) calc(var(--lightness, 70) * 1%) / var(--bg-spot-opacity, 0.10)),
+                transparent);
+            background-color: var(--backdrop, transparent);
+            background-size: calc(100% + (2 * var(--border-size))) calc(100% + (2 * var(--border-size)));
+            background-position: 50% 50%;
+            background-attachment: fixed;
+            touch-action: none;
+        }
+
+        [data-glow]::before,
+        [data-glow]::after {
+            pointer-events: none;
+            content: "";
+            position: absolute;
+            inset: calc(var(--border-size) * -1);
+            border: var(--border-size) solid transparent;
+            border-radius: calc(var(--radius) * 1px);
+            background-attachment: fixed;
+            background-size: calc(100% + (2 * var(--border-size))) calc(100% + (2 * var(--border-size)));
+            background-repeat: no-repeat;
+            background-position: 50% 50%;
+            mask: linear-gradient(transparent, transparent), linear-gradient(white, white);
+            -webkit-mask: linear-gradient(transparent, transparent), linear-gradient(white, white);
+            mask-clip: padding-box, border-box;
+            -webkit-mask-clip: padding-box, border-box;
+            mask-composite: intersect;
+            -webkit-mask-composite: source-in, xor;
+        }
+
+        /* coloured border spotlight */
+        [data-glow]::before {
+            background-image: radial-gradient(
+                calc(var(--spotlight-size) * 0.75) calc(var(--spotlight-size) * 0.75) at
+                calc(var(--x, 0) * 1px) calc(var(--y, 0) * 1px),
+                hsl(var(--hue, 210) calc(var(--saturation, 100) * 1%) calc(var(--lightness, 50) * 1%) / var(--border-spot-opacity, 1)),
+                transparent 100%);
+            filter: brightness(2);
+            z-index: 3;
+        }
+
+        /* white hot-spot on the border */
+        [data-glow]::after {
+            background-image: radial-gradient(
+                calc(var(--spotlight-size) * 0.5) calc(var(--spotlight-size) * 0.5) at
+                calc(var(--x, 0) * 1px) calc(var(--y, 0) * 1px),
+                hsl(0 100% 100% / var(--border-light-opacity, 1)),
+                transparent 100%);
+            z-index: 3;
+        }
+
+        /* the soft outer bloom */
+        [data-glow] [data-glow] {
+            position: absolute;
+            inset: 0;
+            will-change: filter;
+            opacity: var(--outer, 1);
+            border-radius: calc(var(--radius) * 1px);
+            border-width: calc(var(--border-size) * 20);
+            filter: blur(calc(var(--border-size) * 10));
+            background: none;
+            pointer-events: none;
+            border: none;
+        }
+        [data-glow] > [data-glow]::before {
+            inset: -10px;
+            border-width: 10px;
+        }
+
+        /* ---- Social pills ---- */
+        .social-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: 9999px;
+            border: 1px solid rgba(255,255,255,0.14);
+            background: rgba(255,255,255,0.04);
+            color: #c8c8cc;
+            font-size: 13px;
+            font-weight: 500;
+            transition: transform .35s cubic-bezier(.16,1,.3,1),
+                        background-color .35s ease, color .35s ease, border-color .35s ease;
+        }
+        .social-pill svg { width: 15px; height: 15px; flex: none; }
+        .social-pill:hover {
+            transform: translateY(-2px);
+            background: #ffffff;
+            border-color: #ffffff;
+            color: #1d1d1f;
+        }
+
+        /* ---- Software chips: 3D app icons that lift and name themselves on hover ---- */
+        .app-chip {
+            position: relative;
+            width: 58px;
+            height: 58px;
+            border-radius: 16px;
+            background: #141416;
+            border: 1px solid rgba(255,255,255,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: default;
+            transition: transform .45s cubic-bezier(.16,1,.3,1),
+                        border-color .45s ease,
+                        background-color .45s ease,
+                        box-shadow .45s ease;
+        }
+        .app-chip img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            filter: saturate(.55) brightness(.9);
+            transition: filter .45s ease, transform .45s cubic-bezier(.16,1,.3,1);
+        }
+        .app-chip:hover {
+            transform: translateY(-6px);
+            background: #1b1b1f;
+            border-color: rgba(255,255,255,0.22);
+            box-shadow: 0 14px 30px rgba(0,0,0,0.55);
+        }
+        .app-chip:hover img { filter: none; transform: scale(1.1); }
+
+        /* tooltip-style name */
+        .app-chip-name {
+            position: absolute;
+            bottom: calc(100% + 8px);
+            left: 50%;
+            transform: translateX(-50%) translateY(4px);
+            padding: 4px 9px;
+            border-radius: 7px;
+            background: #f5f5f7;
+            color: #1d1d1f;
+            font-size: 10.5px;
+            font-style: normal;
+            font-weight: 550;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .3s ease, transform .3s cubic-bezier(.16,1,.3,1);
+            z-index: 5;
+        }
+        .app-chip:hover .app-chip-name {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* ---- Logo marquee (vanilla port of InfiniteSlider) ----
+           The track holds two identical copies of the list, so translating it by
+           exactly -50% loops seamlessly — the same trick the React version uses. */
+        .marquee { position: relative; overflow: hidden; }
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            align-items: center;
+            gap: 64px;
+            animation: marqueeScroll 34s linear infinite;
+        }
+        .marquee:hover .marquee-track { animation-play-state: paused; }
+        @keyframes marqueeScroll {
+            from { transform: translate3d(0, 0, 0); }
+            to   { transform: translate3d(-50%, 0, 0); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .marquee-track { animation: none; }
+        }
+
+        .marquee-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 104px;
+            flex: none;
+        }
+        .marquee-item img {
+            height: 76px;
+            width: auto;
+            filter: grayscale(1) brightness(1.35);
+            opacity: .55;
+            transition: filter .45s ease, opacity .45s ease, transform .45s cubic-bezier(.16,1,.3,1);
+        }
+        .marquee-item:hover img {
+            filter: none;
+            opacity: 1;
+            transform: scale(1.12);
+        }
+
+        /* ---- ProgressiveBlur: stacked layers, each masked to a slice of the edge
+           and blurred a little more than the last, giving a smooth falloff ---- */
+        .pblur {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            width: 180px;
+            pointer-events: none;
+            z-index: 2;
+        }
+        .pblur span {
+            position: absolute;
+            inset: 0;
+            display: block;
+        }
+        .pblur-left  { left: 0; }
+        .pblur-right { right: 0; }
+        .client-panel { transition: transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+        .client-panel img { transition: transform 1s cubic-bezier(0.16,1,0.3,1), filter 1s ease; }
+        .client-panel:hover img { transform: scale(1.08); }
+        /* inner surface clips the artwork; the glow lives on the wrapper so it isn't cut off */
+        .client-surface {
+            position: relative;
+            border-radius: 30px;
+            overflow: hidden;
+            height: 100%;
+        }
+        .client-panel:hover { transform: translateY(-4px); }
+    </style>
+</head>
+<body class="antialiased relative">
+
+    <!-- FLOATING NAVBAR — hides on scroll down, reveals on scroll up -->
+    <nav id="navbar" class="floating-nav" aria-label="Main">
+        <a href="#cover" class="fn-brand">Jess.</a>
+        <span class="fn-sep" aria-hidden="true"></span>
+
+        <a href="#expertise" class="fn-item"><span>Expertise</span></a>
+        <a href="#about" class="fn-item"><span>About</span></a>
+        <a href="#clients" class="fn-item"><span>Clients</span></a>
+        <a href="#contact" class="fn-item"><span>Contact</span></a>
+
+        <a href="mailto:Jesschavit@gmail.com" class="fn-cta">
+            <span>Hire me</span>
+            <span class="fn-cta-glow" aria-hidden="true"></span>
+        </a>
+    </nav>
+
+    <!-- COVER — full-bleed white landing: grey wordmark + character, nothing else -->
+    <section id="cover" class="hero-light relative min-h-screen w-full flex items-end justify-center overflow-hidden">
+
+        <!-- BIG WORDMARK — outlined text, gradient follows the cursor -->
+        <h1 id="heroWord" class="absolute left-1/2 -translate-x-1/2 top-[26%] z-10 w-[min(96vw,1180px)] select-none">
+            <svg class="hero-word-svg" viewBox="0 0 300 80" xmlns="http://www.w3.org/2000/svg" aria-label="Jesschawit">
+                <defs>
+                    <!-- objectBoundingBox = maps across the text's own box, so the first
+                         letter (J) and last letter (t) always land on a real colour stop -->
+                    <linearGradient id="hwGradient" x1="0" y1="0" x2="1" y2="0">
+                        <stop offset="0%"   stop-color="#eab308"/>
+                        <stop offset="25%"  stop-color="#ef4444"/>
+                        <stop offset="50%"  stop-color="#3b82f6"/>
+                        <stop offset="75%"  stop-color="#06b6d4"/>
+                        <stop offset="100%" stop-color="#8b5cf6"/>
+                    </linearGradient>
+                    <!-- generous radius + solid white core so edge letters (J, t) light up fully -->
+                    <radialGradient id="hwRevealMask" gradientUnits="userSpaceOnUse" r="34%" cx="50%" cy="50%">
+                        <stop offset="0%"   stop-color="white"/>
+                        <stop offset="55%"  stop-color="white"/>
+                        <stop offset="100%" stop-color="black"/>
+                    </radialGradient>
+                    <!-- oversized so no glyph can ever fall outside the mask and lose its colour -->
+                    <mask id="hwMask" maskUnits="userSpaceOnUse" x="-400" y="-300" width="1100" height="700">
+                        <rect x="-400" y="-300" width="1100" height="700" fill="url(#hwRevealMask)"/>
+                    </mask>
+                </defs>
+
+                <!-- lengthAdjust="spacing" fits the width by tracking only, so glyph shapes stay true -->
+                <text x="150" y="50%" textLength="284" lengthAdjust="spacing" class="hw-text hw-base">Jesschawit</text>
+                <text x="150" y="50%" textLength="284" lengthAdjust="spacing" class="hw-text hw-reveal">Jesschawit</text>
+            </svg>
+        </h1>
+
+        <!-- 3D CHARACTER — centered, flush to the bottom edge, in front of the word -->
+        <div id="charStage" class="relative z-20 w-[min(94vw,560px)]">
+            <img src="hero-3d-character.png" alt="Chawit Phechamnong 3D character"
+                 class="base select-none" draggable="false">
+        </div>
+    </section>
+
+    <section id="about" class="py-32 md:py-44 bg-black relative border-t border-white/10">
+        <div class="absolute inset-0 opacity-5 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-14 md:gap-10">
+
+                <!-- Column 1: Greeting + Education + Software -->
+                <div class="md:col-span-4 reveal flex flex-col gap-10">
+                    <div>
+                        <h2 class="font-display text-4xl md:text-5xl font-black text-white tracking-tight mb-6">Hey, friends!</h2>
+                        <p class="text-[#86868b] font-thai leading-relaxed mb-4">
+                            ผมคือ <strong class="text-white">ชวิศ เพชรจำนงค์ (เจส)</strong> — Creative Video Editor และ Motion Graphics Designer ที่ประจำอยู่ในกรุงเทพฯ
+                        </p>
+                        <p class="text-[#86868b] font-thai leading-relaxed">
+                            มีประสบการณ์กว่า 4 ปีในงานโปรดักชันระดับ Broadcast และโซเชียลมีเดีย เชี่ยวชาญการตัดต่อคลิปสั้นให้ดึงดูดสายตา พร้อมรักษามาตรฐานกราฟิกและการทำ Color Grading (S-Log3) ระดับมืออาชีพ
+                        </p>
+                    </div>
+
+                    <div>
+                        <h4 class="font-label text-white text-[13px] uppercase mb-5">Education</h4>
+                        <div class="flex flex-col gap-5">
+                            <div class="flex flex-col border-b border-white/5 pb-5">
+                                <span class="font-label text-[#2997ff] text-xs uppercase mb-1">2022 – Present</span>
+                                <h5 class="text-white font-medium leading-snug">Rajamangala University of Technology Srivijaya</h5>
+                                <p class="text-[#86868b] text-sm mt-1">Bachelor's in Mass Communication Technology</p>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="font-label text-[#2997ff] text-xs uppercase mb-1">2019 – 2022</span>
+                                <h5 class="text-white font-medium leading-snug">Phatthalung Technical College</h5>
+                                <p class="text-[#86868b] text-sm mt-1">Computer Graphics &amp; Computer Repair</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="font-label text-white text-[13px] uppercase mb-5">Software</h4>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="app-chip" title="Photoshop">
+                                <img src="logo-ps.png" alt="Photoshop" loading="lazy" draggable="false">
+                                <em class="app-chip-name">Photoshop</em>
+                            </span>
+                            <span class="app-chip" title="Illustrator">
+                                <img src="logo-ai.png" alt="Illustrator" loading="lazy" draggable="false">
+                                <em class="app-chip-name">Illustrator</em>
+                            </span>
+                            <span class="app-chip" title="Premiere Pro">
+                                <img src="logo-pr.png" alt="Premiere Pro" loading="lazy" draggable="false">
+                                <em class="app-chip-name">Premiere Pro</em>
+                            </span>
+                            <span class="app-chip" title="After Effects">
+                                <img src="logo-ae.png" alt="After Effects" loading="lazy" draggable="false">
+                                <em class="app-chip-name">After Effects</em>
+                            </span>
+                            <span class="app-chip" title="DaVinci Resolve">
+                                <img src="logo-davinci.png" alt="DaVinci Resolve" loading="lazy" draggable="false">
+                                <em class="app-chip-name">DaVinci Resolve</em>
+                            </span>
+                            <span class="app-chip" title="Blender">
+                                <img src="logo-blender.png" alt="Blender" loading="lazy" draggable="false">
+                                <em class="app-chip-name">Blender</em>
+                            </span>
+                            <span class="app-chip" title="Figma">
+                                <img src="logo-figma.png" alt="Figma" loading="lazy" draggable="false">
+                                <em class="app-chip-name">Figma</em>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 2: Work Experience + Interests -->
+                <div class="md:col-span-4 reveal delay-100 flex flex-col gap-10">
+                    <div>
+                        <h4 class="font-label text-white text-[13px] uppercase mb-5">Work Experience</h4>
+                        <div class="flex flex-col gap-6">
+                            <div class="flex flex-col border-b border-white/5 pb-6">
+                                <span class="font-label text-[#2997ff] text-xs uppercase mb-1">Sep 2025 – Mar 2026</span>
+                                <h5 class="text-white font-medium text-lg">Video Editor &amp; Graphic Designer</h5>
+                                <p class="text-[#86868b] text-sm mb-3">Workpoint Entertainment</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="font-label text-[10px] px-3 py-1.5 bg-[#1d1d1f] ring-1 ring-white/10 text-zinc-300 rounded-full uppercase">Short-Form Editing</span>
+                                    <span class="font-label text-[10px] px-3 py-1.5 bg-[#1d1d1f] ring-1 ring-white/10 text-zinc-300 rounded-full uppercase">Motion Graphics</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col border-b border-white/5 pb-6">
+                                <span class="font-label text-[#2997ff] text-xs uppercase mb-1">Sep 2023 – Mar 2024</span>
+                                <h5 class="text-white font-medium text-lg">Broadcast Graphic Designer</h5>
+                                <p class="text-[#86868b] text-sm mb-3">MCOT, Phatthalung</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="font-label text-[10px] px-3 py-1.5 bg-[#1d1d1f] ring-1 ring-white/10 text-zinc-300 rounded-full uppercase">Live Graphics</span>
+                                    <span class="font-label text-[10px] px-3 py-1.5 bg-[#1d1d1f] ring-1 ring-white/10 text-zinc-300 rounded-full uppercase">Streaming Systems</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="font-label text-[#2997ff] text-xs uppercase mb-1">Jan 2023 – May 2023</span>
+                                <h5 class="text-white font-medium text-lg">Political Media Designer &amp; Video Editor</h5>
+                                <p class="text-[#86868b] text-sm mb-3">Freelance</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="font-label text-[10px] px-3 py-1.5 bg-[#1d1d1f] ring-1 ring-white/10 text-zinc-300 rounded-full uppercase">Campaign Graphics</span>
+                                    <span class="font-label text-[10px] px-3 py-1.5 bg-[#1d1d1f] ring-1 ring-white/10 text-zinc-300 rounded-full uppercase">Live Streaming</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="font-label text-white text-[13px] uppercase mb-5">Interests</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-[#86868b] text-sm">Photography</span>
+                            <span class="text-[#3a3a3c]">·</span>
+                            <span class="text-[#86868b] text-sm">Music</span>
+                            <span class="text-[#3a3a3c]">·</span>
+                            <span class="text-[#86868b] text-sm">Film &amp; Anime</span>
+                            <span class="text-[#3a3a3c]">·</span>
+                            <span class="text-[#86868b] text-sm">Coffee</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 3: Portrait -->
+                <div class="md:col-span-4 reveal delay-200 relative">
+                    <div class="w-full aspect-[3/4] md:aspect-auto md:h-full rounded-[2rem] overflow-hidden ring-1 ring-white/10 shadow-2xl relative group min-h-[420px]">
+                        <img src="chawit-headshot-web.jpg" alt="Chawit Phechamnong" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter brightness-90">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+
+                        <div class="absolute bottom-6 left-6 right-6 flex items-center justify-between gap-3">
+                            <div class="bg-black/60 backdrop-blur-md ring-1 ring-white/15 rounded-2xl px-4 py-2.5">
+                                <p class="font-label text-[10px] text-zinc-400 uppercase leading-none mb-1">Hello, I'm</p>
+                                <p class="text-white font-semibold leading-none">Jess</p>
+                            </div>
+                            <span class="font-label text-[10px] text-zinc-400 uppercase bg-black/60 backdrop-blur-md ring-1 ring-white/15 rounded-full px-3 py-2">Bangkok, TH</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERTISE — Apple product-page slider -->
+    <section id="expertise" class="py-20 md:py-28 bg-black overflow-hidden relative border-t border-white/10">
+        <div class="max-w-[1180px] mx-auto px-6 mb-10 md:mb-12">
+            <h2 class="font-display reveal text-4xl md:text-5xl font-black text-white">
+                ความเชี่ยวชาญ. <span class="text-[#86868b] font-thai font-normal">สิ่งที่เราสร้างสรรค์</span>
+            </h2>
+        </div>
+
+        <div class="reveal delay-100 max-w-[1180px] mx-auto px-4 sm:px-6">
+            <div id="expTrack" class="ap-track flex overflow-x-auto snap-x snap-mandatory hide-scrollbar rounded-[22px] md:rounded-[28px]">
+                <!-- Slide 1 -->
+                <article class="ap-slide snap-center shrink-0 w-full relative overflow-hidden bg-gradient-to-br from-[#f3d9c4] to-[#e0b48c]">
+                    <img src="expertise-motion.jpg" alt="Motion graphics editing"
+                         class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+                    <div class="absolute inset-0 bg-gradient-to-r from-white/85 via-white/40 to-transparent pointer-events-none"></div>
+                    <div class="relative z-10 h-full flex items-center pointer-events-none">
+                        <div class="max-w-[560px] px-8 sm:px-12 md:px-16">
+                            <p class="font-label text-[11px] md:text-xs uppercase text-[#1d1d1f]/60 mb-4">Motion Graphics</p>
+                            <h3 class="font-thai text-[#1d1d1f] text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.25] mb-5">
+                                แอนิเมชันที่<br>สะกดทุกสายตา
+                            </h3>
+                            <p class="font-thai text-[#1d1d1f]/70 text-base md:text-lg leading-relaxed mb-6">สร้างภาพเคลื่อนไหวที่ดึงดูดและสื่อสารได้อย่างทรงพลัง</p>
+                            <a href="work-motion-graphics.html" class="slide-cta pointer-events-auto">
+                                ดูผลงาน
+                                <svg width="7" height="11" viewBox="0 0 8 12" fill="none"><path d="M1 1l5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                <!-- Slide 2 -->
+                <article class="ap-slide snap-center shrink-0 w-full relative overflow-hidden bg-gradient-to-br from-[#cfd9e8] to-[#9fb3cd]">
+                    <img src="expertise-editing.jpg" alt="Video editing timeline"
+                         class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+                    <div class="absolute inset-0 bg-gradient-to-r from-white/85 via-white/40 to-transparent pointer-events-none"></div>
+                    <div class="relative z-10 h-full flex items-center pointer-events-none">
+                        <div class="max-w-[560px] px-8 sm:px-12 md:px-16">
+                            <p class="font-label text-[11px] md:text-xs uppercase text-[#1d1d1f]/60 mb-4">Video Editing</p>
+                            <h3 class="font-thai text-[#1d1d1f] text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.25] mb-5">
+                                ตัดต่อระดับ<br>ภาพยนตร์
+                            </h3>
+                            <p class="font-thai text-[#1d1d1f]/70 text-base md:text-lg leading-relaxed mb-6">เล่าเรื่องราวผ่านวิดีโอด้วยเทคนิคตัดต่อขั้นสูง</p>
+                            <a href="work-video-editing.html" class="slide-cta pointer-events-auto">
+                                ดูผลงาน
+                                <svg width="7" height="11" viewBox="0 0 8 12" fill="none"><path d="M1 1l5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                <!-- Slide 3 -->
+                <article class="ap-slide snap-center shrink-0 w-full relative overflow-hidden bg-gradient-to-br from-[#e6d2e8] to-[#bfa0c9]">
+                    <img src="expertise-graphic.jpg" alt="Graphic design workspace"
+                         class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+                    <div class="absolute inset-0 bg-gradient-to-r from-white/85 via-white/40 to-transparent pointer-events-none"></div>
+                    <div class="relative z-10 h-full flex items-center pointer-events-none">
+                        <div class="max-w-[560px] px-8 sm:px-12 md:px-16">
+                            <p class="font-label text-[11px] md:text-xs uppercase text-[#1d1d1f]/60 mb-4">Graphic Design</p>
+                            <h3 class="font-thai text-[#1d1d1f] text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.25] mb-5">
+                                กราฟิกที่<br>สื่อสารได้ทันที
+                            </h3>
+                            <p class="font-thai text-[#1d1d1f]/70 text-base md:text-lg leading-relaxed mb-6">ออกแบบโปสเตอร์ คีย์วิชวล และงานกราฟิกสำหรับแคมเปญและอีเวนต์</p>
+                            <a href="work-graphic-design.html" class="slide-cta pointer-events-auto">
+                                ดูผลงาน
+                                <svg width="7" height="11" viewBox="0 0 8 12" fill="none"><path d="M1 1l5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                <!-- Slide 4 -->
+                <article class="ap-slide snap-center shrink-0 w-full relative overflow-hidden bg-gradient-to-br from-[#d3e4dc] to-[#9dc0b0]">
+                    <!-- clip box: poster until played, centre play button -->
+                    <img src="expertise-3d.jpg" alt="Design workspace illustration"
+                         class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+                    <div class="absolute inset-0 bg-gradient-to-r from-white/85 via-white/40 to-transparent pointer-events-none"></div>
+                    <div class="relative z-10 h-full flex items-center pointer-events-none">
+                        <div class="max-w-[560px] px-8 sm:px-12 md:px-16">
+                            <p class="font-label text-[11px] md:text-xs uppercase text-[#1d1d1f]/60 mb-4">3D &amp; Animation</p>
+                            <h3 class="font-thai text-[#1d1d1f] text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.25] mb-5">
+                                มิติใหม่<br>ของงานดีไซน์
+                            </h3>
+                            <p class="font-thai text-[#1d1d1f]/70 text-base md:text-lg leading-relaxed mb-6">เนรมิตวัตถุและสภาพแวดล้อม 3 มิติ สมจริงเหนือจินตนาการ</p>
+                            <a href="work-3d-animation.html" class="slide-cta pointer-events-auto">
+                                ดูผลงาน
+                                <svg width="7" height="11" viewBox="0 0 8 12" fill="none"><path d="M1 1l5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                <!-- Slide 5 -->
+                <article class="ap-slide snap-center shrink-0 w-full relative overflow-hidden bg-gradient-to-br from-[#f0dcc8] to-[#d2ab84]">
+                    <img src="expertise-model3d.jpg" alt="3D model illustration"
+                         class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+                    <div class="absolute inset-0 bg-gradient-to-r from-white/85 via-white/40 to-transparent pointer-events-none"></div>
+                    <div class="relative z-10 h-full flex items-center pointer-events-none">
+                        <div class="max-w-[560px] px-8 sm:px-12 md:px-16">
+                            <p class="font-label text-[11px] md:text-xs uppercase text-[#1d1d1f]/60 mb-4">Model 3D</p>
+                            <h3 class="font-thai text-[#1d1d1f] text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.25] mb-5">
+                                ปั้นโมเดล<br>ให้จับต้องได้
+                            </h3>
+                            <p class="font-thai text-[#1d1d1f]/70 text-base md:text-lg leading-relaxed mb-6">ขึ้นโมเดล จัดแสง และเรนเดอร์วัตถุสามมิติให้สมจริง</p>
+                            <a href="work-3d-model.html" class="slide-cta pointer-events-auto">
+                                ดูผลงาน
+                                <svg width="7" height="11" viewBox="0 0 8 12" fill="none"><path d="M1 1l5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- controls -->
+            <div class="flex items-center justify-center gap-3 mt-7">
+                <button id="expPlay" type="button" aria-label="Pause slideshow" aria-pressed="true"
+                        class="ap-ctrl w-11 h-11 rounded-full flex items-center justify-center shrink-0">
+                    <svg id="expIconPause" width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1.2"/><rect x="14" y="4" width="4" height="16" rx="1.2"/></svg>
+                    <svg id="expIconPlay" class="hidden ml-[2px]" width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg>
+                </button>
+
+                <div class="ap-dots flex items-center gap-3.5 px-5 h-11 rounded-full">
+                    <button type="button" class="exp-dot" data-index="0" aria-label="Go to slide 1"></button>
+                    <button type="button" class="exp-dot" data-index="1" aria-label="Go to slide 2"></button>
+                    <button type="button" class="exp-dot" data-index="2" aria-label="Go to slide 3"></button>
+                    <button type="button" class="exp-dot" data-index="3" aria-label="Go to slide 4"></button>
+                    <button type="button" class="exp-dot" data-index="4" aria-label="Go to slide 5"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- FEATURED CLIENTS: XEBIS + ME MIND Y -->
+    <section id="clients" class="relative w-full bg-black border-t border-white/10 py-24 md:py-32">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 mb-14 text-center md:text-left">
+            <p class="font-label reveal text-xs md:text-sm text-zinc-400 uppercase mb-4">Featured Clients</p>
+            <h2 class="font-display reveal delay-100 text-4xl md:text-6xl font-black tracking-tight text-white">Trusted by the Industry.</h2>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <!-- XEBIS — spotlight glow, blue hue -->
+            <div class="client-panel reveal min-h-[70vh]" data-glow style="--base: 220; --spread: 200;">
+                <div data-glow></div>
+                <div class="client-surface flex items-end">
+                    <div class="absolute inset-0 w-full h-full z-0 overflow-hidden">
+                        <img src="xebis.png" class="w-full h-full object-cover scale-110 blur-sm opacity-60" alt="XEBIS Entertainment">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/70"></div>
+                    </div>
+                    <div class="relative z-10 flex flex-col items-start text-left px-8 py-10 md:px-12 md:py-14 w-full">
+                        <p class="font-label text-[11px] md:text-xs text-zinc-400 uppercase mb-4">Talent &amp; Entertainment</p>
+                        <h3 class="font-display text-white text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.05] mb-8 drop-shadow-2xl uppercase">
+                            XEBIS<br>ENTERTAINMENT
+                        </h3>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <a href="xebis.html" class="px-7 py-3.5 bg-white text-black rounded-full font-semibold text-base hover:scale-105 transition-all duration-300 shadow-[0_0_30px_rgba(255,255,255,0.3)] hover:shadow-[0_0_50px_rgba(255,255,255,0.5)] inline-block text-center">
+                                Learn more
+                            </a>
+                            <a href="xebis.html#teaser" class="px-7 py-3.5 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-full font-semibold text-base hover:bg-white/20 transition-colors duration-300 inline-block text-center">
+                                Watch Full Film
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ME MIND Y — spotlight glow, purple hue -->
+            <div class="client-panel reveal delay-100 min-h-[70vh]" data-glow style="--base: 280; --spread: 300;">
+                <div data-glow></div>
+                <div class="client-surface flex items-end">
+                    <div class="absolute inset-0 w-full h-full z-0 overflow-hidden">
+                        <img src="memindy-poster.png" class="w-full h-full object-cover object-top scale-110 blur-sm opacity-60" alt="ME MIND Y — AI Girl">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/70"></div>
+                    </div>
+                    <div class="relative z-10 flex flex-col items-start text-left px-8 py-10 md:px-12 md:py-14 w-full">
+                        <p class="font-label text-[11px] md:text-xs text-zinc-400 uppercase mb-4">Talent &amp; Entertainment</p>
+                        <h3 class="font-display text-white text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.05] mb-8 drop-shadow-2xl uppercase">
+                            ME MIND Y
+                        </h3>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <a href="memindy.html" class="px-7 py-3.5 bg-white text-black rounded-full font-semibold text-base hover:scale-105 transition-all duration-300 shadow-[0_0_30px_rgba(255,255,255,0.3)] hover:shadow-[0_0_50px_rgba(255,255,255,0.5)] inline-block text-center">
+                                Learn more
+                            </a>
+                            <a href="memindy.html#work" class="px-7 py-3.5 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-full font-semibold text-base hover:bg-white/20 transition-colors duration-300 inline-block text-center">
+                                Watch Full Film
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- TOOLKIT — infinite logo marquee with progressive blur edges -->
+    <section id="toolkit" class="bg-black border-t border-white/10 py-16 md:py-24">
+        <div class="max-w-[1180px] mx-auto px-6 lg:px-8">
+            <p class="font-label reveal text-[11px] md:text-xs uppercase text-[#86868b] text-center mb-10">Tools I work with every day</p>
+        </div>
+
+        <div class="reveal delay-100 marquee relative h-[120px] w-full">
+            <div class="marquee-track h-full">
+                <div class="marquee-item"><img src="logo-ps.png" alt="Adobe Photoshop" title="Adobe Photoshop" loading="lazy" draggable="false"></div>
+                <div class="marquee-item"><img src="logo-ai.png" alt="Adobe Illustrator" title="Adobe Illustrator" loading="lazy" draggable="false"></div>
+                <div class="marquee-item"><img src="logo-pr.png" alt="Adobe Premiere Pro" title="Adobe Premiere Pro" loading="lazy" draggable="false"></div>
+                <div class="marquee-item"><img src="logo-ae.png" alt="Adobe After Effects" title="Adobe After Effects" loading="lazy" draggable="false"></div>
+                <div class="marquee-item"><img src="logo-davinci.png" alt="DaVinci Resolve" title="DaVinci Resolve" loading="lazy" draggable="false"></div>
+                <div class="marquee-item"><img src="logo-blender.png" alt="Blender" title="Blender" loading="lazy" draggable="false"></div>
+                <div class="marquee-item"><img src="logo-figma.png" alt="Figma" title="Figma" loading="lazy" draggable="false"></div>
+                <div class="marquee-item"><img src="logo-ps.png" alt="Adobe Photoshop" title="Adobe Photoshop" loading="lazy" draggable="false"></div>
+                <div class="marquee-item"><img src="logo-ai.png" alt="Adobe Illustrator" title="Adobe Illustrator" loading="lazy" draggable="false"></div>
+                <div class="marquee-item"><img src="logo-pr.png" alt="Adobe Premiere Pro" title="Adobe Premiere Pro" loading="lazy" draggable="false"></div>
+                <div class="marquee-item"><img src="logo-ae.png" alt="Adobe After Effects" title="Adobe After Effects" loading="lazy" draggable="false"></div>
+                <div class="marquee-item"><img src="logo-davinci.png" alt="DaVinci Resolve" title="DaVinci Resolve" loading="lazy" draggable="false"></div>
+                <div class="marquee-item"><img src="logo-blender.png" alt="Blender" title="Blender" loading="lazy" draggable="false"></div>
+                <div class="marquee-item"><img src="logo-figma.png" alt="Figma" title="Figma" loading="lazy" draggable="false"></div>
+            </div>
+
+            <div class="pblur pblur-left" aria-hidden="true">
+            <span style="-webkit-mask-image:linear-gradient(270deg, rgba(255,255,255,0) 0.00%, rgba(255,255,255,1) 11.11%, rgba(255,255,255,1) 22.22%, rgba(255,255,255,0) 33.33%);mask-image:linear-gradient(270deg, rgba(255,255,255,0) 0.00%, rgba(255,255,255,1) 11.11%, rgba(255,255,255,1) 22.22%, rgba(255,255,255,0) 33.33%);-webkit-backdrop-filter:blur(0.00px);backdrop-filter:blur(0.00px);"></span>
+            <span style="-webkit-mask-image:linear-gradient(270deg, rgba(255,255,255,0) 11.11%, rgba(255,255,255,1) 22.22%, rgba(255,255,255,1) 33.33%, rgba(255,255,255,0) 44.44%);mask-image:linear-gradient(270deg, rgba(255,255,255,0) 11.11%, rgba(255,255,255,1) 22.22%, rgba(255,255,255,1) 33.33%, rgba(255,255,255,0) 44.44%);-webkit-backdrop-filter:blur(1.00px);backdrop-filter:blur(1.00px);"></span>
+            <span style="-webkit-mask-image:linear-gradient(270deg, rgba(255,255,255,0) 22.22%, rgba(255,255,255,1) 33.33%, rgba(255,255,255,1) 44.44%, rgba(255,255,255,0) 55.56%);mask-image:linear-gradient(270deg, rgba(255,255,255,0) 22.22%, rgba(255,255,255,1) 33.33%, rgba(255,255,255,1) 44.44%, rgba(255,255,255,0) 55.56%);-webkit-backdrop-filter:blur(2.00px);backdrop-filter:blur(2.00px);"></span>
+            <span style="-webkit-mask-image:linear-gradient(270deg, rgba(255,255,255,0) 33.33%, rgba(255,255,255,1) 44.44%, rgba(255,255,255,1) 55.56%, rgba(255,255,255,0) 66.67%);mask-image:linear-gradient(270deg, rgba(255,255,255,0) 33.33%, rgba(255,255,255,1) 44.44%, rgba(255,255,255,1) 55.56%, rgba(255,255,255,0) 66.67%);-webkit-backdrop-filter:blur(3.00px);backdrop-filter:blur(3.00px);"></span>
+            <span style="-webkit-mask-image:linear-gradient(270deg, rgba(255,255,255,0) 44.44%, rgba(255,255,255,1) 55.56%, rgba(255,255,255,1) 66.67%, rgba(255,255,255,0) 77.78%);mask-image:linear-gradient(270deg, rgba(255,255,255,0) 44.44%, rgba(255,255,255,1) 55.56%, rgba(255,255,255,1) 66.67%, rgba(255,255,255,0) 77.78%);-webkit-backdrop-filter:blur(4.00px);backdrop-filter:blur(4.00px);"></span>
+            <span style="-webkit-mask-image:linear-gradient(270deg, rgba(255,255,255,0) 55.56%, rgba(255,255,255,1) 66.67%, rgba(255,255,255,1) 77.78%, rgba(255,255,255,0) 88.89%);mask-image:linear-gradient(270deg, rgba(255,255,255,0) 55.56%, rgba(255,255,255,1) 66.67%, rgba(255,255,255,1) 77.78%, rgba(255,255,255,0) 88.89%);-webkit-backdrop-filter:blur(5.00px);backdrop-filter:blur(5.00px);"></span>
+            <span style="-webkit-mask-image:linear-gradient(270deg, rgba(255,255,255,0) 66.67%, rgba(255,255,255,1) 77.78%, rgba(255,255,255,1) 88.89%, rgba(255,255,255,0) 100.00%);mask-image:linear-gradient(270deg, rgba(255,255,255,0) 66.67%, rgba(255,255,255,1) 77.78%, rgba(255,255,255,1) 88.89%, rgba(255,255,255,0) 100.00%);-webkit-backdrop-filter:blur(6.00px);backdrop-filter:blur(6.00px);"></span>
+            <span style="-webkit-mask-image:linear-gradient(270deg, rgba(255,255,255,0) 77.78%, rgba(255,255,255,1) 88.89%, rgba(255,255,255,1) 100.00%, rgba(255,255,255,0) 111.11%);mask-image:linear-gradient(270deg, rgba(255,255,255,0) 77.78%, rgba(255,255,255,1) 88.89%, rgba(255,255,255,1) 100.00%, rgba(255,255,255,0) 111.11%);-webkit-backdrop-filter:blur(7.00px);backdrop-filter:blur(7.00px);"></span>
+            </div>
+            <div class="pblur pblur-right" aria-hidden="true">
+            <span style="-webkit-mask-image:linear-gradient(90deg, rgba(255,255,255,0) 0.00%, rgba(255,255,255,1) 11.11%, rgba(255,255,255,1) 22.22%, rgba(255,255,255,0) 33.33%);mask-image:linear-gradient(90deg, rgba(255,255,255,0) 0.00%, rgba(255,255,255,1) 11.11%, rgba(255,255,255,1) 22.22%, rgba(255,255,255,0) 33.33%);-webkit-backdrop-filter:blur(0.00px);backdrop-filter:blur(0.00px);"></span>
+            <span style="-webkit-mask-image:linear-gradient(90deg, rgba(255,255,255,0) 11.11%, rgba(255,255,255,1) 22.22%, rgba(255,255,255,1) 33.33%, rgba(255,255,255,0) 44.44%);mask-image:linear-gradient(90deg, rgba(255,255,255,0) 11.11%, rgba(255,255,255,1) 22.22%, rgba(255,255,255,1) 33.33%, rgba(255,255,255,0) 44.44%);-webkit-backdrop-filter:blur(1.00px);backdrop-filter:blur(1.00px);"></span>
+            <span style="-webkit-mask-image:linear-gradient(90deg, rgba(255,255,255,0) 22.22%, rgba(255,255,255,1) 33.33%, rgba(255,255,255,1) 44.44%, rgba(255,255,255,0) 55.56%);mask-image:linear-gradient(90deg, rgba(255,255,255,0) 22.22%, rgba(255,255,255,1) 33.33%, rgba(255,255,255,1) 44.44%, rgba(255,255,255,0) 55.56%);-webkit-backdrop-filter:blur(2.00px);backdrop-filter:blur(2.00px);"></span>
+            <span style="-webkit-mask-image:linear-gradient(90deg, rgba(255,255,255,0) 33.33%, rgba(255,255,255,1) 44.44%, rgba(255,255,255,1) 55.56%, rgba(255,255,255,0) 66.67%);mask-image:linear-gradient(90deg, rgba(255,255,255,0) 33.33%, rgba(255,255,255,1) 44.44%, rgba(255,255,255,1) 55.56%, rgba(255,255,255,0) 66.67%);-webkit-backdrop-filter:blur(3.00px);backdrop-filter:blur(3.00px);"></span>
+            <span style="-webkit-mask-image:linear-gradient(90deg, rgba(255,255,255,0) 44.44%, rgba(255,255,255,1) 55.56%, rgba(255,255,255,1) 66.67%, rgba(255,255,255,0) 77.78%);mask-image:linear-gradient(90deg, rgba(255,255,255,0) 44.44%, rgba(255,255,255,1) 55.56%, rgba(255,255,255,1) 66.67%, rgba(255,255,255,0) 77.78%);-webkit-backdrop-filter:blur(4.00px);backdrop-filter:blur(4.00px);"></span>
+            <span style="-webkit-mask-image:linear-gradient(90deg, rgba(255,255,255,0) 55.56%, rgba(255,255,255,1) 66.67%, rgba(255,255,255,1) 77.78%, rgba(255,255,255,0) 88.89%);mask-image:linear-gradient(90deg, rgba(255,255,255,0) 55.56%, rgba(255,255,255,1) 66.67%, rgba(255,255,255,1) 77.78%, rgba(255,255,255,0) 88.89%);-webkit-backdrop-filter:blur(5.00px);backdrop-filter:blur(5.00px);"></span>
+            <span style="-webkit-mask-image:linear-gradient(90deg, rgba(255,255,255,0) 66.67%, rgba(255,255,255,1) 77.78%, rgba(255,255,255,1) 88.89%, rgba(255,255,255,0) 100.00%);mask-image:linear-gradient(90deg, rgba(255,255,255,0) 66.67%, rgba(255,255,255,1) 77.78%, rgba(255,255,255,1) 88.89%, rgba(255,255,255,0) 100.00%);-webkit-backdrop-filter:blur(6.00px);backdrop-filter:blur(6.00px);"></span>
+            <span style="-webkit-mask-image:linear-gradient(90deg, rgba(255,255,255,0) 77.78%, rgba(255,255,255,1) 88.89%, rgba(255,255,255,1) 100.00%, rgba(255,255,255,0) 111.11%);mask-image:linear-gradient(90deg, rgba(255,255,255,0) 77.78%, rgba(255,255,255,1) 88.89%, rgba(255,255,255,1) 100.00%, rgba(255,255,255,0) 111.11%);-webkit-backdrop-filter:blur(7.00px);backdrop-filter:blur(7.00px);"></span>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="bg-black text-white py-24 md:py-32 border-t border-white/10 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col items-center text-center">
+            <h2 class="font-display reveal text-4xl md:text-7xl font-black tracking-tight mb-8">มาเริ่มงานกันเถอะ</h2>
+            <p class="reveal delay-100 text-[#86868b] text-lg md:text-2xl mb-14 max-w-xl font-thai leading-relaxed">
+                เปิดรับงานฟรีแลนซ์ โปรเจกต์ความร่วมมือ และงานจัดจ้างทั่วไป มาร่วมสร้างสิ่งพิเศษไปด้วยกัน
+            </p>
+            <a href="mailto:Jesschavit@gmail.com" class="reveal delay-200 glow-button inline-block bg-white text-black font-medium text-lg md:text-xl px-9 py-4 md:px-10 md:py-5 rounded-full hover:scale-105 transition-transform duration-300 font-thai shadow-2xl">
+                ติดต่อ: Jesschavit@gmail.com
+            </a>
+            <p class="reveal delay-200 font-label text-zinc-500 text-xs md:text-sm mt-8 tracking-[0.1em]">095-028-1375 &nbsp;·&nbsp; Bangkok, Thailand</p>
+
+            <!-- social links -->
+            <div class="reveal delay-300 flex flex-wrap items-center justify-center gap-3 mt-10">
+                <a href="https://www.behance.net/gallery/247977675/Portfolio-Mrchawit" target="_blank" rel="noopener" class="social-pill">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.1 5.5c1.2 0 2.1.3 2.7.8.6.5.9 1.3.9 2.3 0 .6-.14 1.1-.43 1.5-.28.4-.7.74-1.24.98.75.21 1.3.6 1.66 1.14.36.55.54 1.2.54 1.98 0 .62-.11 1.16-.33 1.62-.22.45-.53.83-.92 1.12-.4.3-.86.5-1.38.64-.52.13-1.07.2-1.63.2H2V5.5h7.1zM8.7 10.6c.5 0 .9-.12 1.22-.35.32-.24.48-.62.48-1.14 0-.29-.05-.53-.16-.72a1.1 1.1 0 0 0-.43-.44 1.8 1.8 0 0 0-.62-.22 4 4 0 0 0-.73-.06H5.1v2.93h3.6zm.2 5.36c.28 0 .55-.03.8-.09.26-.05.48-.15.68-.28.2-.14.35-.32.47-.55.11-.23.17-.53.17-.88 0-.7-.2-1.2-.59-1.5-.39-.3-.9-.45-1.55-.45H5.1v3.75h3.8zM17.6 15.9c.42.4 1.02.6 1.8.6.56 0 1.05-.14 1.45-.42.4-.29.65-.59.74-.9h2.05c-.33 1.02-.83 1.75-1.51 2.19-.68.44-1.5.66-2.47.66-.67 0-1.28-.11-1.82-.32a3.87 3.87 0 0 1-1.38-.92 4.1 4.1 0 0 1-.87-1.43 5.3 5.3 0 0 1-.3-1.83c0-.65.1-1.25.31-1.8.21-.56.5-1.04.89-1.44.38-.4.84-.72 1.37-.95a4.6 4.6 0 0 1 1.8-.34c.73 0 1.37.14 1.92.42.55.29 1 .67 1.35 1.15.35.48.6 1.03.76 1.64.15.62.2 1.26.16 1.93h-6.3c.03.78.23 1.36.65 1.76zm3.16-4.78c-.33-.36-.87-.56-1.53-.56-.44 0-.8.07-1.09.22-.29.15-.52.33-.7.55-.17.22-.29.45-.36.7-.06.24-.1.46-.11.65h3.9c-.11-.61-.31-1.2-.11-1.56zM15.5 6.3h4.86v1.18H15.5z"/></svg>
+                    <span>Behance</span>
+                </a>
+                <a href="https://www.linkedin.com/in/mr-chawit-phechamnong-76a877404/" target="_blank" rel="noopener" class="social-pill">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9.5 9h3.8v1.65h.05c.53-.95 1.83-1.95 3.76-1.95 4.02 0 4.76 2.5 4.76 5.76V21h-4v-5.6c0-1.34-.03-3.06-1.9-3.06-1.9 0-2.19 1.45-2.19 2.96V21h-4z"/></svg>
+                    <span>LinkedIn</span>
+                </a>
+            </div>
+            <div class="reveal delay-300 w-full border-t border-white/10 mt-24 pt-10 flex flex-col md:flex-row justify-between items-center text-sm text-[#6e6e73] font-thai">
+                <p>&copy; 2026 Jess. Portfolio. สงวนลิขสิทธิ์ทั้งหมด.</p>
+                <div class="flex flex-wrap justify-center gap-x-7 gap-y-3 mt-6 md:mt-0 font-label text-xs">
+                    <a href="https://www.behance.net/gallery/247977675/Portfolio-Mrchawit" target="_blank" rel="noopener" class="hover:text-white transition-colors">Behance</a>
+                    <a href="https://www.linkedin.com/in/mr-chawit-phechamnong-76a877404/" target="_blank" rel="noopener" class="hover:text-white transition-colors">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const reveals = document.querySelectorAll('.reveal');
+
+            if (prefersReducedMotion) {
+                reveals.forEach(el => el.classList.add('active'));
+            } else {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('active');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
+
+                reveals.forEach(el => observer.observe(el));
+            }
+
+            // Spotlight cards: publish pointer position once on :root.
+            // Every [data-glow] inherits --x/--xp/--y/--yp, and because the gradients use
+            // background-attachment: fixed they line up with the viewport, so one listener
+            // drives all cards (cheaper than the per-card listener in the original).
+            if (document.querySelector('[data-glow]')) {
+                const root = document.documentElement;
+                let glowQueued = false, gx = 0, gy = 0;
+
+                const syncPointer = () => {
+                    glowQueued = false;
+                    root.style.setProperty('--x', gx.toFixed(2));
+                    root.style.setProperty('--xp', (gx / window.innerWidth).toFixed(3));
+                    root.style.setProperty('--y', gy.toFixed(2));
+                    root.style.setProperty('--yp', (gy / window.innerHeight).toFixed(3));
+                };
+
+                document.addEventListener('pointermove', (e) => {
+                    gx = e.clientX; gy = e.clientY;
+                    if (!glowQueued) { glowQueued = true; requestAnimationFrame(syncPointer); }
+                }, { passive: true });
+            }
+
+            // Wordmark: gradient reveal follows the cursor
+            const heroWord = document.getElementById('heroWord');
+            const revealMask = document.getElementById('hwRevealMask');
+
+            if (heroWord && revealMask) {
+                let queued = false, mx = 0, my = 0;
+
+                const apply = () => {
+                    queued = false;
+                    const r = heroWord.getBoundingClientRect();
+                    if (!r.width || !r.height) return;
+                    const cx = ((mx - r.left) / r.width) * 100;
+                    const cy = ((my - r.top) / r.height) * 100;
+                    revealMask.setAttribute('cx', cx + '%');
+                    revealMask.setAttribute('cy', cy + '%');
+                };
+
+                heroWord.addEventListener('mousemove', (e) => {
+                    mx = e.clientX; my = e.clientY;
+                    if (!queued) { queued = true; requestAnimationFrame(apply); }
+                }, { passive: true });
+            }
+
+            // Expertise slider: dots, autoplay, play/pause
+            const track = document.getElementById('expTrack');
+            if (track) {
+                const slides   = Array.from(track.querySelectorAll('.ap-slide'));
+                const dots     = Array.from(document.querySelectorAll('.exp-dot'));
+                const playBtn  = document.getElementById('expPlay');
+                const iconPlay = document.getElementById('expIconPlay');
+                const iconPause= document.getElementById('expIconPause');
+
+                let current = 0;
+                let playing = !prefersReducedMotion;
+                let timer   = null;
+                const DELAY = 5000;
+
+                const setActive = (i) => {
+                    current = i;
+                    dots.forEach((d, k) => d.classList.toggle('is-active', k === i));
+                };
+
+                const goTo = (i) => {
+                    const target = slides[i];
+                    if (!target) return;
+                    track.scrollTo({ left: target.offsetLeft - track.offsetLeft, behavior: 'smooth' });
+                    setActive(i);
+                };
+
+                const start = () => {
+                    stop();
+                    if (!playing) return;
+                    timer = setInterval(() => goTo((current + 1) % slides.length), DELAY);
+                };
+                const stop = () => { if (timer) { clearInterval(timer); timer = null; } };
+
+                const setPlaying = (val) => {
+                    playing = val;
+                    playBtn.setAttribute('aria-pressed', String(val));
+                    playBtn.setAttribute('aria-label', val ? 'Pause slideshow' : 'Play slideshow');
+                    iconPause.classList.toggle('hidden', !val);
+                    iconPlay.classList.toggle('hidden', val);
+                    val ? start() : stop();
+                };
+
+                dots.forEach(d => d.addEventListener('click', () => {
+                    goTo(Number(d.dataset.index));
+                    if (playing) start();          // restart the timer after a manual jump
+                }));
+
+                playBtn.addEventListener('click', () => setPlaying(!playing));
+
+                // keep dots in sync when the user swipes/scrolls the track
+                let scrollTick;
+                track.addEventListener('scroll', () => {
+                    clearTimeout(scrollTick);
+                    scrollTick = setTimeout(() => {
+                        const i = Math.round(track.scrollLeft / track.clientWidth);
+                        if (i !== current && slides[i]) setActive(i);
+                    }, 120);
+                }, { passive: true });
+
+                // only run the slideshow while it's on screen
+                const vis = new IntersectionObserver(([e]) => {
+                    e.isIntersecting && playing ? start() : stop();
+                }, { threshold: 0.25 });
+                vis.observe(track);
+
+                setActive(0);
+                setPlaying(!prefersReducedMotion);
+            }
+
+            // Floating navbar: hide on scroll down, reveal on scroll up.
+            // Also switches to the light variant while it sits over the white cover.
+            const navbar = document.getElementById('navbar');
+            const cover  = document.getElementById('cover');
+
+            let lastY = window.scrollY;
+            const TOP_ZONE = 80;   // always visible near the top
+            const DELTA    = 6;    // ignore jitter
+
+            const onScroll = () => {
+                const y = window.scrollY;
+
+                // light vs dark
+                const past = cover ? y > cover.offsetHeight - 80 : y > 50;
+                navbar.classList.toggle('nav-on-light', !past);
+
+                // hide / reveal
+                if (y <= TOP_ZONE) {
+                    navbar.classList.remove('is-hidden');
+                } else if (Math.abs(y - lastY) > DELTA) {
+                    navbar.classList.toggle('is-hidden', y > lastY);
+                }
+                lastY = y;
+            };
+
+            onScroll();
+            window.addEventListener('scroll', onScroll, { passive: true });
+            window.addEventListener('resize', onScroll, { passive: true });
+
+            // never leave the nav hidden when a link is used
+            navbar.querySelectorAll('a').forEach(a =>
+                a.addEventListener('click', () => navbar.classList.remove('is-hidden'))
+            );
+        });
+    </script>
+</body>
+</html>

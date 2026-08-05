@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XEBIS ENTERTAINMENT — "ROULETTE" Official Teaser</title>
+<meta name="description" content="INC MATAWEE — ROULETTE. Official teaser produced with XEBIS Entertainment. Edited and graded by Chawit Phechamnong.">
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+    @font-face {
+        font-family: 'SF Pro Local';
+        src: url('SF-Pro.ttf') format('truetype-variations'),
+             url('SF-Pro.ttf') format('truetype');
+        font-weight: 1 1000;
+        font-stretch: 30% 150%;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    :root {
+        --font-sf: 'SF Pro Local', -apple-system, BlinkMacSystemFont, 'Inter', 'Noto Sans Thai', sans-serif;
+        --ink: #16161a;
+        --fog: #7b7b82;
+        --paper: #f4f4f5;
+        /* own accent rather than a copy of anyone else's CTA colour */
+        --blue: #16161a;
+    }
+
+    * { font-style: normal; }
+    html { scroll-behavior: smooth; }
+    body {
+        font-family: var(--font-sf);
+        background: #ffffff;
+        color: var(--ink);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        overflow-x: hidden;
+    }
+    ::selection { background: var(--ink); color: #fff; }
+
+    .font-display { font-weight: 700; letter-spacing: -0.035em; }
+    .font-label {
+        font-weight: 500;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+    }
+
+    .buy-btn:hover { background: #2e2e35; transform: scale(1.04); }
+
+    /* ---- reveal ---- */
+    .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 1s cubic-bezier(.16,1,.3,1), transform 1s cubic-bezier(.16,1,.3,1);
+    }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: .1s; }
+    .d2 { transition-delay: .2s; }
+    .d3 { transition-delay: .3s; }
+    @media (prefers-reduced-motion: reduce) {
+        .reveal { transition: none !important; opacity: 1 !important; transform: none !important; }
+        html { scroll-behavior: auto; }
+    }
+
+    /* ---- hero: full-bleed video with overlaid copy ---- */
+    .hero-stage {
+        height: 100vh;
+        min-height: 560px;
+    }
+    .hero-video {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+    /* dark wash bottom-left so the headline stays readable */
+    .hero-scrim {
+        position: absolute;
+        inset: 0;
+        background:
+            linear-gradient(to top, rgba(0,0,0,.72) 0%, rgba(0,0,0,.30) 38%, transparent 68%),
+            linear-gradient(to right, rgba(0,0,0,.45) 0%, transparent 55%);
+        pointer-events: none;
+    }
+    .hero-copy {
+        position: absolute;
+        left: 24px;
+        bottom: 34px;
+        z-index: 10;
+        color: #fff;
+        max-width: 760px;
+        text-shadow: 0 2px 24px rgba(0,0,0,.35);
+    }
+    @media (min-width: 768px) {
+        .hero-copy { left: 56px; bottom: 56px; }
+    }
+
+    /* circular play/pause control */
+    .vid-ctrl {
+        position: absolute;
+        top: 26px;
+        right: 26px;
+        width: 44px;
+        height: 44px;
+        border-radius: 9999px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255,255,255,0.30);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border: 1px solid rgba(255,255,255,0.35);
+        color: #fff;
+        z-index: 20;
+        transition: background-color .3s ease, transform .3s cubic-bezier(.16,1,.3,1);
+    }
+    .vid-ctrl:hover { background: rgba(255,255,255,0.45); transform: scale(1.07); }
+
+    /* ---- sticky contact bar ---- */
+    .buy-bar {
+        position: fixed;
+        left: 50%;
+        bottom: 24px;
+        transform: translateX(-50%) translateY(0);
+        z-index: 60;
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        padding: 10px 10px 10px 24px;
+        border-radius: 9999px;
+        background: rgba(255,255,255,0.82);
+        backdrop-filter: saturate(180%) blur(20px);
+        -webkit-backdrop-filter: saturate(180%) blur(20px);
+        border: 1px solid rgba(0,0,0,0.07);
+        box-shadow: 0 12px 34px rgba(0,0,0,0.14);
+        transition: transform .45s cubic-bezier(.16,1,.3,1), opacity .35s ease;
+    }
+    .buy-bar.is-hidden {
+        transform: translateX(-50%) translateY(160%);
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    /* ---- clips: real YouTube thumbnail, swaps to the player on click ---- */
+    .vplay {
+        position: relative;
+        display: block;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        border: 0;
+        padding: 0;
+        border-radius: 18px;
+        overflow: hidden;
+        background: #000;
+        cursor: pointer;
+        transition: transform .5s cubic-bezier(.16,1,.3,1), box-shadow .5s ease;
+    }
+    @media (min-width: 900px) {
+        .vplay { border-radius: 22px; }
+        .vplay.is-feature { border-radius: 26px; }
+    }
+    .vplay img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform .8s cubic-bezier(.16,1,.3,1), filter .5s ease;
+    }
+    .vplay:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 22px 48px rgba(0,0,0,.28);
+    }
+    .vplay:hover img { transform: scale(1.04); filter: brightness(.92); }
+
+    .vplay-btn {
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        width: 64px; height: 64px;
+        border-radius: 9999px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0,0,0,.55);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,.35);
+        color: #fff;
+        transition: background-color .35s ease, transform .35s cubic-bezier(.16,1,.3,1);
+    }
+    .vplay-btn svg { width: 22px; height: 22px; margin-left: 3px; }
+    .vplay:hover .vplay-btn {
+        background: rgba(0,0,0,.72);
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+
+    /* ---- process clip box ---- */
+    .process-clip {
+        position: relative;
+        border-radius: 18px;
+        overflow: hidden;
+        background: #000;
+        box-shadow: 0 18px 44px rgba(0,0,0,.18);
+    }
+    @media (min-width: 900px) { .process-clip { border-radius: 22px; } }
+    .process-clip video {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+    /* dim only while paused, so the button reads clearly */
+    .process-clip::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(0,0,0,.22);
+        opacity: 1;
+        pointer-events: none;
+        transition: opacity .4s ease;
+    }
+    .process-clip.is-playing::after { opacity: 0; }
+
+    .proc-btn {
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        width: 76px; height: 76px;
+        border-radius: 9999px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255,255,255,.92);
+        border: none;
+        color: #16161a;
+        cursor: pointer;
+        z-index: 5;
+        box-shadow: 0 10px 30px rgba(0,0,0,.32);
+        transition: transform .35s cubic-bezier(.16,1,.3,1), opacity .35s ease, background-color .3s ease;
+    }
+    .proc-btn svg { width: 26px; height: 26px; }
+    .proc-btn #procPlay { margin-left: 4px; }
+    .proc-btn:hover {
+        background: #fff;
+        transform: translate(-50%, -50%) scale(1.08);
+    }
+    /* fade the button away while playing, bring it back on hover */
+    .process-clip.is-playing .proc-btn { opacity: 0; }
+    .process-clip.is-playing:hover .proc-btn { opacity: 1; }
+
+    /* ---- hover card (vanilla port of shadcn HoverCard) ---- */
+    .hcard { position: relative; display: inline-block; outline: none; }
+    .hcard-trigger {
+        display: inline-flex;
+        align-items: center;
+        padding: 9px 18px;
+        border-radius: 8px;
+        border: 1px solid rgba(0,0,0,.14);
+        background: #fff;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: default;
+        transition: background-color .3s ease, border-color .3s ease;
+    }
+    .hcard:hover .hcard-trigger,
+    .hcard:focus-visible .hcard-trigger {
+        background: #ececee;
+        border-color: rgba(0,0,0,.24);
+    }
+
+    .hcard-panel {
+        position: absolute;
+        bottom: calc(100% + 8px);
+        left: 0;
+        z-index: 40;
+        width: 256px;                 /* w-64, same as the shadcn default */
+        border-radius: 8px;
+        border: 1px solid rgba(0,0,0,.12);
+        background: #fff;
+        color: var(--ink);
+        box-shadow: 0 12px 34px rgba(0,0,0,.16);
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(6px) scale(.96);
+        transform-origin: bottom left;
+        pointer-events: none;
+        transition: opacity .2s ease, transform .2s cubic-bezier(.16,1,.3,1);
+    }
+    .hcard:hover .hcard-panel,
+    .hcard:focus-visible .hcard-panel {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    .hcard-panel img {
+        width: 100%;
+        height: 116px;
+        object-fit: cover;
+        display: block;
+    }
+    .hcard-body {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        padding: 12px;
+    }
+    .hcard-title { font-size: 14px; font-weight: 500; }
+    .hcard-text  { font-size: 12px; line-height: 1.6; color: var(--fog); }
+
+    /* keep the last card's panel on screen */
+    .hcard:last-child .hcard-panel {
+        left: auto; right: 0;
+        transform-origin: bottom right;
+    }
+    @media (max-width: 420px) {
+        .hcard, .hcard-trigger { width: 100%; }
+        .hcard-panel { width: 100%; }
+    }
+
+    /* once clicked the button is replaced by the embed */
+    .vplay iframe {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+        display: block;
+    }
+
+    /* ---- Floating navbar ---- */
+    .floating-nav {
+        position: fixed;
+        top: 18px;
+        left: 50%;
+        transform: translateX(-50%) translateY(0);
+        z-index: 60;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        max-width: calc(100vw - 24px);
+        padding: 7px 8px 7px 16px;
+        border-radius: 9999px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        background: rgba(10, 10, 10, 0.72);
+        backdrop-filter: saturate(180%) blur(18px);
+        -webkit-backdrop-filter: saturate(180%) blur(18px);
+        box-shadow: 0 2px 6px rgba(0,0,0,0.06),
+                    0 12px 34px rgba(0,0,0,0.28);
+        opacity: 1;
+        transition: transform .45s cubic-bezier(.16,1,.3,1),
+                    opacity .35s ease,
+                    background-color .4s ease,
+                    border-color .4s ease,
+                    box-shadow .4s ease;
+    }
+    /* hidden while scrolling down */
+    .floating-nav.is-hidden {
+        transform: translateX(-50%) translateY(-140%);
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .fn-brand {
+        font-weight: 600;
+        font-size: 15px;
+        letter-spacing: -0.02em;
+        color: #f5f5f7;
+        padding-right: 4px;
+        transition: opacity .3s ease;
+    }
+    .fn-brand:hover { opacity: 0.7; }
+
+    .fn-sep {
+        width: 1px;
+        height: 18px;
+        background: rgba(255,255,255,0.16);
+        margin: 0 6px 0 2px;
+    }
+
+    .fn-item {
+        display: inline-flex;
+        align-items: center;
+        padding: 8px 14px;
+        border-radius: 9999px;
+        font-size: 13px;
+        font-weight: 450;
+        color: #c8c8cc;
+        white-space: nowrap;
+        transition: color .3s ease, background-color .3s ease;
+    }
+    .fn-item:hover { color: #ffffff; background: rgba(255,255,255,0.09); }
+
+    /* text-only nav: tighten the padding so every label still fits on small screens */
+    @media (max-width: 720px) {
+        .floating-nav { gap: 0; padding: 6px; }
+        .fn-brand { padding-left: 8px; font-size: 14px; }
+        .fn-sep { margin: 0 4px 0 2px; }
+        .fn-item { padding: 8px 9px; font-size: 12px; }
+        .fn-cta { padding: 8px 12px; font-size: 12px; margin-left: 2px; }
+    }
+    @media (max-width: 460px) {
+        .fn-brand, .fn-sep { display: none; }
+        .fn-item { padding: 8px 8px; font-size: 11.5px; }
+    }
+
+    .fn-cta {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        padding: 8px 16px;
+        margin-left: 4px;
+        border-radius: 9999px;
+        font-size: 13px;
+        font-weight: 550;
+        color: #1d1d1f;
+        background: #ffffff;
+        white-space: nowrap;
+        overflow: hidden;
+        transition: transform .35s cubic-bezier(.16,1,.3,1);
+    }
+    .fn-cta:hover { transform: scale(1.04); }
+    .fn-cta-glow {
+        position: absolute;
+        left: 12%; right: 12%; bottom: -1px;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, #2997ff, transparent);
+    }
+
+    /* light variant while the nav sits over the white cover */
+    .floating-nav.nav-on-light {
+        background: rgba(255, 255, 255, 0.78);
+        border-color: rgba(0, 0, 0, 0.08);
+        box-shadow: 0 2px 6px rgba(0,0,0,0.04),
+                    0 12px 30px rgba(0,0,0,0.10);
+    }
+    .floating-nav.nav-on-light .fn-brand { color: #1d1d1f; }
+    .floating-nav.nav-on-light .fn-sep   { background: rgba(0,0,0,0.12); }
+    .floating-nav.nav-on-light .fn-item  { color: #424245; }
+    .floating-nav.nav-on-light .fn-item:hover { color: #1d1d1f; background: rgba(0,0,0,0.05); }
+    .floating-nav.nav-on-light .fn-cta   { color: #ffffff; background: #1d1d1f; }
+
+    @media (prefers-reduced-motion: reduce) {
+        .floating-nav { transition: none; }
+    }
+</style>
+</head>
+<body>
+
+<!-- FLOATING NAVBAR -->
+<nav id="navbar" class="floating-nav nav-on-light" aria-label="Main">
+    <a href="index.html" class="fn-brand">Jess.</a>
+    <span class="fn-sep" aria-hidden="true"></span>
+    <a href="#teaser" class="fn-item"><span>ตัวอย่าง</span></a>
+    <a href="#work" class="fn-item"><span>ผลงานวิดีโอ</span></a>
+    <a href="memindy.html" class="fn-item"><span>ME MIND Y</span></a>
+    <a href="mailto:Jesschavit@gmail.com" class="fn-cta">
+        <span>ติดต่อ</span>
+        <span class="fn-cta-glow" aria-hidden="true"></span>
+    </a>
+</nav>
+
+<!-- HERO — full-bleed teaser with overlaid copy -->
+<header id="teaser" class="hero-stage relative w-full overflow-hidden bg-black">
+    <video id="teaserVideo"
+           class="hero-video"
+           src="xebis-roulette-teaser.mp4"
+           poster="xebis-teaser-poster.jpg"
+           autoplay muted loop playsinline preload="metadata"></video>
+
+    <!-- keeps the headline legible over the footage -->
+    <div class="hero-scrim" aria-hidden="true"></div>
+
+    <!-- pause / play -->
+    <button id="vidBtn" class="vid-ctrl" type="button" aria-label="หยุดวิดีโอชั่วคราว" aria-pressed="true">
+        <svg id="iconPause" width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1.2"/><rect x="14" y="4" width="4" height="16" rx="1.2"/></svg>
+        <svg id="iconPlay" class="hidden ml-[2px]" width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg>
+    </button>
+
+    <!-- headline, bottom-left -->
+    <div class="hero-copy">
+        <p class="text-[19px] md:text-[26px] font-medium mb-3">XEBIS</p>
+        <h1 class="font-display text-[26px] sm:text-[36px] md:text-[46px] leading-[1.14] max-w-[20ch]">
+            INC MATAWEE — &ldquo;ROULETTE&rdquo;<br>Official Teaser
+        </h1>
+    </div>
+</header>
+
+<!-- WORK — clips only -->
+<section id="work" class="bg-white px-4 sm:px-6 py-14 md:py-20">
+    <div class="max-w-[1180px] mx-auto flex flex-col gap-4 md:gap-5">
+            <button type="button" class="vplay is-feature" data-id="uQdEAmZC7OI" data-start="137" aria-label="เล่นวิดีโอ">
+                <img src="https://i.ytimg.com/vi/uQdEAmZC7OI/maxresdefault.jpg"
+                     onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/uQdEAmZC7OI/hqdefault.jpg'"
+                     alt="" loading="lazy" draggable="false">
+                <span class="vplay-btn" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg>
+                </span>
+            </button>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
+            <button type="button" class="vplay" data-id="05OwaANCEHc" data-start="0" aria-label="เล่นวิดีโอ">
+                <img src="https://i.ytimg.com/vi/05OwaANCEHc/maxresdefault.jpg"
+                     onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/05OwaANCEHc/hqdefault.jpg'"
+                     alt="" loading="lazy" draggable="false">
+                <span class="vplay-btn" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg>
+                </span>
+            </button>
+            <button type="button" class="vplay" data-id="5IAp4rXUmd8" data-start="0" aria-label="เล่นวิดีโอ">
+                <img src="https://i.ytimg.com/vi/5IAp4rXUmd8/maxresdefault.jpg"
+                     onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/5IAp4rXUmd8/hqdefault.jpg'"
+                     alt="" loading="lazy" draggable="false">
+                <span class="vplay-btn" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg>
+                </span>
+            </button>
+            <button type="button" class="vplay" data-id="ycwAeBbWego" data-start="0" aria-label="เล่นวิดีโอ">
+                <img src="https://i.ytimg.com/vi/ycwAeBbWego/maxresdefault.jpg"
+                     onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/ycwAeBbWego/hqdefault.jpg'"
+                     alt="" loading="lazy" draggable="false">
+                <span class="vplay-btn" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg>
+                </span>
+            </button>
+            <button type="button" class="vplay" data-id="waLFYsbbd44" data-start="0" aria-label="เล่นวิดีโอ">
+                <img src="https://i.ytimg.com/vi/waLFYsbbd44/maxresdefault.jpg"
+                     onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/waLFYsbbd44/hqdefault.jpg'"
+                     alt="" loading="lazy" draggable="false">
+                <span class="vplay-btn" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg>
+                </span>
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- PROCESS — behind-the-scenes clip + hover cards -->
+<section id="process" class="bg-[var(--paper)] px-4 sm:px-6 py-16 md:py-24">
+    <div class="max-w-[1180px] mx-auto">
+
+        <div class="reveal mb-8 md:mb-10 px-2">
+            <p class="font-label text-[10px] text-[var(--fog)] mb-4">Behind the Scene</p>
+            <h2 class="font-display text-[28px] md:text-[44px] leading-[1.15]">เบื้องหลังการทำงาน</h2>
+        </div>
+
+        <!-- the clip — click the centre button to play -->
+        <div class="reveal process-clip" id="procBox">
+            <video id="procVideo"
+                   src="xebis-process-clip.mp4"
+                   poster="xebis-process-poster.jpg"
+                   muted loop playsinline preload="metadata"></video>
+
+            <button id="procBtn" type="button" class="proc-btn" aria-label="เล่นวิดีโอ" aria-pressed="false">
+                <svg id="procPlay" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg>
+                <svg id="procPause" class="hidden" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1.2"/><rect x="14" y="4" width="4" height="16" rx="1.2"/></svg>
+            </button>
+        </div>
+
+        <!-- hover cards -->
+        <div class="reveal d1 flex flex-wrap gap-3 mt-8">
+            <span class="hcard" tabindex="0">
+                <span class="hcard-trigger">ขั้นตอนการตัดต่อ</span>
+                <span class="hcard-panel" role="tooltip">
+                    <img src="xebis-process-poster.jpg" alt="">
+                    <span class="hcard-body">
+                        <span class="hcard-title">Editing</span>
+                        <span class="hcard-text">
+                            เริ่มจากคัดฟุตเทจที่ใช้ได้จริง เรียงลำดับเรื่องให้ลื่นไหล
+                            แล้วค่อยเก็บจังหวะการตัดให้ตรงกับดนตรี
+                        </span>
+                    </span>
+                </span>
+            </span>
+
+            <span class="hcard" tabindex="0">
+                <span class="hcard-trigger">การไล่โทนสี</span>
+                <span class="hcard-panel" role="tooltip">
+                    <img src="xebis-teaser-poster.jpg" alt="">
+                    <span class="hcard-body">
+                        <span class="hcard-title">Color Grading</span>
+                        <span class="hcard-text">
+                            ไล่โทนจากฟุตเทจ S-Log3 ไปสู่ Rec.709 คุมโทนผิวให้เป็นธรรมชาติ
+                            ก่อนใส่คาแรกเตอร์ของสีให้ตรงกับอารมณ์เพลง
+                        </span>
+                    </span>
+                </span>
+            </span>
+
+            <span class="hcard" tabindex="0">
+                <span class="hcard-trigger">กราฟิกและไตเติล</span>
+                <span class="hcard-panel" role="tooltip">
+                    <img src="xebis-process-poster.jpg" alt="">
+                    <span class="hcard-body">
+                        <span class="hcard-title">Motion Graphics</span>
+                        <span class="hcard-text">
+                            ออกแบบไตเติลและสติกเกอร์ประกอบให้เข้ากับโทนคลิป
+                            โดยวางไว้ในตำแหน่งที่ไม่บังใบหน้าหรือซับไตเติล
+                        </span>
+                    </span>
+                </span>
+            </span>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-[var(--paper)] px-6 py-12 text-[12px] text-[var(--fog)]">
+    <div class="max-w-[1060px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+        <p>&copy; 2026 Chawit Phechamnong · ผลงานร่วมกับ XEBIS Entertainment</p>
+        <div class="flex flex-wrap justify-center gap-6">
+            <a href="https://www.behance.net/gallery/247977675/Portfolio-Mrchawit" target="_blank" rel="noopener" class="hover:text-[var(--ink)] transition-colors">Behance</a>
+            <a href="https://www.linkedin.com/in/mr-chawit-phechamnong-76a877404/" target="_blank" rel="noopener" class="hover:text-[var(--ink)] transition-colors">LinkedIn</a>
+        </div>
+    </div>
+</footer>
+
+<!-- STICKY BAR -->
+<div id="buyBar" class="buy-bar">
+    <div class="text-left leading-tight">
+        <p class="font-label text-[9px] text-[var(--fog)]">XEBIS Entertainment</p>
+        <p class="text-[13px] font-semibold">&ldquo;ROULETTE&rdquo; Teaser</p>
+    </div>
+    <a href="mailto:Jesschavit@gmail.com" class="buy-btn px-5 py-2.5 text-[13px] font-medium whitespace-nowrap">ติดต่องาน</a>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // Floating navbar: hide on scroll down, reveal on scroll up
+        const navbar = document.getElementById('navbar');
+        if (navbar) {
+            let navLastY = window.scrollY;
+            const TOP_ZONE = 80, DELTA = 6;
+            const navScroll = () => {
+                const y = window.scrollY;
+                if (y <= TOP_ZONE) navbar.classList.remove('is-hidden');
+                else if (Math.abs(y - navLastY) > DELTA) navbar.classList.toggle('is-hidden', y > navLastY);
+                navLastY = y;
+            };
+            navScroll();
+            window.addEventListener('scroll', navScroll, { passive: true });
+            navbar.querySelectorAll('a').forEach(a =>
+                a.addEventListener('click', () => navbar.classList.remove('is-hidden'))
+            );
+        }
+
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // YouTube embeds need a real http(s) origin. Opened straight off the disk
+        // (file://) there is none, and the player fails with "Error 153".
+        // So on file:// we open YouTube in a new tab instead of embedding.
+        const canEmbed = location.protocol === 'http:' || location.protocol === 'https:';
+
+        document.querySelectorAll('.vplay').forEach(btn => {
+            const id    = btn.dataset.id;
+            const start = btn.dataset.start;
+
+            btn.addEventListener('click', () => {
+                if (!canEmbed) {
+                    let url = 'https://www.youtube.com/watch?v=' + id;
+                    if (start && start !== '0') url += '&t=' + start + 's';
+                    window.open(url, '_blank', 'noopener');
+                    return;
+                }
+
+                if (btn.dataset.loaded) return;
+                btn.dataset.loaded = '1';
+
+                let src = 'https://www.youtube-nocookie.com/embed/' + id
+                        + '?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+                if (start && start !== '0') src += '&start=' + start;
+
+                const frame = document.createElement('iframe');
+                frame.src = src;
+                frame.title = 'ผลงานวิดีโอ';
+                frame.allow = 'autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+                frame.referrerPolicy = 'strict-origin-when-cross-origin';
+                frame.allowFullscreen = true;
+
+                btn.innerHTML = '';
+                btn.appendChild(frame);
+                btn.style.cursor = 'default';
+            });
+        });
+
+        // on file:// tell people the click opens YouTube, so it isn't a surprise
+        if (!canEmbed) {
+            document.querySelectorAll('.vplay').forEach(b => {
+                b.setAttribute('title', 'เปิดใน YouTube');
+                b.classList.add('is-external');
+            });
+        }
+
+        // process clip: centre button toggles playback
+        const procBox   = document.getElementById('procBox');
+        const procVideo = document.getElementById('procVideo');
+        const procBtn   = document.getElementById('procBtn');
+        const procPlay  = document.getElementById('procPlay');
+        const procPause = document.getElementById('procPause');
+
+        if (procBox && procVideo && procBtn) {
+            const paintProc = () => {
+                const playing = !procVideo.paused;
+                procBox.classList.toggle('is-playing', playing);
+                procPlay.classList.toggle('hidden', playing);
+                procPause.classList.toggle('hidden', !playing);
+                procBtn.setAttribute('aria-pressed', String(playing));
+                procBtn.setAttribute('aria-label', playing ? 'หยุดวิดีโอชั่วคราว' : 'เล่นวิดีโอ');
+            };
+
+            procBtn.addEventListener('click', () => {
+                procVideo.paused ? procVideo.play() : procVideo.pause();
+            });
+            procVideo.addEventListener('play', paintProc);
+            procVideo.addEventListener('pause', paintProc);
+            paintProc();
+
+            // stop decoding once it scrolls away
+            new IntersectionObserver(([e]) => {
+                if (!e.isIntersecting && !procVideo.paused) procVideo.pause();
+            }, { threshold: 0.15 }).observe(procVideo);
+        }
+
+        // scroll reveal
+        const reveals = document.querySelectorAll('.reveal');
+        if (reduced) {
+            reveals.forEach(el => el.classList.add('active'));
+        } else {
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) { e.target.classList.add('active'); io.unobserve(e.target); }
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -70px 0px' });
+            reveals.forEach(el => io.observe(el));
+        }
+
+        // video play / pause
+        const video = document.getElementById('teaserVideo');
+        const btn   = document.getElementById('vidBtn');
+        const iPlay = document.getElementById('iconPlay');
+        const iPause= document.getElementById('iconPause');
+
+        if (video && btn) {
+            const paint = () => {
+                const playing = !video.paused;
+                iPause.classList.toggle('hidden', !playing);
+                iPlay.classList.toggle('hidden', playing);
+                btn.setAttribute('aria-pressed', String(playing));
+                btn.setAttribute('aria-label', playing ? 'หยุดวิดีโอชั่วคราว' : 'เล่นวิดีโอ');
+            };
+
+            btn.addEventListener('click', () => {
+                video.paused ? video.play() : video.pause();
+            });
+            video.addEventListener('play', paint);
+            video.addEventListener('pause', paint);
+
+            if (reduced) video.pause();
+            paint();
+
+            // don't keep decoding while off screen
+            const vio = new IntersectionObserver(([e]) => {
+                if (!e.isIntersecting && !video.paused) video.pause();
+            }, { threshold: 0.15 });
+            vio.observe(video);
+        }
+
+        // sticky bar hides while scrolling down
+        const bar = document.getElementById('buyBar');
+        let lastY = window.scrollY;
+        const onScroll = () => {
+            const y = window.scrollY;
+            if (y < 200) bar.classList.add('is-hidden');
+            else if (Math.abs(y - lastY) > 6) bar.classList.toggle('is-hidden', y > lastY);
+            lastY = y;
+        };
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
+    });
+</script>
+
+</body>
+</html>
