@@ -1,23 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Jess — Portfolio 2026</title>
-  <meta name="description" content="Chawit “Jess” Phechamnong — Bangkok-based video editor & motion designer. Short-form editing, motion graphics, colour grading and 3D.">
+  <title>เจส — พอร์ตโฟลิโอ 2026 | ชวิศ เพชรจำนงค์</title>
+  <meta name="description" content="ชวิศ “เจส” เพชรจำนงค์ — วิดีโอเอดิเตอร์และโมชันดีไซเนอร์ประจำกรุงเทพฯ งานตัดต่อคลิปสั้น โมชันกราฟิก เกรดสี และ 3D">
   <meta name="theme-color" content="#5B87F7">
-  <meta property="og:title" content="Jess — Portfolio 2026">
-  <meta property="og:description" content="Video Editor & Motion Designer · Bangkok, Thailand">
+  <meta property="og:title" content="เจส — พอร์ตโฟลิโอ 2026">
+  <meta property="og:description" content="วิดีโอเอดิเตอร์และโมชันดีไซเนอร์ ประจำกรุงเทพฯ">
   <meta property="og:image" content="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/xebis-teaser-poster.jpg">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%232F6BFF'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' dominant-baseline='middle' font-family='Arial Black,Arial' font-weight='900' font-size='34' fill='white'%3EJ.%3C/text%3E%3C/svg%3E">
 
-  <!-- Kanit: chunky display (Thai + Latin) · Plus Jakarta Sans: body · IBM Plex Sans Thai: Thai body · Caveat: handwriting -->
+  <!-- Kanit: หัวข้อ (ไทย + อังกฤษ) · Plus Jakarta Sans + IBM Plex Sans Thai: เนื้อหา · Caveat + Sriracha: ลายมือ -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=IBM+Plex+Sans+Thai:wght@400;500;600&family=Kanit:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Sriracha&family=Kanit:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script>document.documentElement.classList.add('js');</script>
 
   <style>
+    /* hallmark: custom direction by request (the user's own reference: toy-like blue 3D desk scene) · genre playful · signature: a working edit monitor that plays the reel · mode: experience (impeccable) */
+    /* critique: hero now carries a readable headline, one sentence and two actions above the fold; eyebrows, tracked caps, middle-dot strings and glued arrows removed; motion limited to transform/opacity with one reveal (the lower-third wipe) */
+    /* waive 11 (card inside card): the white frame around a coloured panel is the user's pinned reference style */
     /* ============================================================
        TOKENS
        ============================================================ */
@@ -41,7 +44,7 @@
 
       --display: "Kanit", "IBM Plex Sans Thai", system-ui, sans-serif;
       --body: "Plus Jakarta Sans", "IBM Plex Sans Thai", system-ui, sans-serif;
-      --hand: "Caveat", "Comic Sans MS", cursive;
+      --hand: "Caveat", "Sriracha", "Comic Sans MS", cursive;
       --mono: ui-monospace, "SF Mono", Menlo, monospace;
 
       --r-card: 44px;
@@ -52,19 +55,21 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; overflow-x: clip; scrollbar-color: #9DB3F5 var(--bg); }
+    [data-tc], .nav__tc, .vf__top, .screen__tc, .viewer__count { font-variant-numeric: tabular-nums; }
     body {
       margin: 0;
       background: var(--bg) radial-gradient(var(--dot) 1.1px, transparent 1.6px) 0 0 / 22px 22px;
       color: var(--ink);
-      font: 400 15.5px/1.6 var(--body);
+      font: 400 16px/1.75 var(--body);
       -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
+      overflow-x: clip;
+      caret-color: var(--blue);
     }
     img { display: block; max-width: 100%; height: auto; }
     a { color: inherit; }
     button { font: inherit; color: inherit; }
-    :lang(th) { font-family: "IBM Plex Sans Thai", var(--body); }
+    p, li { text-wrap: pretty; }
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
     :focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; border-radius: 8px; }
     ::selection { background: var(--blue); color: #fff; }
@@ -82,9 +87,13 @@
     }
     .panel { position: relative; border-radius: var(--r-panel); }
 
-    .h2 { margin: 0 0 18px; font: 800 clamp(30px, 3.5vw, 40px)/1.05 var(--display); }
-    .h3 { margin: 0 0 18px; font: 800 clamp(26px, 2.8vw, 34px)/1.05 var(--display); }
-    .h2::after, .h3::after { content: "."; color: var(--blue); }
+    .h2, .h3, .cta h2, .proj__name { overflow-wrap: break-word; min-width: 0; }
+    .h2 { margin: 0 0 18px; font: 700 clamp(30px, 3.5vw, 42px)/1.22 var(--display); text-wrap: balance; }
+    .h3 { margin: 0 0 18px; font: 700 clamp(25px, 2.8vw, 33px)/1.22 var(--display); text-wrap: balance; }
+    .h2::after, .h3::after { /* a blue dot instead of a full stop — Thai doesn't end headings with "." */
+      content: ""; display: inline-block; width: .2em; height: .2em; margin-left: .16em;
+      border-radius: 50%; background: var(--blue);
+    }
 
     .kbd {
       display: inline-grid; place-items: center;
@@ -98,8 +107,7 @@
        TOP TIMELINE (scroll progress) + NAV
        ============================================================ */
     .scrub { position: fixed; z-index: 70; top: 0; left: 0; right: 0; height: 3px; background: rgba(47, 107, 255, .12); pointer-events: none; }
-    .scrub i { position: absolute; left: 0; top: 0; bottom: 0; width: calc(var(--p, 0) * 100%); background: linear-gradient(90deg, var(--blue), #7EA3FF); }
-    .scrub i::after { content: ""; position: absolute; right: -1px; top: 0; width: 3px; height: 12px; border-radius: 0 0 3px 3px; background: #FF5A4E; box-shadow: 0 0 8px #FF5A4E; }
+    .scrub i { position: absolute; inset: 0; transform-origin: 0 50%; transform: scaleX(var(--p, 0)); background: linear-gradient(90deg, var(--blue), #7EA3FF); }
 
     .nav {
       position: fixed; z-index: 60; top: 14px; left: 50%;
@@ -119,7 +127,6 @@
     .nav__link { padding: 9px 13px; border-radius: 999px; font-size: 13.5px; font-weight: 600; color: var(--ink-2); text-decoration: none; transition: background .2s, color .2s; }
     .nav__link:hover, .nav__link.on { background: var(--blue-soft); color: var(--blue-2); }
     .nav__tc { display: inline-flex; align-items: center; gap: 6px; margin: 0 6px 0 8px; padding: 7px 10px; border-radius: 999px; background: #10131B; color: #8FA8EA; font: 500 12px/1 var(--mono); }
-    .nav__tc i { width: 7px; height: 7px; border-radius: 50%; background: #FF5A4E; animation: blink 1.2s steps(1) infinite; }
     .nav .btn { margin-left: 4px; padding: 11px 18px; }
 
     .btn {
@@ -141,19 +148,11 @@
        HERO — a working edit-monitor on a grid-paper plinth.
        All stage sizes are in cqw so the scene scales as one piece.
        ============================================================ */
-    .card.hero { margin-top: 128px; }
+    .card.hero { margin-top: 104px; }
     .hero .panel {
       background:
         radial-gradient(55% 60% at 50% 30%, rgba(255, 255, 255, .55), transparent 70%),
         linear-gradient(180deg, #D4E0FF 0%, #A3BEFF 40%, #5B87F7 100%);
-    }
-    .hero .panel::before { /* faint graph lines that fade toward the bottom */
-      content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
-      background:
-        linear-gradient(rgba(255, 255, 255, .22) 1px, transparent 1px) 0 0 / 44px 44px,
-        linear-gradient(90deg, rgba(255, 255, 255, .22) 1px, transparent 1px) 0 0 / 44px 44px;
-      -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 75%);
-              mask-image: linear-gradient(180deg, #000 0%, transparent 75%);
     }
     .hero__glow { /* soft light that follows the pointer */
       position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
@@ -162,7 +161,7 @@
     }
     .hero:hover .hero__glow { opacity: 1; }
     .stage-clip { position: relative; clip-path: inset(-45% 0 0 0 round 0 0 var(--r-panel) var(--r-panel)); }
-    .stage { position: relative; container-type: inline-size; aspect-ratio: 1000 / 560; }
+    .stage { position: relative; container-type: inline-size; aspect-ratio: 1000 / 530; }
     .stage > * { position: absolute; }
 
     .year {
@@ -210,10 +209,10 @@
     .frames img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; }
     .frames img.on { opacity: 1; }
     .screen__title {
-      position: absolute; inset: 0 0 3.6cqw; z-index: 3;
+      position: absolute; inset: 1.4cqw 0 6.6cqw; z-index: 3;
       display: grid; place-content: center;
       text-align: center;
-      font: 900 9.4cqw/.84 var(--display);
+      font: 900 8.6cqw/.86 var(--display);
       letter-spacing: .04em;
       color: #fff;
       text-shadow: 0 0 1.4cqw rgba(150, 185, 255, .45), 0 .35cqw 0 rgba(120, 150, 230, .35);
@@ -242,9 +241,14 @@
       width: 7cqw; height: 7cqw; translate: -50% -50%;
       display: grid; place-items: center;
       border-radius: 50%; background: rgba(8, 10, 16, .55);
-      color: #fff; font: 700 2.4cqw/1 var(--display);
+      color: #fff;
       opacity: 0; pointer-events: none;
     }
+    .screen__osd svg { width: 2.8cqw; height: 2.8cqw; }
+    .screen__hint { position: absolute; z-index: 3; left: 0; right: 0; bottom: 4.4cqw; text-align: center; font: 400 1.35cqw/1.3 var(--display); color: rgba(255, 255, 255, .72); pointer-events: none; transition: opacity .3s; }
+    .monitor:not([data-mode="idle"]) .screen__hint { opacity: 0; }
+    .screen__hint .t { display: none; }
+    @media (hover: none) { .screen__hint .m { display: none; } .screen__hint .t { display: inline; } }
     .screen__osd.show { animation: osd .7s var(--ease); }
     @keyframes osd { 0% { opacity: 0; scale: .6; } 25% { opacity: 1; scale: 1.08; } 100% { opacity: 0; scale: 1.25; } }
     .screen__flash { position: absolute; inset: 0; z-index: 4; background: #fff; opacity: 0; pointer-events: none; }
@@ -265,7 +269,7 @@
     .track--v span.on { background: #9DB3FF; box-shadow: 0 0 .6cqw rgba(157, 179, 255, .8); }
     .track--g span { background: #B07CFF; }
     .track--a span { background: #3FCF8E; }
-    .playhead { position: absolute; top: -.5cqw; bottom: -.2cqw; left: 0; width: .2cqw; background: #FF5A4E; box-shadow: 0 0 .6cqw #FF5A4E; }
+    .playhead { position: absolute; top: -.5cqw; bottom: -.2cqw; left: 0; will-change: translate; width: .2cqw; background: #FF5A4E; box-shadow: 0 0 .6cqw #FF5A4E; }
     .playhead::before { content: ""; position: absolute; top: 0; left: -.45cqw; width: 1.1cqw; height: .7cqw; border-radius: .15cqw .15cqw 50% 50%; background: #FF5A4E; }
 
     .monitor__brand { position: absolute; left: 3cqw; bottom: 1.6cqw; font: 700 1.1cqw/1 var(--display); letter-spacing: .25em; color: rgba(255, 255, 255, .6); }
@@ -284,12 +288,12 @@
     .knob::after { content: ""; position: absolute; width: .9cqw; height: .9cqw; border-radius: 50%; background: #fff; translate: -.5cqw -.5cqw; opacity: .85; }
 
     .note {
-      z-index: 6; left: 61cqw; top: -6.5cqw; width: 10cqw; height: 9cqw;
+      z-index: 6; left: 61.5cqw; top: -4.2cqw; width: 10cqw; height: 9cqw;
       padding: 1.6cqw 1cqw 0 1.4cqw;
       rotate: 9deg;
       background: linear-gradient(170deg, #FFD761, #FFC23A);
       box-shadow: 0 .8cqw 1.2cqw rgba(120, 80, 0, .3);
-      font: 700 2.3cqw/.95 var(--hand); color: #6A4600;
+      font: 400 2.1cqw/1.15 var(--hand); color: #6A4600;
       border-radius: .3cqw .3cqw .3cqw 1.6cqw;
       transform-origin: 50% 0;
       transition: rotate .5s var(--spring);
@@ -409,27 +413,23 @@
     .f-bl img { rotate: 10deg; }
 
     /* --- the strip under the stage --- */
-    .hero__bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 24px; padding: 16px 12px 4px; }
-    .hero__id { display: flex; align-items: center; gap: 12px; }
-    .hero__id img { width: 46px; height: 46px; border-radius: 50%; object-fit: cover; object-position: 50% 14%; box-shadow: 0 0 0 3px #fff, 0 0 0 4.5px var(--blue-soft); }
-    .hero__id strong { display: block; font: 700 17px/1.2 var(--display); }
-    .hero__id span { font-size: 13.5px; color: var(--muted); }
-    .hints { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; font-size: 13px; color: var(--muted); }
-    .hints > span { display: inline-flex; align-items: center; gap: 5px; }
-    .hints--touch { display: none; }
-    @media (hover: none) { .hints--mouse { display: none; } .hints--touch { display: flex; } }
-    .status { display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 999px; background: #EAF8EF; color: #157A3B; font: 700 13px/1 var(--body); text-decoration: none; }
-    .status i { width: 8px; height: 8px; border-radius: 50%; background: var(--green); animation: ping 1.8s infinite; }
-    @keyframes ping { 0% { box-shadow: 0 0 0 0 rgba(34, 180, 90, .5); } 70%, 100% { box-shadow: 0 0 0 7px rgba(34, 180, 90, 0); } }
+    .hero__bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 28px; padding: 14px 14px 4px; }
+    .hero__id { display: flex; align-items: center; gap: 16px; min-width: 0; }
+    .hero__id img { flex: none; width: 56px; height: 56px; border-radius: 50%; object-fit: cover; object-position: 50% 14%; box-shadow: 0 0 0 3px #fff, 0 0 0 4.5px var(--blue-soft); }
+    .hero__name { margin: 0; font: 700 clamp(24px, 2.6vw, 32px)/1.25 var(--display); }
+    .hero__line { margin: 2px 0 0; font-size: 16px; color: var(--ink-2); }
+    .hero__actions { display: flex; flex-wrap: wrap; gap: 10px; }
+    .btn--line { background: #fff; color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--line); }
+    .btn--line:hover { box-shadow: inset 0 0 0 1.5px var(--blue); color: var(--blue-2); }
 
     /* ============================================================
        RIBBONS — two crossing marquee straps (speed follows scroll)
        ============================================================ */
-    .ribbons { position: relative; height: 150px; width: 100vw; margin: 20px 0 -30px calc(50% - 50vw); pointer-events: none; }
+    .ribbons { position: relative; height: 150px; margin: 20px 0 -30px; pointer-events: none; }
     .ribbon { position: absolute; left: -4%; right: -4%; top: 52px; height: 50px; display: flex; align-items: center; overflow: hidden; box-shadow: 0 14px 30px -16px rgba(20, 40, 120, .5); }
     .ribbon--blue { z-index: 2; rotate: -3deg; background: linear-gradient(180deg, #3C76FF, #2559E8); color: #fff; }
     .ribbon--yellow { z-index: 1; rotate: 2.4deg; background: linear-gradient(180deg, #FFD45E, #FFC132); color: #4A3300; }
-    .ribbon__track { display: flex; flex: none; align-items: center; gap: 22px; padding-right: 22px; white-space: nowrap; font: 700 19px/1 var(--display); letter-spacing: .08em; text-transform: uppercase; will-change: transform; }
+    .ribbon__track { display: flex; flex: none; align-items: center; gap: 22px; padding-right: 22px; white-space: nowrap; font: 600 19px/1.3 var(--display); letter-spacing: .03em; text-transform: uppercase; will-change: transform; }
     .ribbon__track svg { width: 16px; height: 16px; flex: none; }
 
     /* ============================================================
@@ -437,7 +437,7 @@
        ============================================================ */
     .sheet { z-index: 3; }
     .sheet .panel { background: var(--panel); padding: clamp(28px, 5vw, 64px); }
-    .sheet__top { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 48px; align-items: start; }
+    .sheet__top { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px 48px; align-items: start; }
     .intro p { max-width: 44ch; margin: 0 0 14px; color: var(--ink-2); }
     .intro .th { font-size: 14.5px; color: var(--muted); }
     .offclock { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 6px; font-size: 13px; color: var(--muted); }
@@ -462,13 +462,13 @@
     @keyframes kb { from { transform: scale(1.12) translate(1.5%, 1%); } to { transform: scale(1.01); } }
     @keyframes kb2 { from { transform: scale(1.01); } to { transform: scale(1.12) translate(-1.5%, -1%); } }
     .segs { position: absolute; z-index: 3; display: flex; gap: 6px; }
-    .segs button { flex: 1; min-width: 0; height: 20px; padding: 8px 0; border: 0; background: transparent; cursor: pointer; }
+    .segs button { flex: 1; min-width: 0; height: 44px; padding: 20px 0; border: 0; background: transparent; cursor: pointer; }
     .segs button::before { content: ""; display: block; height: 4px; border-radius: 4px; background: rgba(255, 255, 255, .35); }
-    .segs button i { display: block; width: 0; height: 4px; margin-top: -4px; border-radius: 4px; background: #fff; }
-    .segs button.done i { width: 100%; }
+    .segs button i { display: block; height: 4px; margin-top: -4px; border-radius: 4px; background: #fff; transform-origin: 0 50%; transform: scaleX(0); }
+    .segs button.done i { transform: scaleX(1); }
     .segs button.on i { animation: seg var(--dur, 6000ms) linear forwards; }
     .paused .segs button.on i { animation-play-state: paused; }
-    @keyframes seg { to { width: 100%; } }
+    @keyframes seg { to { transform: scaleX(1); } }
 
     /* --- full-bleed portrait in a camera viewfinder --- */
     .vf {
@@ -482,7 +482,7 @@
     }
     .vf__media { position: absolute; inset: 0; }
     .vf__media img { pointer-events: none; -webkit-user-drag: none; }
-    .vf .segs { left: 24px; right: 24px; bottom: 112px; }
+    .vf .segs { left: 24px; right: 24px; bottom: 100px; }
     .vf__ui { position: absolute; inset: 0; z-index: 2; pointer-events: none; color: #fff; font: 600 12px/1 var(--mono); letter-spacing: .04em; text-shadow: 0 1px 3px rgba(0, 0, 0, .55); }
     .vf__ui::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8, 10, 16, .5), transparent 22%, transparent 55%, rgba(8, 10, 16, .7)); }
     .vf__grid {
@@ -508,7 +508,6 @@
       width: 76px; height: 76px; translate: -50% -50%;
       border: 2px solid #FFD54A; border-radius: 6px;
       box-shadow: 0 0 0 1px rgba(0, 0, 0, .25);
-      transition: left .35s var(--ease), top .35s var(--ease);
     }
     .vf__focus::before, .vf__focus::after { content: ""; position: absolute; left: 50%; top: 50%; background: #FFD54A; translate: -50% -50%; }
     .vf__focus::before { width: 12px; height: 2px; }
@@ -518,21 +517,19 @@
     .vf__flash { position: absolute; inset: 0; z-index: 4; background: #fff; opacity: 0; pointer-events: none; }
     .vf__flash.go { animation: flash .45s ease-out; }
     .lower3 { position: absolute; z-index: 3; left: 24px; right: 24px; bottom: 30px; display: grid; justify-items: start; pointer-events: none; }
-    .lower3 strong { padding: 10px 18px 9px 16px; border-left: 6px solid var(--red); background: var(--blue); color: #fff; font: 700 clamp(18px, 2.1vw, 24px)/1.1 var(--display); }
-    .lower3 span { padding: 7px 14px 7px 16px; border-left: 6px solid var(--yellow); background: #fff; color: var(--ink); font: 600 13px/1.2 var(--body); }
+    .lower3 strong { padding: 8px 18px 8px 16px; border-left: 6px solid var(--red); background: var(--blue); color: #fff; font: 600 clamp(18px, 2.1vw, 23px)/1.35 var(--display); }
+    .lower3 span { padding: 6px 14px 6px 16px; border-left: 6px solid var(--yellow); background: #fff; color: var(--ink); font: 500 13.5px/1.45 var(--display); }
     .js .lower3 > * { clip-path: inset(0 100% 0 0); transition: clip-path .8s var(--ease) .35s; }
     .js .lower3 span { transition-delay: .6s; }
     .js .vf.in .lower3 > * { clip-path: inset(0 0 0 0); }
 
     /* --- education / experience / skills --- */
-    .sheet__grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px 56px; margin-top: 30px; }
+    .sheet__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 40px 56px; margin-top: 30px; }
     .sheet__grid > div > section + section { margin-top: 46px; }
 
     .tl { --date-w: 92px; list-style: none; margin: 0; padding: 0; }
     .tl > li { position: relative; display: grid; grid-template-columns: var(--date-w) 1fr; gap: 0 26px; padding-bottom: 26px; }
     .tl > li::before { content: ""; position: absolute; left: calc(var(--date-w) + 12px); top: 12px; bottom: -4px; width: 1.5px; background: #C2C8D3; transform-origin: 0 0; }
-    .js .tl > li::before { scale: 1 0; transition: scale 1s var(--ease) .3s; }
-    .js .in .tl > li::before { scale: 1 1; }
     .tl > li:last-child { padding-bottom: 0; }
     .tl > li:last-child::before { display: none; }
     .tl > li::after { content: ""; position: absolute; left: calc(var(--date-w) + 8px); top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--panel); border: 2px solid var(--ink-2); transition: transform .3s var(--spring), background .2s, border-color .2s; }
@@ -540,8 +537,8 @@
     .tl > li:first-child::after { background: var(--blue); border-color: var(--blue); animation: ring 2.2s infinite; }
     @keyframes ring { 0% { box-shadow: 0 0 0 0 rgba(47, 107, 255, .35); } 70%, 100% { box-shadow: 0 0 0 9px rgba(47, 107, 255, 0); } }
     .tl time { font: 600 15px/1.3 var(--display); }
-    .tl time small { display: block; font: 500 12.5px/1.4 var(--display); color: var(--muted); }
-    .tl h4 { margin: 0; font: 800 14.5px/1.35 var(--body); text-transform: uppercase; letter-spacing: .02em; }
+    .tl time small { display: block; font: 400 12.5px/1.5 var(--display); color: var(--muted); }
+    .tl h4 { margin: 0; font: 600 15.5px/1.45 var(--display); }
     .tl p { margin: 2px 0 0; color: var(--ink-2); font-size: 14.5px; }
     .tl .role b, .tl .desc-h { font-weight: 700; color: var(--ink); }
     .tl ul { margin: 2px 0 0; padding: 0; list-style: none; color: var(--ink-2); font-size: 14.5px; }
@@ -549,10 +546,10 @@
     .tl ul li::before { content: ""; position: absolute; left: 1px; top: .72em; width: 5px; height: 5px; border-radius: 50%; background: var(--ink-2); }
     .tl--xp { --date-w: 84px; }
     .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-    .tags span { padding: 3px 9px; border-radius: 6px; background: var(--blue-soft); color: var(--blue-2); font: 600 11.5px/1.4 var(--body); letter-spacing: .04em; text-transform: uppercase; }
+    .tags span { padding: 3px 10px; border-radius: 6px; background: var(--blue-soft); color: var(--blue-2); font: 500 12.5px/1.6 var(--display); }
 
     .chips { display: flex; flex-wrap: wrap; gap: 9px; }
-    .chip { padding: 6px 15px; border-radius: 999px; background: #fff; box-shadow: inset 0 0 0 1.5px #BFC6D3; font-size: 13.5px; font-weight: 600; color: var(--ink-2); transition: background .2s, color .2s, box-shadow .2s, transform .35s var(--spring); }
+    .chip { padding: 5px 15px; border-radius: 999px; background: #fff; box-shadow: inset 0 0 0 1.5px #BFC6D3; font-size: 13.5px; font-weight: 600; color: var(--ink-2); transition: background .2s, color .2s, box-shadow .2s, transform .35s var(--spring); }
     .chip:hover { background: var(--blue); color: #fff; box-shadow: none; transform: translateY(-3px) rotate(-2deg); }
     .chips .chip:nth-child(3n+2):hover { background: var(--red); transform: translateY(-3px) rotate(2deg); }
     .chips .chip:nth-child(3n):hover { background: var(--yellow); color: var(--ink); }
@@ -568,151 +565,98 @@
 
     /* --- highlights strip (the reference's "Achievement" row) --- */
     .highlights { margin-top: 56px; }
-    .highlights ol { position: relative; list-style: none; margin: 8px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; text-align: center; }
+    .highlights ol { position: relative; list-style: none; margin: 8px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; text-align: center; }
     .highlights ol::before { content: ""; position: absolute; left: 16.6%; right: 16.6%; top: 41px; height: 1.5px; background: #C2C8D3; transform-origin: 0 50%; }
-    .js .highlights ol::before { scale: 0 1; transition: scale 1.2s var(--ease) .2s; }
-    .js .highlights.in ol::before { scale: 1 1; }
-    .highlights .lab { display: block; height: 32px; font: 700 22px/32px var(--display); color: var(--blue-2); }
+    .highlights .lab { display: block; height: 34px; font: 700 22px/34px var(--display); color: var(--blue-2); }
     .highlights .node { position: relative; z-index: 1; display: block; width: 11px; height: 11px; margin: 4px auto 18px; border-radius: 50%; background: var(--panel); border: 2px solid var(--ink-2); }
-    .highlights strong { display: block; font: 800 14.5px/1.35 var(--body); text-transform: uppercase; letter-spacing: .01em; }
+    .highlights strong { display: block; font: 600 16px/1.45 var(--display); }
     .highlights .sub { display: block; margin-top: 4px; font-size: 14px; color: var(--muted); }
 
     /* ============================================================
-       SELECTED WORKS — a wall of prints taped to grid paper.
-       Drag them around, click one for a closer look.
+       SELECTED WORKS — three projects, each with its own page
        ============================================================ */
-    .works .panel {
-      overflow: clip;
-      padding: clamp(24px, 4.5vw, 56px);
-      background:
-        linear-gradient(#E1E7F3 1px, transparent 1px) 0 0 / 28px 28px,
-        linear-gradient(90deg, #E1E7F3 1px, transparent 1px) 0 0 / 28px 28px,
-        #FAFBFE;
-    }
-    .works__head { position: relative; display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 18px 32px; margin-bottom: 24px; }
+    .works .panel, .more .panel { background: var(--panel); padding: clamp(24px, 4.5vw, 56px); }
+    .works__head { margin-bottom: 28px; max-width: 60ch; }
     .works__head .h2 { margin: 0 0 6px; }
-    .works__head p { margin: 0; color: var(--muted); max-width: 46ch; }
-    .works__note {
-      position: relative; width: 190px; padding: 18px 16px 16px;
-      rotate: 4deg;
-      background: linear-gradient(170deg, #FFD761, #FFC23A);
-      box-shadow: 0 10px 18px -8px rgba(120, 80, 0, .45);
-      border-radius: 3px 3px 3px 22px;
-      font: 700 21px/1 var(--hand); color: #5E3E00;
-      transition: rotate .5s var(--spring);
+    .works__head p { margin: 0; color: var(--muted); }
+    .projects { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px 28px; }
+    .proj { grid-column: 1 / -1; display: grid; align-content: start; gap: 18px; color: inherit; text-decoration: none; }
+    .proj--workpoint { grid-column: 1 / span 7; }
+    .proj--memindy { grid-column: 8 / span 5; }
+    .proj__media {
+      position: relative; overflow: hidden; isolation: isolate;
+      aspect-ratio: 16 / 10; border-radius: 22px; background: #0D1018;
+      box-shadow: 0 22px 40px -26px rgba(20, 30, 70, .6);
+      transition: transform .5s var(--ease), box-shadow .5s var(--ease);
     }
-    .works__note:hover { rotate: -2deg; }
-    .works__note::before { content: ""; position: absolute; top: -11px; left: 50%; width: 70px; height: 22px; translate: -50% 0; rotate: -4deg; background: rgba(255, 255, 255, .7); }
-    .works__note .n-touch { display: none; }
-    @media (hover: none) { .works__note .n-mouse { display: none; } .works__note .n-touch { display: inline; } }
-
-    .toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 34px; }
-    .filters { display: flex; flex-wrap: wrap; gap: 8px; }
-    .filters button {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 9px 15px 9px 10px; border: 0; border-radius: 999px;
-      background: #fff; box-shadow: inset 0 0 0 1.5px #CDD3DE;
-      font: 600 13.5px/1 var(--body); color: var(--ink-2); cursor: pointer;
-      transition: background .25s, color .25s, box-shadow .25s, transform .35s var(--spring);
-    }
-    .filters button i { width: 18px; height: 18px; border-radius: 50%; background: var(--fc, var(--ink)); box-shadow: inset 0 0 0 2.5px #fff, 0 0 0 1px rgba(0, 0, 0, .08); }
-    .filters button small { font: 700 11px/1 var(--display); color: var(--muted); }
-    .filters button:hover { transform: translateY(-2px) rotate(-2deg); }
-    .filters button[aria-pressed="true"] { background: var(--ink); color: #fff; box-shadow: 0 8px 16px -8px rgba(14, 17, 23, .6); }
-    .filters button[aria-pressed="true"] small { color: rgba(255, 255, 255, .7); }
-    .tidy { display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border: 0; border-radius: 999px; background: transparent; font: 700 13.5px/1 var(--body); color: var(--blue-2); cursor: pointer; transition: opacity .3s, transform .35s var(--spring); }
-    .tidy:disabled { opacity: 0; pointer-events: none; transform: translateY(6px); }
-    .tidy svg { width: 16px; height: 16px; }
-
-    .wall { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 46px 34px; grid-auto-flow: row dense; align-items: start; padding: 10px 4px 14px; }
-    .print {
-      --r: 0deg; --y: 0px; --dx: 0px; --dy: 0px; --tilt: 0deg;
-      position: relative; display: block; width: 100%;
-      margin: 0; padding: 11px 11px 0; border: 0;
-      border-radius: 4px; background: #fff;
-      text-align: left; cursor: pointer;
-      box-shadow: 0 1px 2px rgba(20, 30, 70, .1), 0 16px 28px -16px rgba(20, 30, 70, .45);
-      transform: translate(var(--dx), calc(var(--y) + var(--dy))) rotate(calc(var(--r-now, var(--r)) + var(--tilt)));
-      transition: transform .6s var(--spring), box-shadow .3s, opacity .45s, filter .45s;
-      user-select: none; -webkit-user-select: none; touch-action: pan-y;
-    }
-    .print:hover, .print:focus-visible { --r-now: 0deg; z-index: 30; box-shadow: 0 2px 4px rgba(20, 30, 70, .1), 0 34px 44px -20px rgba(20, 30, 70, .55); }
-    .print:focus-visible { outline-offset: 6px; }
-    .print.dragging { cursor: grabbing; z-index: 40; transition: transform .12s linear, box-shadow .3s; box-shadow: 0 2px 4px rgba(20, 30, 70, .1), 0 44px 56px -22px rgba(20, 30, 70, .6); }
-    .print.wide { grid-column: span 2; }
-    .print.full { grid-column: 1 / -1; }
-    .print__img video { display: block; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
-    .print--led .print__img::after { /* LED-wall pixel grid */
+    .proj--memindy .proj__media { aspect-ratio: 8 / 7; }
+    .proj--thaya .proj__media { aspect-ratio: 2432 / 768; background: #9E78D8; }
+    .proj__media img, .proj__media video { width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
+    .proj--thaya .proj__media::after { /* the LED wall's pixel grid */
       content: ""; position: absolute; inset: 0; pointer-events: none;
-      background: radial-gradient(circle, transparent 52%, rgba(10, 6, 30, .32) 56%) 0 0 / 4px 4px;
+      background: radial-gradient(circle, transparent 52%, rgba(10, 6, 30, .3) 56%) 0 0 / 4px 4px;
     }
-    .print__live {
-      position: absolute; z-index: 1; left: 12px; top: 12px;
-      display: inline-flex; align-items: center; gap: 7px;
-      padding: 7px 11px; border-radius: 999px;
-      background: rgba(10, 8, 24, .72); color: #fff;
-      font: 600 11.5px/1 var(--mono); letter-spacing: .08em;
+    .proj:hover .proj__media { transform: translateY(-4px); box-shadow: 0 32px 50px -28px rgba(20, 30, 70, .7); }
+    .proj:hover .proj__media img, .proj:hover .proj__media video { transform: scale(1.04); }
+    .proj__body { display: grid; gap: 6px; }
+    .proj--thaya .proj__body { grid-template-columns: minmax(0, 1fr) auto; align-items: end; column-gap: 28px; }
+    .proj--thaya .proj__body > :not(.proj__go) { grid-column: 1; }
+    .proj--thaya .proj__go { grid-column: 2; grid-row: 1 / span 3; align-self: end; }
+    .proj__name { margin: 0; font: 700 clamp(24px, 2.6vw, 32px)/1.25 var(--display); }
+    .proj__meta { display: flex; flex-wrap: wrap; gap: 4px 18px; margin: 0; font-size: 15px; color: var(--muted); }
+    .proj__line { margin: 2px 0 8px; color: var(--ink-2); max-width: 58ch; }
+    .proj__go {
+      justify-self: start; display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px;
+      border-radius: 999px; background: var(--ink); color: #fff; font: 500 15px/1 var(--display);
+      transition: background .25s, transform .3s var(--ease);
     }
-    .print__live i { width: 8px; height: 8px; border-radius: 50%; background: #FF5A4E; box-shadow: 0 0 8px #FF5A4E; animation: blink 1.2s steps(1) infinite; }
-    .print.dim { opacity: .16; filter: grayscale(1); pointer-events: none; }
-    .print::before { /* tape */
-      content: ""; position: absolute; z-index: 2; top: -13px; left: 50%;
-      width: 92px; height: 26px; translate: -50% 0; rotate: var(--tr, -3deg);
-      background: var(--tape, rgba(255, 206, 84, .78));
-      clip-path: polygon(0 8%, 4% 0, 8% 10%, 12% 0, 88% 0, 92% 10%, 96% 0, 100% 8%, 100% 92%, 96% 100%, 92% 90%, 88% 100%, 12% 100%, 8% 90%, 4% 100%, 0 92%);
-    }
-    .print.pin::before { /* a push-pin instead of tape */
-      width: 20px; height: 20px; top: -7px; border-radius: 50%; clip-path: none; rotate: 0deg;
-      background: radial-gradient(circle at 35% 30%, #FF9C92, #E5392E 55%, #A8231A);
-      box-shadow: 0 5px 5px -1px rgba(0, 0, 0, .35);
-    }
-    .print__img { position: relative; display: block; overflow: hidden; aspect-ratio: var(--ar, 4 / 3); border-radius: 2px; background: #11141B; }
-    .print__img img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); pointer-events: none; -webkit-user-drag: none; }
-    .print:hover .print__img img { transform: scale(1.06); }
-    .print__view {
-      position: absolute; right: 10px; bottom: 10px; width: 40px; height: 40px;
-      display: grid; place-items: center; border-radius: 50%;
-      background: #fff; color: var(--ink);
-      box-shadow: 0 6px 14px -4px rgba(0, 0, 0, .4);
-      scale: 0; transition: scale .4s var(--spring);
-    }
-    .print__view svg { width: 18px; height: 18px; }
-    .print:hover .print__view, .print:focus-visible .print__view { scale: 1; }
-    .print__cap { display: block; padding: 10px 4px 14px; }
-    .print__cap b { display: block; font: 700 24px/1 var(--hand); color: var(--ink); }
-    .print__cap span { display: block; margin-top: 4px; font: 500 12.5px/1.35 var(--body); color: var(--muted); }
-    .sticker {
-      position: absolute; z-index: 3; top: -16px; right: -14px;
-      width: 58px; height: 58px; border-radius: 50%;
-      display: grid; place-items: center; text-align: center;
-      background: var(--sc, var(--blue)); color: var(--st, #fff);
-      font: 800 10.5px/1.05 var(--display); letter-spacing: .06em;
-      box-shadow: inset 0 0 0 3px rgba(255, 255, 255, .95), 0 8px 14px -6px rgba(0, 0, 0, .4);
-      rotate: 12deg;
-      transition: rotate .5s var(--spring), scale .5s var(--spring);
-    }
-    .print:hover .sticker { rotate: -8deg; scale: 1.08; }
-    .s-video { --sc: var(--blue); }
-    .s-graphic { --sc: var(--red); }
-    .s-3d { --sc: var(--yellow); --st: #4A3300; }
+    .proj:hover .proj__go, .proj:focus-visible .proj__go { background: var(--blue); }
+    .proj:focus-visible { outline-offset: 8px; border-radius: 24px; }
 
-    .js .wall:not(.in) .print { visibility: hidden; }
-    .js .wall.in .print { animation: drop .9s var(--spring) backwards; animation-delay: calc(var(--i, 0) * 70ms); }
-    @keyframes drop { from { opacity: 0; translate: 0 -60px; scale: 1.12; } }
-
-    .crafts { display: flex; flex-wrap: wrap; align-items: center; gap: 9px; margin-top: 36px; }
-    .crafts > span { margin-right: 6px; font: 600 15px/1 var(--display); }
-    .crafts a.chip { text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
-    .crafts a.chip svg { width: 13px; height: 13px; transition: translate .3s var(--ease); }
-    .crafts a.chip:hover svg { translate: 3px 0; }
+    /* --- everything else: a strip that keeps looping --- */
+    .more__head { margin-bottom: 26px; max-width: 60ch; }
+    .more__head .h2 { margin: 0 0 6px; }
+    .more__head p { margin: 0; color: var(--muted); }
+    .loop {
+      --h: 220px;
+      overflow: hidden; padding: 4px 0 6px;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+              mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+    }
+    .loop + .loop { margin-top: 22px; }
+    .loop__track { display: flex; width: max-content; animation: marquee var(--dur, 80s) linear infinite; }
+    .loop--rev .loop__track { animation-direction: reverse; }
+    .loop:hover .loop__track, .loop:focus-within .loop__track { animation-play-state: paused; }
+    @keyframes marquee { to { transform: translateX(-50%); } }
+    .lp {
+      flex: none; display: grid; align-content: start; gap: 10px;
+      width: max(190px, calc(var(--h) * var(--r))); margin-right: 22px; padding: 0;
+      border: 0; background: none; color: inherit; text-align: left; cursor: pointer;
+    }
+    .lp__media {
+      position: relative; display: block; overflow: hidden;
+      width: calc(var(--h) * var(--r)); height: var(--h);
+      border-radius: 18px; background: #0D1018;
+      box-shadow: 0 16px 28px -20px rgba(20, 30, 70, .6);
+      transition: transform .45s var(--ease);
+    }
+    .lp__media img, .lp__media video { width: 100%; height: 100%; object-fit: cover; transition: transform .7s var(--ease); }
+    .lp:hover .lp__media { transform: translateY(-4px); }
+    .lp:hover .lp__media img, .lp:hover .lp__media video { transform: scale(1.05); }
+    .lp__type { position: absolute; left: 10px; top: 10px; padding: 4px 11px; border-radius: 999px; background: rgba(255, 255, 255, .94); color: var(--ink); font: 500 13px/1.5 var(--display); }
+    .lp__play { position: absolute; right: 10px; bottom: 10px; width: 36px; height: 36px; display: grid; place-items: center; border-radius: 50%; background: rgba(255, 255, 255, .94); color: var(--ink); }
+    .lp__play svg { width: 14px; height: 14px; translate: 1px 0; }
+    .lp__cap b { display: block; font: 600 16px/1.4 var(--display); }
+    .lp__cap span { display: block; font-size: 14px; line-height: 1.5; color: var(--muted); }
+    .loop [data-clone] { pointer-events: auto; }
 
     /* --- the viewer (opened from a print) --- */
-    .viewer { width: 100vw; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 20px; border: 0; background: transparent; overflow: auto; }
+    .viewer { inset: 0; width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; padding: 20px; border: 0; background: transparent; overflow: auto; }
     .viewer[open] { display: grid; place-items: center; }
     .viewer::backdrop { background: rgba(14, 22, 48, .6); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
     .viewer__card {
       position: relative; width: min(1000px, 100%);
-      display: grid; grid-template-columns: 1.5fr 1fr; gap: 28px;
+      display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 28px;
       padding: 16px; border-radius: 26px; background: #fff;
       box-shadow: 0 40px 80px -30px rgba(0, 0, 0, .6);
       rotate: -.8deg;
@@ -723,7 +667,8 @@
     @keyframes vswap { from { opacity: 0; translate: var(--from, 40px) 0; rotate: 3deg; } }
     .viewer__card::before { content: ""; position: absolute; top: -14px; left: 50%; width: 110px; height: 28px; translate: -50% 0; rotate: -3deg; background: rgba(126, 163, 255, .7); }
     .viewer__media { overflow: hidden; border-radius: 14px; background: #0D1018; aspect-ratio: 4 / 3; }
-    .viewer__media img, .viewer__media video { display: block; width: 100%; height: 100%; object-fit: contain; }
+    .viewer__media img, .viewer__media video, .viewer__media iframe { display: block; width: 100%; height: 100%; object-fit: contain; border: 0; }
+    .viewer__card.yt .viewer__media { aspect-ratio: 16 / 9; }
     .viewer__media [hidden] { display: none !important; }
     .viewer__card.wide { grid-template-columns: 1fr; gap: 14px; width: min(1120px, 100%); }
     .viewer__card.wide .viewer__media { aspect-ratio: var(--var, 3 / 1); }
@@ -733,14 +678,14 @@
     .viewer__versions button { padding: 7px 13px; border: 0; border-radius: 999px; background: var(--panel); box-shadow: inset 0 0 0 1.5px var(--line); font: 600 12.5px/1 var(--body); cursor: pointer; transition: background .2s, color .2s; }
     .viewer__versions button[aria-pressed="true"] { background: var(--ink); color: #fff; box-shadow: none; }
     .viewer__meta { display: flex; flex-direction: column; gap: 12px; padding: 14px 8px 8px 0; }
-    .viewer__cat { align-self: flex-start; padding: 7px 12px; border-radius: 999px; background: var(--sc, var(--blue)); color: var(--st, #fff); font: 700 12px/1 var(--display); letter-spacing: .1em; text-transform: uppercase; }
-    .viewer__meta h3 { margin: 0; font: 800 clamp(26px, 3vw, 34px)/1.05 var(--display); }
-    .viewer__kicker { margin: -4px 0 0; font: 700 22px/1.1 var(--hand); color: var(--blue-2); }
+    .viewer__cat { align-self: flex-start; padding: 7px 13px; border-radius: 999px; background: var(--sc, var(--blue)); color: var(--st, #fff); font: 600 13px/1.2 var(--display); letter-spacing: .02em; }
+    .viewer__meta h3 { margin: 0; font: 700 clamp(24px, 2.8vw, 32px)/1.25 var(--display); }
+    .viewer__kicker { margin: -4px 0 0; font: 400 20px/1.35 var(--hand); color: var(--blue-2); }
     .viewer__desc { margin: 0; color: var(--ink-2); }
     .viewer__tools { display: flex; flex-wrap: wrap; gap: 6px; }
     .viewer__tools span { padding: 4px 10px; border-radius: 6px; background: var(--panel); box-shadow: inset 0 0 0 1px var(--line); font: 600 12.5px/1.4 var(--body); }
     .viewer__foot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 8px; }
-    .viewer__count { font: 600 13px/1 var(--mono); color: var(--muted); }
+    .viewer__count { font: 500 14px/1 var(--display); color: var(--muted); }
     .viewer__foot [hidden] { display: none; }
     .viewer__close, .viewer__nav {
       position: absolute; display: grid; place-items: center;
@@ -749,8 +694,9 @@
       box-shadow: 0 10px 20px -8px rgba(0, 0, 0, .45);
       transition: transform .35s var(--spring), background .2s, color .2s;
     }
-    .viewer__close { top: -16px; right: -16px; width: 44px; height: 44px; font: 600 24px/1 var(--body); }
-    .viewer__nav { top: 50%; width: 52px; height: 52px; translate: 0 -50%; font: 700 26px/1 var(--display); }
+    .viewer__close { top: -16px; right: -16px; width: 44px; height: 44px; }
+    .viewer__close svg, .viewer__nav svg { width: 20px; height: 20px; }
+    .viewer__nav { top: 50%; width: 52px; height: 52px; translate: 0 -50%; }
     .viewer__nav--prev { left: -26px; }
     .viewer__nav--next { right: -26px; }
     .viewer__close:hover, .viewer__nav:hover { background: var(--blue); color: #fff; transform: scale(1.08); }
@@ -767,18 +713,8 @@
         linear-gradient(160deg, #6A95FF 0%, #2F6BFF 55%, #1F55E6 100%);
       color: #fff;
     }
-    .cta .panel::before {
-      content: ""; position: absolute; inset: 0; pointer-events: none;
-      background:
-        linear-gradient(rgba(255, 255, 255, .13) 1px, transparent 1px) 0 0 / 44px 44px,
-        linear-gradient(90deg, rgba(255, 255, 255, .13) 1px, transparent 1px) 0 0 / 44px 44px;
-      -webkit-mask-image: linear-gradient(90deg, #000, transparent 60%);
-              mask-image: linear-gradient(90deg, #000, transparent 60%);
-    }
     .cta__copy { position: relative; z-index: 2; align-self: center; padding: clamp(30px, 5vw, 64px); }
-    .eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 7px 13px; border-radius: 999px; background: rgba(255, 255, 255, .16); font: 600 12.5px/1 var(--display); letter-spacing: .12em; }
-    .eyebrow i { width: 8px; height: 8px; border-radius: 50%; background: #5BF08F; box-shadow: 0 0 0 4px rgba(91, 240, 143, .25); }
-    .cta h2 { margin: 18px 0 14px; font: 800 clamp(40px, 5.4vw, 68px)/.95 var(--display); }
+    .cta h2 { margin: 18px 0 16px; font: 700 clamp(36px, 4.8vw, 60px)/1.18 var(--display); text-wrap: balance; }
     .cta p { margin: 0 0 8px; max-width: 46ch; color: rgba(255, 255, 255, .9); }
     .cta p.th { font-size: 14.5px; color: rgba(255, 255, 255, .75); }
     .cta__actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
@@ -793,12 +729,9 @@
       content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none;
       background: linear-gradient(180deg, rgba(8, 10, 16, .5), transparent 24%, transparent 58%, rgba(8, 10, 16, .78));
     }
-    .cta__media .segs { top: 20px; left: 22%; right: 22px; }
-    .reel__rec { position: absolute; z-index: 3; top: 48px; left: 22%; display: inline-flex; align-items: center; gap: 8px; font: 600 12px/1 var(--mono); letter-spacing: .06em; color: #fff; pointer-events: none; }
-    .reel__rec i { width: 9px; height: 9px; border-radius: 50%; background: #FF5A4E; box-shadow: 0 0 8px #FF5A4E; animation: blink 1.2s steps(1) infinite; }
+    .cta__media .segs { top: 8px; left: 22%; right: 22px; }
     .reel__cap { position: absolute; z-index: 3; left: 22%; right: 24px; bottom: 26px; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; pointer-events: none; }
-    .reel__cap small { padding: 6px 10px; border-radius: 999px; background: rgba(255, 255, 255, .18); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); font: 600 11px/1 var(--display); letter-spacing: .16em; }
-    .reel__cap b { font: 700 clamp(19px, 2.1vw, 26px)/1.15 var(--display); text-shadow: 0 2px 12px rgba(0, 0, 0, .45); }
+    .reel__cap b { font: 600 clamp(19px, 2.1vw, 25px)/1.35 var(--display); text-shadow: 0 2px 12px rgba(0, 0, 0, .45); }
     .reel__cap b.swap { animation: capin .6s var(--ease); }
     @keyframes capin { from { opacity: 0; translate: 0 10px; } }
 
@@ -811,19 +744,16 @@
     .foot a:hover { color: var(--blue-2); }
 
     /* ============================================================
-       REVEAL
-       ============================================================ */
-    .js .reveal { opacity: 0; translate: 0 26px; transition: opacity .9s var(--ease), translate .9s var(--ease); transition-delay: var(--rd, 0s); }
-    .js .reveal.in { opacity: 1; translate: 0 0; }
-
-    /* ============================================================
        RESPONSIVE
        ============================================================ */
     @media (max-width: 1000px) { .nav__tc { display: none; } }
     @media (max-width: 900px) {
-      .sheet__top, .sheet__grid { grid-template-columns: 1fr; }
+      .sheet__top, .sheet__grid { grid-template-columns: minmax(0, 1fr); }
+      .proj--workpoint, .proj--memindy { grid-column: 1 / -1; }
+      .proj--memindy .proj__media { aspect-ratio: 16 / 10; }
+      .proj--thaya .proj__body { grid-template-columns: minmax(0, 1fr); }
+      .proj--thaya .proj__go { grid-column: 1; grid-row: auto; }
       .vf { justify-self: center; margin-top: 8px; }
-      .wall { grid-template-columns: repeat(2, 1fr); gap: 40px 26px; }
       .viewer__card { grid-template-columns: 1fr; gap: 16px; }
       .viewer__meta { padding: 4px 6px 6px; }
       .viewer__nav { top: auto; bottom: -24px; translate: 0 0; }
@@ -835,7 +765,6 @@
       .cta__media { -webkit-mask-image: linear-gradient(180deg, transparent 0, rgba(0, 0, 0, .6) 12%, #000 30%); mask-image: linear-gradient(180deg, transparent 0, rgba(0, 0, 0, .6) 12%, #000 30%); }
       .cta__media::after { background: linear-gradient(180deg, transparent 60%, rgba(8, 10, 16, .78)); }
       .cta__media .segs { left: 22px; top: 30%; }
-      .reel__rec { left: 22px; top: calc(30% + 28px); }
       .reel__cap { left: 22px; }
     }
     @media (max-width: 720px) {
@@ -867,12 +796,8 @@
       .tl--xp { --date-w: 70px; }
       .tl { --date-w: 72px; }
       .tl > li { gap: 0 22px; }
-      .works__note { width: auto; max-width: 240px; }
     }
     @media (max-width: 560px) {
-      .wall { grid-template-columns: 1fr; gap: 44px; padding: 10px 10px 14px; }
-      .print.wide { grid-column: auto; }
-      .print { --y: 0px !important; }
       .nav { padding-left: 16px; }
       .vf__top { left: 50px; right: 50px; font-size: 10.5px; }
       .vf__spec { display: none; }
@@ -880,12 +805,13 @@
       .vf .segs { bottom: 100px; }
     }
 
+    @media (pointer: coarse) { .nav__link, .btn, .lp { min-height: 44px; } }
+    @media (max-width: 720px) { .loop { --h: 170px; } }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
+      .loop { overflow-x: auto; -webkit-mask-image: none; mask-image: none; }
+      .loop [data-clone] { display: none; }
       *, *::before, *::after { animation: none !important; transition: none !important; }
-      .js .reveal { opacity: 1; translate: none; }
-      .js .tl > li::before, .js .highlights ol::before { scale: 1 1; }
-      .js .wall:not(.in) .print { visibility: visible; }
     }
   </style>
 </head>
@@ -902,27 +828,36 @@
     <symbol id="i-phone" viewBox="0 0 24 24"><path d="M6.6 3.5h2.7l1.6 4.2-2 1.4a10.6 10.6 0 0 0 6 6l1.4-2 4.2 1.6v2.7a2 2 0 0 1-2.1 2A16.3 16.3 0 0 1 4.6 5.6a2 2 0 0 1 2-2.1Z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/></symbol>
     <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="12" height="12" rx="2.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M15.5 5.5V5a1.5 1.5 0 0 0-1.5-1.5H5A1.5 1.5 0 0 0 3.5 5v9A1.5 1.5 0 0 0 5 15.5h.5" fill="none" stroke="currentColor" stroke-width="2.2"/></symbol>
     <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 1.5c.6 5.6 4.9 9.9 10.5 10.5-5.6.6-9.9 4.9-10.5 10.5C11.4 16.9 7.1 12.6 1.5 12 7.1 11.4 11.4 7.1 12 1.5Z" fill="currentColor"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15l12.5-7.5Z" fill="currentColor"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><rect x="6" y="4.5" width="4" height="15" rx="1.2" fill="currentColor"/><rect x="14" y="4.5" width="4" height="15" rx="1.2" fill="currentColor"/></symbol>
+    <symbol id="i-stop" viewBox="0 0 24 24"><rect x="5.5" y="5.5" width="13" height="13" rx="2" fill="currentColor"/></symbol>
+    <symbol id="i-ff" viewBox="0 0 24 24"><path d="M3.5 6v12l8.5-6Zm9 0v12l8.5-6Z" fill="currentColor"/></symbol>
+    <symbol id="i-rw" viewBox="0 0 24 24"><path d="M20.5 6v12L12 12Zm-9 0v12L3 12Z" fill="currentColor"/></symbol>
+    <symbol id="i-cut" viewBox="0 0 24 24"><circle cx="6.5" cy="6.5" r="3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="6.5" cy="17.5" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 8.5 20 18M9 15.5 20 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+    <symbol id="i-chev-l" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-chev-r" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
     <symbol id="i-curl" viewBox="0 0 60 40"><path d="M4 6c10 2 22 6 26 16 3 8-6 12-9 6s6-12 18-8c8 3 12 9 14 15" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><path d="m47 30 6 6 2-9" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   </svg>
 
   <div class="scrub" aria-hidden="true"><i></i></div>
 
-  <nav class="nav" aria-label="Main">
+  <nav class="nav" aria-label="เมนูหลัก">
     <a class="nav__logo" href="#top">Jess<span>.</span></a>
-    <a class="nav__link" href="#about">About</a>
-    <a class="nav__link" href="#experience">Experience</a>
-    <a class="nav__link" href="#works">Works</a>
-    <span class="nav__tc" aria-hidden="true"><i></i><span data-scroll-tc>00:00:00:00</span></span>
-    <a class="btn btn--blue" href="#contact">Hire me</a>
+    <a class="nav__link" href="#about">เกี่ยวกับ</a>
+    <a class="nav__link" href="#experience">ประสบการณ์</a>
+    <a class="nav__link" href="#works">ผลงาน</a>
+    <span class="nav__tc" aria-hidden="true"><span data-scroll-tc>00:00:00:00</span></span>
+    <a class="btn btn--blue" href="#contact">ติดต่องาน</a>
   </nav>
 
-  <main class="wrap" id="top">
+  <main id="top">
+    <div class="wrap">
 
     <!-- ========================================================
          HERO
          ======================================================== -->
     <header class="card hero">
-      <h1 class="sr-only">Chawit “Jess” Phechamnong — Video Editor &amp; Motion Designer, Portfolio 2026</h1>
       <div class="panel">
         <div class="hero__glow" aria-hidden="true"></div>
         <div class="stage-clip">
@@ -950,7 +885,7 @@
             </div>
             <div class="mouse" aria-hidden="true"></div>
 
-            <button class="clap" type="button" data-clap aria-label="Clapperboard — play the reel">
+            <button class="clap" type="button" data-clap aria-label="สเลท — กดเพื่อเล่นโชว์รีล">
               <span class="clap__pop" aria-hidden="true">ACTION!</span>
               <span class="clap__arm" aria-hidden="true"></span>
               <span class="clap__body" aria-hidden="true">
@@ -962,7 +897,7 @@
             <!-- monitor: hover to scrub · click / K to play · J L to shuttle · Ctrl+K to cut -->
             <div class="neck" aria-hidden="true"></div>
             <div class="base" aria-hidden="true"></div>
-            <div class="monitor" data-monitor data-mode="idle" tabindex="0" role="group" aria-label="Showreel monitor. Press Enter or K to play, J and L to move between clips.">
+            <div class="monitor" data-monitor data-mode="idle" tabindex="0" role="group" aria-label="จอโชว์รีล กด Enter หรือ K เพื่อเล่น และกด J หรือ L เพื่อเลื่อนคลิป">
               <div class="screen" data-screen>
                 <div class="frames" data-frames>
                   <img src="assets/thaya/thaya-brush-bright.jpg" alt="" data-name="THAYA — BRUSH &amp; BRIGHT">
@@ -978,7 +913,8 @@
                 <span class="screen__tc" data-tc>00:00:26:00</span>
                 <div class="screen__title" aria-hidden="true">PORT<br>FOLIO</div>
                 <span class="screen__clip" data-clipname>CLIP 01</span>
-                <span class="screen__osd" data-osd aria-hidden="true">▶</span>
+                <span class="screen__hint" aria-hidden="true"><span class="m">คลิกจอหรือกด K เพื่อเล่นโชว์รีล</span><span class="t">แตะจอเพื่อเล่นโชว์รีล</span></span>
+                <span class="screen__osd" data-osd aria-hidden="true"></span>
                 <div class="screen__dock"></div>
                 <div class="tracks" aria-hidden="true">
                   <div class="track track--g"><span style="width:14%;margin-left:8%"></span><span style="width:22%;margin-left:16%"></span><span style="width:12%;margin-left:10%"></span></div>
@@ -988,11 +924,11 @@
                 </div>
                 <div class="screen__flash" data-flash></div>
               </div>
-              <span class="monitor__brand" aria-hidden="true">JESS · 2026</span>
+              <span class="monitor__brand" aria-hidden="true">JESS 2026</span>
               <span class="monitor__btns" aria-hidden="true"><i style="background:#FF5A4E"></i><i style="background:#3FCF8E"></i><i style="background:#FFC83D"></i></span>
             </div>
             <div class="knob" aria-hidden="true"></div>
-            <div class="note" aria-hidden="true">Motion<br>Designer</div>
+            <div class="note" aria-hidden="true">โมชัน<br>ดีไซเนอร์</div>
 
             <!-- floating props: drag them around, tap the keys -->
             <div class="fl f-k" data-depth="18" data-tap="play" aria-hidden="true"><div class="bob" style="--pd:.3s;--d:-1s"><div class="key key--blue"><b>K</b></div></div></div>
@@ -1015,54 +951,53 @@
 
       <div class="hero__bar">
         <div class="hero__id">
-          <img src="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/chawit-headshot-web.jpg" alt="" width="46" height="46">
-          <div><strong>Chawit “Jess” Phechamnong</strong><span>Video Editor &amp; Motion Designer · Bangkok</span></div>
+          <img src="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/chawit-headshot-web.jpg" alt="" width="56" height="56">
+          <div>
+            <h1 class="hero__name">ชวิศ “เจส” เพชรจำนงค์</h1>
+            <p class="hero__line">วิดีโอเอดิเตอร์และโมชันดีไซเนอร์ ประจำกรุงเทพฯ</p>
+          </div>
         </div>
-        <div class="hints hints--mouse">
-          <span>Hover the screen to scrub</span>
-          <span><span class="kbd">K</span> play</span>
-          <span><span class="kbd">J</span><span class="kbd">L</span> shuttle</span>
-          <span><span class="kbd">Ctrl</span>+<span class="kbd">K</span> cut</span>
+        <div class="hero__actions">
+          <a class="btn btn--blue" href="#works">ดูผลงาน</a>
+          <a class="btn btn--line" href="#contact">ติดต่องาน</a>
         </div>
-        <div class="hints hints--touch">
-          <span>Tap the screen or the clapperboard · drag the props</span>
-        </div>
-        <a class="status" href="#contact"><i></i>Open for work</a>
       </div>
     </header>
+
+    </div>
 
     <!-- crossing marquee ribbons -->
     <div class="ribbons" aria-hidden="true" data-ribbons>
       <div class="ribbon ribbon--yellow"><div class="ribbon__track" data-dir="1">
-        <span>Open for work 2026</span><svg><use href="#i-star"/></svg><span>Freelance</span><svg><use href="#i-star"/></svg><span>Full-time</span><svg><use href="#i-star"/></svg><span>Collaborations</span><svg><use href="#i-star"/></svg><span>Bangkok, TH</span><svg><use href="#i-star"/></svg>
+        <span>เปิดรับงาน 2026</span><svg><use href="#i-star"/></svg><span>ฟรีแลนซ์</span><svg><use href="#i-star"/></svg><span>งานประจำ</span><svg><use href="#i-star"/></svg><span>งานคอลแลบ</span><svg><use href="#i-star"/></svg><span>กรุงเทพฯ</span><svg><use href="#i-star"/></svg>
       </div></div>
       <div class="ribbon ribbon--blue"><div class="ribbon__track" data-dir="-1">
-        <span>Video Editing</span><svg><use href="#i-star"/></svg><span>Motion Graphics</span><svg><use href="#i-star"/></svg><span>Color Grading</span><svg><use href="#i-star"/></svg><span>3D Modeling</span><svg><use href="#i-star"/></svg><span>Key Visuals</span><svg><use href="#i-star"/></svg><span>Kinetic Type</span><svg><use href="#i-star"/></svg>
+        <span>ตัดต่อวิดีโอ</span><svg><use href="#i-star"/></svg><span>โมชันกราฟิก</span><svg><use href="#i-star"/></svg><span>เกรดสี</span><svg><use href="#i-star"/></svg><span>โมเดล 3D</span><svg><use href="#i-star"/></svg><span>คีย์วิชวล</span><svg><use href="#i-star"/></svg><span>คิเนติกไทโป</span><svg><use href="#i-star"/></svg>
       </div></div>
     </div>
 
+    <div class="wrap">
     <!-- ========================================================
          PROFILE SHEET
          ======================================================== -->
-    <section class="card sheet" id="about" aria-label="Profile">
+    <section class="card sheet" id="about" aria-label="โปรไฟล์">
       <div class="panel">
         <div class="sheet__top">
           <div>
             <section class="intro reveal">
-              <h2 class="h2">Behind the Cut</h2>
-              <p>I’m Chawit Phechamnong — <b>Jess</b> to most people — a video editor and motion designer based in Bangkok. For 4+ years I’ve cut stories for broadcast TV and the restless social feed, from MCOT to Workpoint Entertainment.</p>
-              <p>My strengths are short-form edits that hook in the first second, motion graphics that move on the beat, and broadcast-standard colour grading — from S-Log3 to final master.</p>
-              <p class="th" lang="th">ผมคือ ชวิศ เพชรจำนงค์ (เจส) ถนัดตัดต่อคลิปสั้นให้ดึงดูดสายตา พร้อมรักษามาตรฐานกราฟิกและ Color Grading ระดับ Broadcast</p>
-              <div class="offclock"><b>Off the clock</b><span>Photography</span><span>Music</span><span>Film &amp; Anime</span><span>Coffee</span></div>
+              <h2 class="h2">เบื้องหลังทุกคัต</h2>
+              <p>ผมชื่อ ชวิศ เพชรจำนงค์ เรียกสั้น ๆ ว่า <b>เจส</b> ทำงานตัดต่อและโมชันกราฟิกมากว่า 4 ปี เริ่มจากกราฟิกออนแอร์ที่ MCOT พัทลุง ล่าสุดเป็นวิดีโอเอดิเตอร์และกราฟิกดีไซเนอร์ที่ Workpoint Entertainment</p>
+              <p>งานที่ถนัดคือคลิปสั้นที่ต้องดึงคนดูให้หยุดตั้งแต่วินาทีแรก ผมทำกราฟิกเคลื่อนไหวเองใน After Effects และเกรดสีใน DaVinci Resolve จากฟุตเทจ S-Log3 จนได้ไฟล์มาสเตอร์</p>
+              <div class="offclock"><b>นอกเวลางาน</b><span>ถ่ายภาพ</span><span>ฟังเพลง</span><span>หนังและอนิเมะ</span><span>กาแฟ</span></div>
             </section>
 
             <section class="connect reveal">
-              <h2 class="h3">Let’s Connect</h2>
+              <h2 class="h3">ช่องทางติดต่อ</h2>
               <ul>
-                <li><span><span class="ic" style="background:var(--orange)"><svg><use href="#i-pin"/></svg></span><span class="connect__txt">Bangkok, Thailand</span></span></li>
+                <li><span><span class="ic" style="background:var(--orange)"><svg><use href="#i-pin"/></svg></span><span class="connect__txt">กรุงเทพมหานคร ประเทศไทย</span></span></li>
                 <li><a href="mailto:Jesschavit@gmail.com"><span class="ic" style="background:var(--red)"><svg><use href="#i-mail"/></svg></span><span class="connect__txt">Jesschavit@gmail.com</span></a></li>
                 <li><a href="tel:+66950281375"><span class="ic" style="background:var(--green)"><svg><use href="#i-phone"/></svg></span><span class="connect__txt">095-028-1375</span></a></li>
-                <li><a href="https://www.behance.net/gallery/247977675/Portfolio-Mrchawit" target="_blank" rel="noopener"><span class="ic" style="background:#1769FF">Bē</span><span class="connect__txt">behance.net · Portfolio-Mrchawit</span></a></li>
+                <li><a href="https://www.behance.net/gallery/247977675/Portfolio-Mrchawit" target="_blank" rel="noopener"><span class="ic" style="background:#1769FF">Bē</span><span class="connect__txt">Behance: Portfolio-Mrchawit</span></a></li>
                 <li><a href="https://www.linkedin.com/in/mr-chawit-phechamnong-76a877404/" target="_blank" rel="noopener"><span class="ic" style="background:#0A66C2">in</span><span class="connect__txt">linkedin.com/in/mr-chawit-phechamnong</span></a></li>
               </ul>
             </section>
@@ -1072,7 +1007,7 @@
                To show more photos, add more <img> lines inside .vf__media — it becomes a slideshow on its own. -->
           <figure class="vf reveal" data-vf>
             <div class="vf__media" data-slides data-interval="5000">
-              <img src="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/chawit-headshot-web.jpg" alt="Portrait of Chawit “Jess” Phechamnong" style="object-position:50% 18%" width="1200" height="1800">
+              <img src="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/chawit-headshot-web.jpg" alt="ภาพของ ชวิศ “เจส” เพชรจำนงค์" style="object-position:50% 18%" width="1200" height="1800">
               <div class="segs" data-segs></div>
             </div>
             <div class="vf__ui" aria-hidden="true">
@@ -1081,12 +1016,12 @@
               <span class="vf__focus" data-focus></span>
               <div class="vf__top">
                 <span class="vf__rec"><i></i>REC&nbsp;<span data-vf-tc>00:00:00:00</span></span>
-                <span>TAKE <span data-vf-take>01</span><span class="vf__spec"> · 4K 25P</span><span class="vf__batt"></span></span>
+                <span>TAKE <span data-vf-take>01</span><span class="vf__spec">&nbsp; 4K 25P</span><span class="vf__batt"></span></span>
               </div>
             </div>
             <figcaption class="lower3">
-              <strong>Chawit “Jess” Phechamnong</strong>
-              <span>Video Editor &amp; Motion Designer · Bangkok</span>
+              <strong>ชวิศ “เจส” เพชรจำนงค์</strong>
+              <span>วิดีโอเอดิเตอร์และโมชันดีไซเนอร์ ประจำกรุงเทพฯ</span>
             </figcaption>
             <span class="vf__flash" data-vf-flash aria-hidden="true"></span>
           </figure>
@@ -1095,45 +1030,45 @@
         <div class="sheet__grid">
           <div>
             <section class="reveal">
-              <h2 class="h3">Education</h2>
+              <h2 class="h3">การศึกษา</h2>
               <ol class="tl">
                 <li>
-                  <time>2022<small>– Present</small></time>
+                  <time>2022<small>– ปัจจุบัน</small></time>
                   <div>
-                    <h4>Rajamangala University of Technology Srivijaya</h4>
-                    <p>Bachelor’s in Mass Communication Technology</p>
+                    <h4>มหาวิทยาลัยเทคโนโลยีราชมงคลศรีวิชัย</h4>
+                    <p>ปริญญาตรี สาขาเทคโนโลยีสื่อสารมวลชน</p>
                   </div>
                 </li>
                 <li>
                   <time>2019<small>– 2022</small></time>
                   <div>
-                    <h4>Phatthalung Technical College</h4>
-                    <p>Computer Graphics &amp; Computer Repair</p>
+                    <h4>วิทยาลัยเทคนิคพัทลุง</h4>
+                    <p>คอมพิวเตอร์กราฟิกและงานซ่อมคอมพิวเตอร์</p>
                   </div>
                 </li>
               </ol>
             </section>
 
             <section class="reveal">
-              <h2 class="h3">Skills</h2>
+              <h2 class="h3">ทักษะ</h2>
               <div class="chips">
-                <span class="chip">Short-form Editing</span>
-                <span class="chip">Motion Graphics</span>
-                <span class="chip">Kinetic Typography</span>
-                <span class="chip">Color Grading · S-Log3</span>
-                <span class="chip">Sound Design</span>
-                <span class="chip">Storyboarding</span>
-                <span class="chip">3D Modeling &amp; Lighting</span>
-                <span class="chip">Compositing</span>
-                <span class="chip">Key Visual Design</span>
-                <span class="chip">Live Streaming</span>
-                <span class="chip">Brand Identity</span>
-                <span class="chip">AI-assisted Workflow</span>
+                <span class="chip">ตัดต่อคลิปสั้น</span>
+                <span class="chip">โมชันกราฟิก</span>
+                <span class="chip">คิเนติกไทโปกราฟี</span>
+                <span class="chip">เกรดสี S-Log3</span>
+                <span class="chip">ออกแบบเสียง</span>
+                <span class="chip">สตอรีบอร์ด</span>
+                <span class="chip">โมเดล 3D และจัดแสง</span>
+                <span class="chip">คอมโพสิต</span>
+                <span class="chip">ออกแบบคีย์วิชวล</span>
+                <span class="chip">ไลฟ์สตรีม</span>
+                <span class="chip">แบรนด์ไอเดนทิตี</span>
+                <span class="chip">ใช้ AI ช่วยในเวิร์กโฟลว์</span>
               </div>
             </section>
 
             <section class="reveal">
-              <h2 class="h3">Software</h2>
+              <h2 class="h3">โปรแกรมที่ใช้</h2>
               <ul class="software" data-software>
                 <li data-name="Premiere Pro"><img src="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/logo-pr.png" alt="Adobe Premiere Pro" loading="lazy"></li>
                 <li data-name="After Effects"><img src="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/logo-ae.png" alt="Adobe After Effects" loading="lazy"></li>
@@ -1147,45 +1082,45 @@
           </div>
 
           <section class="reveal" id="experience">
-            <h2 class="h3">Experience</h2>
+            <h2 class="h3">ประสบการณ์ทำงาน</h2>
             <ol class="tl tl--xp">
               <li>
                 <time>09/2025<small>– 03/2026</small></time>
                 <div>
-                  <h4>Workpoint Entertainment, Bangkok</h4>
-                  <p class="role"><b>Role:</b> Video Editor &amp; Graphic Designer</p>
-                  <p class="desc-h">Description:</p>
+                  <h4>Workpoint Entertainment, กรุงเทพฯ</h4>
+                  <p class="role"><b>ตำแหน่ง:</b> วิดีโอเอดิเตอร์และกราฟิกดีไซเนอร์</p>
+                  <p class="desc-h">หน้าที่:</p>
                   <ul>
-                    <li>Cut short-form clips for social, built to hook in the first second.</li>
-                    <li>Designed motion graphics and on-screen type for entertainment content.</li>
+                    <li>ตัดต่อคลิปสั้นสำหรับโซเชียล ออกแบบให้ดึงคนดูตั้งแต่วินาทีแรก</li>
+                    <li>ออกแบบโมชันกราฟิกและตัวอักษรบนจอสำหรับคอนเทนต์บันเทิง</li>
                   </ul>
-                  <div class="tags"><span>Short-form editing</span><span>Motion graphics</span></div>
+                  <div class="tags"><span>ตัดต่อคลิปสั้น</span><span>โมชันกราฟิก</span></div>
                 </div>
               </li>
               <li>
                 <time>09/2023<small>– 03/2024</small></time>
                 <div>
-                  <h4>MCOT, Phatthalung</h4>
-                  <p class="role"><b>Role:</b> Broadcast Graphic Designer</p>
-                  <p class="desc-h">Description:</p>
+                  <h4>MCOT, พัทลุง</h4>
+                  <p class="role"><b>ตำแหน่ง:</b> บรอดแคสต์กราฟิกดีไซเนอร์</p>
+                  <p class="desc-h">หน้าที่:</p>
                   <ul>
-                    <li>Designed live on-air graphics for broadcast.</li>
-                    <li>Ran the streaming systems behind live productions.</li>
+                    <li>ออกแบบกราฟิกออนแอร์สำหรับรายการถ่ายทอดสด</li>
+                    <li>ดูแลระบบสตรีมมิงเบื้องหลังการถ่ายทอดสด</li>
                   </ul>
-                  <div class="tags"><span>Live graphics</span><span>Streaming systems</span></div>
+                  <div class="tags"><span>กราฟิกสด</span><span>ระบบสตรีมมิง</span></div>
                 </div>
               </li>
               <li>
                 <time>01/2023<small>– 05/2023</small></time>
                 <div>
-                  <h4>Freelance</h4>
-                  <p class="role"><b>Role:</b> Political Media Designer &amp; Video Editor</p>
-                  <p class="desc-h">Description:</p>
+                  <h4>ฟรีแลนซ์</h4>
+                  <p class="role"><b>ตำแหน่ง:</b> นักออกแบบสื่อการเมืองและวิดีโอเอดิเตอร์</p>
+                  <p class="desc-h">หน้าที่:</p>
                   <ul>
-                    <li>Designed campaign graphics and edited campaign video.</li>
-                    <li>Set up and operated live streams for campaign events.</li>
+                    <li>ออกแบบกราฟิกและตัดต่อวิดีโอสำหรับแคมเปญ</li>
+                    <li>ติดตั้งและควบคุมไลฟ์สตรีมในกิจกรรมของแคมเปญ</li>
                   </ul>
-                  <div class="tags"><span>Campaign graphics</span><span>Live streaming</span></div>
+                  <div class="tags"><span>กราฟิกแคมเปญ</span><span>ไลฟ์สตรีม</span></div>
                 </div>
               </li>
             </ol>
@@ -1193,227 +1128,130 @@
         </div>
 
         <section class="highlights reveal" aria-labelledby="hl-title">
-          <h2 class="h3" id="hl-title">Highlights</h2>
+          <h2 class="h3" id="hl-title">จุดเด่น</h2>
           <ol>
-            <li><span class="lab"><span data-count="4">4</span>+ years</span><span class="node"></span><strong>Broadcast &amp; social<br>production</strong><span class="sub">MCOT · Workpoint Entertainment</span></li>
-            <li><span class="lab">S-Log3 → Cinema</span><span class="node"></span><strong>Broadcast-standard<br>colour grading</strong><span class="sub">DaVinci Resolve</span></li>
-            <li><span class="lab">16:9 · 9:16 · 1:1</span><span class="node"></span><strong>Masters for<br>every screen</strong><span class="sub">Premiere Pro · After Effects</span></li>
+            <li><span class="lab"><span data-count="4">4</span>+ ปี</span><span class="node"></span><strong>ประสบการณ์งาน<br>Broadcast และโซเชียล</strong><span class="sub">MCOT และ Workpoint Entertainment</span></li>
+            <li><span class="lab">S-Log3 → Cinema</span><span class="node"></span><strong>เกรดสี<br>มาตรฐาน Broadcast</strong><span class="sub">DaVinci Resolve</span></li>
+            <li><span class="lab">16:9, 9:16, 1:1</span><span class="node"></span><strong>ส่งไฟล์มาสเตอร์<br>ได้ทุกหน้าจอ</strong><span class="sub">Premiere Pro และ After Effects</span></li>
           </ol>
         </section>
       </div>
     </section>
 
     <!-- ========================================================
-         SELECTED WORKS — the print wall
+         SELECTED WORKS — three projects, each with its own page
          ======================================================== -->
     <section class="card works" id="works" aria-labelledby="works-title">
       <div class="panel">
-        <div class="works__head reveal">
-          <div>
-            <h2 class="h2" id="works-title">Selected Works</h2>
-            <p>Talent teasers, original series, key visuals and 3D — pinned up like prints on the studio wall.</p>
-            <p style="margin-top:10px"><a class="link-arrow" href="https://www.behance.net/gallery/247977675/Portfolio-Mrchawit" target="_blank" rel="noopener">Full portfolio on Behance <svg width="16" height="16"><use href="#i-out"/></svg></a></p>
-          </div>
-          <div class="works__note" aria-hidden="true"><span class="n-mouse">drag the prints around — click one for a closer look!</span><span class="n-touch">tap any print for a closer look!</span></div>
+        <div class="works__head">
+          <h2 class="h2" id="works-title">ผลงานหลัก</h2>
+          <p>สามโปรเจกต์ที่ผมทำมากที่สุด แต่ละงานมีหน้าแยกพร้อมวิดีโอและรายละเอียด</p>
         </div>
 
-        <div class="toolbar reveal">
-          <div class="filters" role="group" aria-label="Filter works" data-filters>
-            <button type="button" data-filter="all" aria-pressed="true"><i style="--fc:conic-gradient(var(--blue) 0 33%, var(--red) 0 66%, var(--yellow) 0)"></i>All <small data-n="all"></small></button>
-            <button type="button" data-filter="video" aria-pressed="false"><i style="--fc:var(--blue)"></i>Video &amp; Motion <small data-n="video"></small></button>
-            <button type="button" data-filter="graphic" aria-pressed="false"><i style="--fc:var(--red)"></i>Graphic <small data-n="graphic"></small></button>
-            <button type="button" data-filter="3d" aria-pressed="false"><i style="--fc:var(--yellow)"></i>3D <small data-n="3d"></small></button>
-          </div>
-          <button class="tidy" type="button" data-tidy disabled><svg><use href="#i-undo"/></svg>Tidy up the wall</button>
-        </div>
-
-        <div class="wall" data-wall>
-          <button class="print full print--led" type="button" style="--i:0;--r:-.8deg;--y:0px;--ar:2432/768;--tape:rgba(184,150,255,.8);--tr:-2deg"
-            data-cat="video" data-label="LED Loop · Motion"
-            data-title="THAYA — LED Loop" data-kicker="“ยิ่งใกล้ ยิ่งกล้ายิ้ม” · Get closer, bolder"
-            data-desc="A seamless 15-second loop for a 2432×768 px LED screen — the THAYA logo and the Violet Whitening &amp; Herbal Mix Berry toothpaste tube, animated in two versions."
-            data-tools="Motion graphics, LED screen 2432×768, 15s loop"
-            data-videos="assets/thaya/thaya-led-loop-v2.mp4|assets/thaya/thaya-led-loop.mp4"
-            data-version-names="Version 2|Version 1"
-            data-links="https://drive.google.com/file/d/107wKNQfYsi6xw6KQNxQNNKWjoxXoWluF/view?usp=sharing|https://drive.google.com/file/d/1MsZOzdnECSIdssWWXq2jtv4-yl0b_t49/view?usp=sharing"
-            data-href="https://drive.google.com/file/d/107wKNQfYsi6xw6KQNxQNNKWjoxXoWluF/view?usp=sharing" data-link-label="Watch on Google Drive">
-            <span class="print__img">
-              <video class="print__video" muted playsinline preload="metadata" poster="assets/thaya/thaya-led-loop-v2.jpg" src="assets/thaya/thaya-led-loop-v2.mp4" data-loop="assets/thaya/thaya-led-loop-v2.mp4|assets/thaya/thaya-led-loop.mp4" data-loop-names="V2|V1"></video>
-              <span class="print__live"><i></i>ON AIR · <b data-ver>V2</b></span>
-              <span class="print__view"><svg><use href="#i-zoom"/></svg></span>
+        <div class="projects">
+          <a class="proj proj--workpoint" href="project-workpoint.html">
+            <span class="proj__media"><video muted loop playsinline preload="none" poster="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/xebis-teaser-poster.jpg" data-src="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/xebis-roulette-teaser.mp4" aria-hidden="true"></video></span>
+            <span class="proj__body">
+              <span class="proj__name">Workpoint Entertainment</span>
+              <span class="proj__meta"><span>วิดีโอเอดิเตอร์และกราฟิกดีไซเนอร์</span><span>2025–2026</span></span>
+              <span class="proj__line">ทีเซอร์ศิลปิน คอนเทนต์ YouTube และโปสเตอร์อีเวนต์ของ XEBIS Entertainment</span>
+              <span class="proj__go">ดูโปรเจกต์ Workpoint</span>
             </span>
-            <span class="print__cap"><b>THAYA — LED loop</b><span>2432×768 LED screen · two versions, 15 seconds each</span></span>
-            <span class="sticker s-video">LED<br>LOOP</span>
-          </button>
+          </a>
 
-          <button class="print wide" type="button" style="--i:1;--r:1.6deg;--y:12px;--ar:3/1;--tape:rgba(184,150,255,.8);--tr:3deg"
-            data-cat="graphic" data-label="Key Visual"
-            data-title="THAYA — Brush &amp; Bright" data-kicker="“ยิ่งใกล้… ยิ่งกล้ายิ้ม”"
-            data-desc="A 3:1 key-visual banner for THAYA Violet Whitening &amp; Herbal Mix Berry toothpaste — talent, product tube and the “Brush &amp; Bright” headline."
-            data-tools="Key visual, Banner 3:1">
-            <span class="print__img"><img src="assets/thaya/thaya-brush-bright.jpg" alt="" loading="lazy" draggable="false"><span class="print__view"><svg><use href="#i-zoom"/></svg></span></span>
-            <span class="print__cap"><b>THAYA — Brush &amp; Bright</b><span>Key visual banner · 3:1</span></span>
-            <span class="sticker s-graphic">KEY<br>VISUAL</span>
-          </button>
+          <a class="proj proj--memindy" href="project-memindy.html">
+            <span class="proj__media"><img src="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/memindy-hero.jpg" alt="" loading="lazy"></span>
+            <span class="proj__body">
+              <span class="proj__name">ME MIND Y</span>
+              <span class="proj__meta"><span>ตัดต่อซีรีส์รีแอคชัน</span><span>7 ตอน</span></span>
+              <span class="proj__line">“AI Girl Series จะ Gen จนกว่าจะเจอ” และคลิปเกมของช่อง MeMindY Official</span>
+              <span class="proj__go">ดูโปรเจกต์ ME MIND Y</span>
+            </span>
+          </a>
 
-          <!-- Drive link for this piece: put it in data-href="" (the viewer shows an “Open on Google Drive” button once it is set) -->
-          <button class="print pin" type="button" style="--i:2;--r:-2.2deg;--y:18px;--ar:1/1"
-            data-cat="graphic" data-label="Social Post"
-            data-title="THAYA — ยาสีฟันทยา VS ยาสีฟันทั่วไป" data-kicker="Product comparison post · 1:1"
-            data-desc="A square comparison post putting THAYA toothpaste side by side with regular toothpaste — Hydrated Silica, herbal extract, colour from five berries, 1,500 ppm fluoride and 8-hour protection."
-            data-tools="Social post 1:1, Product comparison"
-            data-href="" data-link-label="Open on Google Drive">
-            <span class="print__img"><img src="assets/thaya/thaya-vs.jpg" alt="" loading="lazy" draggable="false"><span class="print__view"><svg><use href="#i-zoom"/></svg></span></span>
-            <span class="print__cap"><b>THAYA VS ยาสีฟันทั่วไป</b><span>Comparison post · 1:1</span></span>
-            <span class="sticker s-graphic">POST</span>
-          </button>
-
-          <!-- Drive link for this piece: put it in data-href="" (the viewer shows an “Open on Google Drive” button once it is set) -->
-          <button class="print" type="button" style="--i:3;--r:2.6deg;--y:0px;--ar:4/5;--tape:rgba(184,150,255,.8);--tr:-4deg"
-            data-cat="graphic" data-label="Event Post"
-            data-title="THAYA × FOURTH — 4 เวลาที่ต้องจำ" data-kicker="Closer the Moment · event schedule"
-            data-desc="A schedule post for the THAYA × FOURTH “Closer the Moment” event — fan-zone registration, activities, seating and the main event, laid out as four clock times."
-            data-tools="Social post 4:5, Event"
-            data-href="" data-link-label="Open on Google Drive">
-            <span class="print__img"><img src="assets/thaya/thaya-fourth-4-times.jpg" alt="" loading="lazy" draggable="false"><span class="print__view"><svg><use href="#i-zoom"/></svg></span></span>
-            <span class="print__cap"><b>THAYA × FOURTH</b><span>4 เวลาที่ต้องจำ · event post</span></span>
-            <span class="sticker s-graphic">EVENT</span>
-          </button>
-
-          <!-- Drive link for this piece: put it in data-href="" (the viewer shows an “Open on Google Drive” button once it is set) -->
-          <button class="print" type="button" style="--i:4;--r:-2.8deg;--y:26px;--ar:4/5;--tape:rgba(255,206,84,.85);--tr:3deg"
-            data-cat="graphic" data-label="Campaign Post"
-            data-title="THAYA — Golden Lucky Smile" data-kicker="ยิ้มรับโชคลุ้นทอง · campaign post"
-            data-desc="A campaign post for the Golden Lucky Smile giveaway — the THAYA line-up bursting from a gift box with gold bars, plus the entry rule: every ฿500 spent is one chance."
-            data-tools="Social post 4:5, Campaign"
-            data-href="" data-link-label="Open on Google Drive">
-            <span class="print__img"><img src="assets/thaya/thaya-golden-lucky-smile.jpg" alt="" loading="lazy" draggable="false"><span class="print__view"><svg><use href="#i-zoom"/></svg></span></span>
-            <span class="print__cap"><b>Golden Lucky Smile</b><span>ยิ้มรับโชคลุ้นทอง · campaign</span></span>
-            <span class="sticker s-graphic">PROMO</span>
-          </button>
-
-          <button class="print wide" type="button" style="--i:5;--r:-1.6deg;--y:0px;--ar:16/9;--tape:rgba(126,163,255,.7);--tr:-4deg"
-            data-cat="video" data-label="Editing &amp; Motion"
-            data-title="XEBIS Entertainment" data-kicker="INC MATAWEE — “ROULETTE” official teaser"
-            data-desc="A talent teaser edited around the music: hooks in the first second, type that moves on the beat, and a final grade that holds the stage lights."
-            data-tools="Premiere Pro, After Effects, DaVinci Resolve"
-            data-href="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/xebis.html">
-            <span class="print__img"><img src="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/xebis-teaser-poster.jpg" alt="" loading="lazy" draggable="false"><span class="print__view"><svg><use href="#i-zoom"/></svg></span></span>
-            <span class="print__cap"><b>XEBIS — “Roulette” teaser</b><span>INC MATAWEE · official teaser</span></span>
-            <span class="sticker s-video">VIDEO</span>
-          </button>
-
-          <button class="print pin" type="button" style="--i:6;--r:2.6deg;--y:22px;--ar:3/4"
-            data-cat="graphic" data-label="Graphic Design"
-            data-title="Alters — Out of Nowhere" data-kicker="Exclusive Feel Meet poster"
-            data-desc="Poster and key visual for the Alters “Out of Nowhere” Exclusive Feel Meet."
-            data-tools="Photoshop"
-            data-href="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/work-graphic-design.html">
-            <span class="print__img"><img src="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/gfx-poster-alters.jpg" alt="" loading="lazy" draggable="false"><span class="print__view"><svg><use href="#i-zoom"/></svg></span></span>
-            <span class="print__cap"><b>Alters — Out of Nowhere</b><span>Fan-meet poster</span></span>
-            <span class="sticker s-graphic">POSTER</span>
-          </button>
-
-          <button class="print" type="button" style="--i:7;--r:-3deg;--y:44px;--ar:4/3;--tape:rgba(255,206,84,.8);--tr:5deg"
-            data-cat="video" data-label="Original Series"
-            data-title="ME MIND Y" data-kicker="“AI Girl” original series"
-            data-desc="Original reaction series for ME MIND Y — “REACTION | AI Girl Series”."
-            data-tools="Premiere Pro"
-            data-href="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/memindy.html">
-            <span class="print__img"><img src="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/memindy-hero.jpg" alt="" loading="lazy" draggable="false"><span class="print__view"><svg><use href="#i-zoom"/></svg></span></span>
-            <span class="print__cap"><b>ME MIND Y</b><span>“AI Girl” reaction series</span></span>
-            <span class="sticker s-video">SERIES</span>
-          </button>
-
-          <button class="print wide" type="button" style="--i:8;--r:1.4deg;--y:-4px;--ar:16/9;--tape:rgba(255,150,170,.7);--tr:-2deg"
-            data-cat="3d" data-label="3D Model"
-            data-title="Hogwarts Room" data-kicker="Isometric environment"
-            data-desc="An isometric room lit by candles and the fireplace for a warm, cosy mood."
-            data-tools="Blender"
-            data-href="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/work-3d-model.html">
-            <span class="print__img"><img src="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/m3d-hogwarts.jpg" alt="" loading="lazy" draggable="false"><span class="print__view"><svg><use href="#i-zoom"/></svg></span></span>
-            <span class="print__cap"><b>Hogwarts Room</b><span>Isometric 3D environment</span></span>
-            <span class="sticker s-3d">3D</span>
-          </button>
-
-          <button class="print pin" type="button" style="--i:9;--r:-2.4deg;--y:26px;--ar:4/5"
-            data-cat="3d" data-label="Product Render"
-            data-title="Can Mockup" data-kicker="Product render"
-            data-desc="A modelled can with metal materials — the pattern placed and the lights set so the label reads clearly."
-            data-tools="Blender"
-            data-href="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/work-3d-model.html">
-            <span class="print__img"><img src="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/m3d-pepsi.jpg" alt="" loading="lazy" draggable="false"><span class="print__view"><svg><use href="#i-zoom"/></svg></span></span>
-            <span class="print__cap"><b>Can Mockup</b><span>Product render &amp; lighting</span></span>
-            <span class="sticker s-3d">3D</span>
-          </button>
-
-          <button class="print" type="button" style="--i:10;--r:3.4deg;--y:6px;--ar:16/10;--tape:rgba(126,163,255,.7);--tr:3deg"
-            data-cat="graphic 3d" data-label="3D Type"
-            data-title="Alters 3D Title" data-kicker="Concrete &amp; chains"
-            data-desc="A 3D title in concrete and chains, built to match the event’s key visual."
-            data-tools="Blender"
-            data-href="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/work-3d-animation.html">
-            <span class="print__img"><img src="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/gfx-3d-portfolio.jpg" alt="" loading="lazy" draggable="false"><span class="print__view"><svg><use href="#i-zoom"/></svg></span></span>
-            <span class="print__cap"><b>Alters 3D Title</b><span>3D type for the key visual</span></span>
-            <span class="sticker s-graphic">3D<br>TYPE</span>
-          </button>
-
-          <button class="print" type="button" style="--i:11;--r:-3.6deg;--y:34px;--ar:1/1;--tape:rgba(255,206,84,.8);--tr:-6deg"
-            data-cat="graphic 3d" data-label="3D Render"
-            data-title="Portfolio Badge" data-kicker="3D render"
-            data-desc="A 3D metal sign with rust and stickers for a street feel."
-            data-tools="Blender"
-            data-href="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/work-3d-animation.html">
-            <span class="print__img"><img src="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/gfx-3d-alters.jpg" alt="" loading="lazy" draggable="false"><span class="print__view"><svg><use href="#i-zoom"/></svg></span></span>
-            <span class="print__cap"><b>Portfolio Badge</b><span>Rusty metal sign &amp; stickers</span></span>
-            <span class="sticker s-3d">3D</span>
-          </button>
-
-          <button class="print pin wide" type="button" style="--i:12;--r:1.8deg;--y:0px;--ar:16/9"
-            data-cat="video" data-label="Motion Graphics"
-            data-title="Advertising Motion" data-kicker="Motion graphics"
-            data-desc="Motion graphics for advertising, with type timed in and out so it reads instantly and catches the eye."
-            data-tools="After Effects, Illustrator"
-            data-href="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/work-motion-graphics.html">
-            <span class="print__img"><img src="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/expertise-motion.jpg" alt="" loading="lazy" draggable="false"><span class="print__view"><svg><use href="#i-zoom"/></svg></span></span>
-            <span class="print__cap"><b>Advertising Motion</b><span>Type timed to read at a glance</span></span>
-            <span class="sticker s-video">MOTION</span>
-          </button>
-
-          <button class="print wide" type="button" style="--i:13;--r:-1.4deg;--y:14px;--ar:16/9;--tape:rgba(255,150,170,.7);--tr:4deg"
-            data-cat="video" data-label="Video Editing"
-            data-title="Long &amp; Short Form" data-kicker="Video editing"
-            data-desc="Stories told through video with advanced editing — cut for YouTube and for the feed."
-            data-tools="Premiere Pro"
-            data-href="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/work-video-editing.html">
-            <span class="print__img"><img src="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/expertise-editing.jpg" alt="" loading="lazy" draggable="false"><span class="print__view"><svg><use href="#i-zoom"/></svg></span></span>
-            <span class="print__cap"><b>Long &amp; Short Form</b><span>Cut for YouTube and the feed</span></span>
-            <span class="sticker s-video">EDIT</span>
-          </button>
-
-          <button class="print wide" type="button" style="--i:14;--r:1.3deg;--y:-8px;--ar:2/1;--tape:rgba(126,163,255,.7);--tr:2deg"
-            data-cat="video" data-label="Behind the Scenes"
-            data-title="XEBIS — Behind the Scenes" data-kicker="The process"
-            data-desc="Behind the scenes from making the “ROULETTE” teaser."
-            data-tools="Premiere Pro"
-            data-href="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/xebis.html">
-            <span class="print__img"><img src="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/xebis-process-poster.jpg" alt="" loading="lazy" draggable="false"><span class="print__view"><svg><use href="#i-zoom"/></svg></span></span>
-            <span class="print__cap"><b>XEBIS — Behind the Scenes</b><span>How the teaser came together</span></span>
-            <span class="sticker s-video">BTS</span>
-          </button>
-
+          <a class="proj proj--thaya" href="project-thaya.html">
+            <span class="proj__media"><video muted loop playsinline preload="none" poster="assets/thaya/thaya-led-loop-v2.jpg" data-src="assets/thaya/thaya-led-loop-v2.mp4" aria-hidden="true"></video></span>
+            <span class="proj__body">
+              <span class="proj__name">THAYA</span>
+              <span class="proj__meta"><span>โมชันจอ LED คีย์วิชวล และโพสต์โซเชียล</span><span>2026</span></span>
+              <span class="proj__line">งานโฆษณายาสีฟัน THAYA Violet Whitening และอีเวนต์ THAYA × FOURTH “Closer the Moment”</span>
+              <span class="proj__go">ดูโปรเจกต์ THAYA</span>
+            </span>
+          </a>
         </div>
+      </div>
+    </section>
 
-        <nav class="crafts reveal" aria-label="Browse by craft">
-          <span>Browse by craft</span>
-          <a class="chip" href="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/work-motion-graphics.html">Motion Graphics <svg><use href="#i-arrow"/></svg></a>
-          <a class="chip" href="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/work-video-editing.html">Video Editing <svg><use href="#i-arrow"/></svg></a>
-          <a class="chip" href="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/work-graphic-design.html">Graphic Design <svg><use href="#i-arrow"/></svg></a>
-          <a class="chip" href="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/work-3d-animation.html">3D &amp; Animation <svg><use href="#i-arrow"/></svg></a>
-          <a class="chip" href="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/work-3d-model.html">Model 3D <svg><use href="#i-arrow"/></svg></a>
-          <a class="chip" href="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/work-color-grading.html">Color Grading <svg><use href="#i-arrow"/></svg></a>
-          <a class="chip" href="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/work-brand-identity.html">Brand Identity <svg><use href="#i-arrow"/></svg></a>
-        </nav>
+    <!-- ========================================================
+         MORE WORK — a strip that keeps looping (hover to pause)
+         To add a piece: copy one <button class="lp"> block into a track.
+         ======================================================== -->
+    <section class="card more" id="more" aria-labelledby="more-title">
+      <div class="panel">
+        <div class="more__head">
+          <h2 class="h2" id="more-title">ผลงานอื่น ๆ</h2>
+          <p>โมชัน ตัดต่อ 3D และกราฟิก เลื่อนวนอยู่ตลอด วางเมาส์เพื่อหยุดแล้วคลิกเพื่อดูเต็ม ๆ</p>
+        </div>
+        <div class="loop" data-loop style="--dur:90s">
+          <div class="loop__track">
+          <button class="lp" type="button" style="--r:1.778" data-cat="video" data-label="โมชัน" data-title="แอนิเมชันตัวละคร" data-kicker="Character Animation" data-desc="แอนิเมชันตัวละครแบบ cut-out ที่ผสมงานคอลลาจเข้ากับการเคลื่อนไหวแบบวนซ้ำ" data-tools="After Effects" data-videos="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/motion-work-1.mp4">
+            <span class="lp__media"><video muted loop playsinline preload="none" poster="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/motion-work-1-poster.jpg" data-src="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/motion-work-1.mp4"></video><span class="lp__type">โมชัน</span><span class="lp__play" aria-hidden="true"><svg><use href="#i-play"/></svg></span></span>
+            <span class="lp__cap"><b>แอนิเมชันตัวละคร</b><span>คัตเอาต์ผสมคอลลาจ</span></span>
+          </button>
+          <button class="lp" type="button" style="--r:1.778" data-cat="video" data-label="ตัดต่อ" data-title="งานตัดต่อเต็มเรื่อง 1" data-kicker="Long Form" data-desc="งานตัดต่อความยาวเต็ม ดูแลตั้งแต่การเรียงลำดับเรื่องไปจนถึงการคุมจังหวะและโทนสีให้สม่ำเสมอ" data-tools="Premiere Pro" data-videos="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/edit-work-1.mp4">
+            <span class="lp__media"><img src="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/edit-work-1-poster.jpg" alt="" loading="lazy"><span class="lp__type">ตัดต่อ</span><span class="lp__play" aria-hidden="true"><svg><use href="#i-play"/></svg></span></span>
+            <span class="lp__cap"><b>งานตัดต่อเต็มเรื่อง 1</b><span>เรียงเรื่อง คุมจังหวะและโทนสี</span></span>
+          </button>
+          <button class="lp" type="button" style="--r:0.5625" data-cat="3d" data-label="3D" data-title="แบดมินตัน" data-kicker="Animation" data-desc="งานโมเดลและแอนิเมชันแนวตั้ง สำหรับลงโซเชียลมีเดีย" data-tools="Blender" data-videos="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/m3d-badminton.mp4">
+            <span class="lp__media"><video muted loop playsinline preload="none" poster="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/m3d-badminton-poster.jpg" data-src="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/m3d-badminton.mp4"></video><span class="lp__type">3D</span><span class="lp__play" aria-hidden="true"><svg><use href="#i-play"/></svg></span></span>
+            <span class="lp__cap"><b>แบดมินตัน</b><span>แอนิเมชันแนวตั้ง</span></span>
+          </button>
+          <button class="lp" type="button" style="--r:1.778" data-cat="video" data-label="โมชัน" data-title="โมชันงานโฆษณา" data-kicker="Advertising Motion" data-desc="โมชันกราฟิกสำหรับงานโฆษณา เน้นจังหวะเข้า–ออกของตัวอักษรให้อ่านทันและดึงสายตา" data-tools="After Effects, Illustrator" data-videos="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/motion-work-2.mp4">
+            <span class="lp__media"><video muted loop playsinline preload="none" poster="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/motion-work-2-poster.jpg" data-src="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/motion-work-2.mp4"></video><span class="lp__type">โมชัน</span><span class="lp__play" aria-hidden="true"><svg><use href="#i-play"/></svg></span></span>
+            <span class="lp__cap"><b>โมชันงานโฆษณา</b><span>ตัวอักษรที่อ่านทันในพริบตา</span></span>
+          </button>
+          <button class="lp" type="button" style="--r:1.778" data-cat="video" data-label="YouTube" data-title="คุยกับน้องพลอย ปทุมพร" data-kicker="AirDrop Channel" data-desc="ตัดต่อระดับภาพยนตร์ วางจังหวะภาพและเสียงให้ส่งเสริมกันตลอดคลิป" data-tools="Premiere Pro" data-youtube="zOOOQonOMaA" data-href="https://www.youtube.com/watch?v=zOOOQonOMaA" data-link-label="ดูบน YouTube">
+            <span class="lp__media"><img src="https://i.ytimg.com/vi/zOOOQonOMaA/hqdefault.jpg" alt="" loading="lazy"><span class="lp__type">YouTube</span><span class="lp__play" aria-hidden="true"><svg><use href="#i-play"/></svg></span></span>
+            <span class="lp__cap"><b>คุยกับน้องพลอย ปทุมพร</b><span>AirDrop Channel</span></span>
+          </button>
+          <button class="lp" type="button" style="--r:0.5625" data-cat="3d" data-label="3D" data-title="Personal Reel" data-kicker="Showreel" data-desc="คลิปแนะนำตัวสั้น ๆ รวมงานสามมิติที่ทำไว้" data-tools="Blender" data-videos="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/m3d-reel.mp4">
+            <span class="lp__media"><video muted loop playsinline preload="none" poster="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/m3d-reel-poster.jpg" data-src="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/m3d-reel.mp4"></video><span class="lp__type">3D</span><span class="lp__play" aria-hidden="true"><svg><use href="#i-play"/></svg></span></span>
+            <span class="lp__cap"><b>Personal Reel</b><span>รวมงานสามมิติ</span></span>
+          </button>
+          <button class="lp" type="button" style="--r:1.778" data-cat="video" data-label="ตัดต่อ" data-title="งานตัดต่อเต็มเรื่อง 2" data-kicker="Long Form" data-desc="งานตัดต่อความยาวเต็มอีกชิ้น เน้นการเล่าเรื่องให้ลื่นไหลและคุมอารมณ์ตลอดทั้งเรื่อง" data-tools="Premiere Pro" data-videos="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/edit-work-2.mp4">
+            <span class="lp__media"><img src="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/edit-work-2-poster.jpg" alt="" loading="lazy"><span class="lp__type">ตัดต่อ</span><span class="lp__play" aria-hidden="true"><svg><use href="#i-play"/></svg></span></span>
+            <span class="lp__cap"><b>งานตัดต่อเต็มเรื่อง 2</b><span>เล่าเรื่องให้ลื่นไหล</span></span>
+          </button>
+          </div>
+        </div>
+        <div class="loop loop--rev" data-loop style="--dur:80s">
+          <div class="loop__track">
+          <button class="lp" type="button" style="--r:1.778" data-cat="3d" data-label="3D" data-title="Hogwarts Room" data-kicker="Environment" data-desc="ห้องไอโซเมตริก จัดแสงเทียนและไฟจากเตาผิงให้ได้บรรยากาศอบอุ่น" data-tools="Blender">
+            <span class="lp__media"><img src="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/m3d-hogwarts.jpg" alt="" loading="lazy"><span class="lp__type">3D</span></span>
+            <span class="lp__cap"><b>Hogwarts Room</b><span>ฉากไอโซเมตริก</span></span>
+          </button>
+          <button class="lp" type="button" style="--r:1.778" data-cat="graphic" data-label="กราฟิก" data-title="กราฟิกแคมเปญ" data-kicker="Campaign Graphics" data-desc="ชุดภาพประชาสัมพันธ์สำหรับแคมเปญ ออกแบบให้อ่านข้อมูลสำคัญได้ครบในภาพเดียว" data-tools="Photoshop, After Effects" data-videos="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/gfx-work-campaign.mp4">
+            <span class="lp__media"><video muted loop playsinline preload="none" poster="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/gfx-work-campaign-poster.jpg" data-src="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/gfx-work-campaign.mp4"></video><span class="lp__type">กราฟิก</span><span class="lp__play" aria-hidden="true"><svg><use href="#i-play"/></svg></span></span>
+            <span class="lp__cap"><b>กราฟิกแคมเปญ</b><span>ชุดภาพประชาสัมพันธ์</span></span>
+          </button>
+          <button class="lp" type="button" style="--r:1.778" data-cat="3d" data-label="3D" data-title="Can Mockup" data-kicker="Product Render" data-desc="ขึ้นโมเดลกระป๋องพร้อมวัสดุโลหะ วางลวดลายและจัดไฟให้ฉลากอ่านชัด" data-tools="Blender">
+            <span class="lp__media"><img src="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/m3d-pepsi.jpg" alt="" loading="lazy"><span class="lp__type">3D</span></span>
+            <span class="lp__cap"><b>Can Mockup</b><span>เรนเดอร์สินค้า</span></span>
+          </button>
+          <button class="lp" type="button" style="--r:1.778" data-cat="graphic" data-label="กราฟิก" data-title="ชุดโปสเตอร์" data-kicker="Poster Series" data-desc="รวมงานออกแบบโปสเตอร์หลายชิ้น คุมสไตล์ให้อยู่ในตระกูลเดียวกัน" data-tools="Photoshop" data-videos="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/gfx-work-collage.mp4">
+            <span class="lp__media"><video muted loop playsinline preload="none" poster="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/gfx-work-collage-poster.jpg" data-src="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/gfx-work-collage.mp4"></video><span class="lp__type">กราฟิก</span><span class="lp__play" aria-hidden="true"><svg><use href="#i-play"/></svg></span></span>
+            <span class="lp__cap"><b>ชุดโปสเตอร์</b><span>โปสเตอร์หลายชิ้นในสไตล์เดียว</span></span>
+          </button>
+          <button class="lp" type="button" style="--r:1.778" data-cat="3d" data-label="3D" data-title="Portfolio Badge" data-kicker="3D Render" data-desc="ป้ายโลหะสามมิติ ใส่พื้นผิวสนิมและสติกเกอร์ให้ได้อารมณ์สตรีท" data-tools="Blender">
+            <span class="lp__media"><img src="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/gfx-3d-alters.jpg" alt="" loading="lazy"><span class="lp__type">3D</span></span>
+            <span class="lp__cap"><b>Portfolio Badge</b><span>ป้ายโลหะสนิมและสติกเกอร์</span></span>
+          </button>
+          <button class="lp" type="button" style="--r:1.778" data-cat="video" data-label="YouTube" data-title="พบกับน้องฮากีม" data-kicker="AirDrop Channel" data-desc="เล่าเรื่องผ่านการตัดต่อ คุมโทนภาพให้คงคาแรกเตอร์เดียวกันทั้งเรื่อง" data-tools="Premiere Pro" data-youtube="Gh8q4-GdB4E" data-href="https://www.youtube.com/watch?v=Gh8q4-GdB4E" data-link-label="ดูบน YouTube">
+            <span class="lp__media"><img src="https://i.ytimg.com/vi/Gh8q4-GdB4E/hqdefault.jpg" alt="" loading="lazy"><span class="lp__type">YouTube</span><span class="lp__play" aria-hidden="true"><svg><use href="#i-play"/></svg></span></span>
+            <span class="lp__cap"><b>พบกับน้องฮากีม</b><span>AirDrop Channel</span></span>
+          </button>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -1423,48 +1261,46 @@
     <section class="card cta" id="contact" aria-labelledby="cta-title">
       <div class="panel">
         <div class="cta__copy reveal">
-          <span class="eyebrow"><i></i>OPEN FOR WORK · 2026</span>
-          <h2 id="cta-title">Let’s make something move.</h2>
-          <p>Got footage that needs a heartbeat, a brand that wants to move, or a reel that should feel like a little magic? I’d love to hear about it.</p>
-          <p class="th" lang="th">เปิดรับงานฟรีแลนซ์ งานประจำ และโปรเจกต์ความร่วมมือ — มาสร้างสิ่งพิเศษไปด้วยกันครับ</p>
+          <h2 id="cta-title">มีงานให้ช่วยตัดต่อไหมครับ</h2>
+          <p>ตอนนี้ผมเปิดรับทั้งงานฟรีแลนซ์และงานประจำ ด้านตัดต่อ โมชันกราฟิก และกราฟิกดีไซน์ ส่งรายละเอียดมาทางอีเมลหรือโทรคุยกันได้เลยครับ</p>
           <div class="cta__actions">
             <a class="btn btn--white" href="mailto:Jesschavit@gmail.com"><svg><use href="#i-mail"/></svg>Jesschavit@gmail.com</a>
-            <button class="btn btn--ghost copy-btn" type="button" data-copy="Jesschavit@gmail.com" aria-label="Copy email address"><svg><use href="#i-copy"/></svg></button>
+            <button class="btn btn--ghost copy-btn" type="button" data-copy="Jesschavit@gmail.com" aria-label="คัดลอกอีเมล"><svg><use href="#i-copy"/></svg></button>
             <a class="btn btn--ghost" href="tel:+66950281375"><svg><use href="#i-phone"/></svg>095-028-1375</a>
           </div>
           <div class="cta__actions" style="margin-top:10px">
-            <a class="btn btn--ghost" href="https://www.behance.net/gallery/247977675/Portfolio-Mrchawit" target="_blank" rel="noopener">Behance <svg><use href="#i-out"/></svg></a>
-            <a class="btn btn--ghost" href="https://www.linkedin.com/in/mr-chawit-phechamnong-76a877404/" target="_blank" rel="noopener">LinkedIn <svg><use href="#i-out"/></svg></a>
+            <a class="btn btn--ghost" href="https://www.behance.net/gallery/247977675/Portfolio-Mrchawit" target="_blank" rel="noopener">Behance</a>
+            <a class="btn btn--ghost" href="https://www.linkedin.com/in/mr-chawit-phechamnong-76a877404/" target="_blank" rel="noopener">LinkedIn</a>
           </div>
         </div>
 
-        <!-- Reel of work. Add a piece = add one <img> (or muted <video>) line; data-caption is the title shown on screen.
-             Wide pieces: add style="object-fit:contain;background:…" so nothing gets cropped; data-duration (ms) sets how long a slide stays. -->
+        <!-- สไลด์ผลงาน: เพิ่มงาน = เพิ่ม <img> (หรือ <video muted>) 1 บรรทัด, data-caption คือชื่องานที่ขึ้นบนจอ
+             งานแนวกว้าง: ใส่ style="object-fit:contain;background:…" จะได้ไม่ถูกครอป, data-duration (มิลลิวินาที) คือเวลาที่สไลด์ค้าง -->
         <div class="cta__media" data-slides data-interval="4200">
-          <video src="assets/thaya/thaya-led-loop-v2.mp4" poster="assets/thaya/thaya-led-loop-v2.jpg" muted playsinline loop preload="metadata" data-duration="7500" data-caption="THAYA — LED loop “ยิ่งใกล้ ยิ่งกล้ายิ้ม”" style="object-fit:contain;background:#9E78D8"></video>
-          <img src="assets/thaya/thaya-brush-bright.jpg" alt="" data-caption="THAYA — Brush &amp; Bright key visual" style="object-fit:contain;background:linear-gradient(180deg,#8336E8,#934AF1)">
-          <img src="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/xebis-teaser-poster.jpg" alt="" data-caption="XEBIS — “ROULETTE” official teaser">
-          <img src="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/memindy-hero.jpg" alt="" data-caption="ME MIND Y — “AI Girl” series">
-          <img src="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/gfx-poster-alters.jpg" alt="" data-caption="Alters — Out of Nowhere poster" style="object-position:50% 30%">
-          <img src="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/m3d-hogwarts.jpg" alt="" data-caption="Hogwarts Room — 3D environment">
+          <video src="assets/thaya/thaya-led-loop-v2.mp4" poster="assets/thaya/thaya-led-loop-v2.jpg" muted playsinline loop preload="metadata" data-duration="7500" data-caption="THAYA — ลูปจอ LED “ยิ่งใกล้ ยิ่งกล้ายิ้ม”" style="object-fit:contain;background:#9E78D8"></video>
+          <img src="assets/thaya/thaya-brush-bright.jpg" alt="" data-caption="THAYA — คีย์วิชวล Brush &amp; Bright" style="object-fit:contain;background:linear-gradient(180deg,#8336E8,#934AF1)">
+          <img src="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/xebis-teaser-poster.jpg" alt="" data-caption="XEBIS — ทีเซอร์ทางการ “ROULETTE”">
+          <img src="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/memindy-hero.jpg" alt="" data-caption="ME MIND Y — ซีรีส์ “AI Girl”">
+          <img src="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/gfx-poster-alters.jpg" alt="" data-caption="Alters — โปสเตอร์ Out of Nowhere" style="object-position:50% 30%">
+          <img src="https://jesschavit-lab.github.io/Jesschawit-Phechamning-Portfolio/m3d-hogwarts.jpg" alt="" data-caption="Hogwarts Room — ฉาก 3D">
           <img src="assets/thaya/thaya-fourth-4-times.jpg" alt="" data-caption="THAYA × FOURTH — Closer the Moment" style="object-position:50% 38%">
           <div class="segs" data-segs></div>
-          <span class="reel__rec" aria-hidden="true"><i></i>NOW PLAYING</span>
-          <div class="reel__cap"><small>SELECTED WORK</small><b data-cap></b></div>
+          <div class="reel__cap"><b data-cap></b></div>
         </div>
       </div>
     </section>
 
     <footer class="foot">
-      <span>© 2026 Chawit Phechamnong · Bangkok, Thailand</span>
-      <a href="#top">Back to top ↑</a>
+      <span>© 2026 ชวิศ เพชรจำนงค์ กรุงเทพฯ</span>
+      <a href="#top">กลับขึ้นด้านบน</a>
     </footer>
+    </div>
   </main>
 
   <!-- closer look at a print -->
   <dialog class="viewer" data-viewer aria-labelledby="v-title">
     <div class="viewer__card" data-v-card>
-      <div class="viewer__media" data-v-media><img data-v-img src="" alt=""><video data-v-video muted loop playsinline controls preload="metadata" hidden></video></div>
+      <div class="viewer__media" data-v-media><img data-v-img src="" alt=""><video data-v-video muted loop playsinline controls preload="metadata" hidden></video><iframe data-v-yt title="วิดีโอ YouTube" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen hidden></iframe></div>
       <div class="viewer__meta">
         <span class="viewer__cat" data-v-cat></span>
         <h3 id="v-title" data-v-title></h3>
@@ -1473,13 +1309,13 @@
         <div class="viewer__tools" data-v-tools></div>
         <div class="viewer__versions" data-v-versions></div>
         <div class="viewer__foot">
-          <a class="btn btn--blue" data-v-link href="#" target="_blank" rel="noopener"><span data-v-link-label>Open project</span> <svg><use href="#i-arrow"/></svg></a>
+          <a class="btn btn--blue" data-v-link href="#" target="_blank" rel="noopener"><span data-v-link-label>ดูโปรเจกต์</span></a>
           <span class="viewer__count" data-v-count></span>
         </div>
       </div>
-      <button class="viewer__close" type="button" data-v-close aria-label="Close">×</button>
-      <button class="viewer__nav viewer__nav--prev" type="button" data-v-prev aria-label="Previous work">‹</button>
-      <button class="viewer__nav viewer__nav--next" type="button" data-v-next aria-label="Next work">›</button>
+      <button class="viewer__close" type="button" data-v-close aria-label="ปิด"><svg aria-hidden="true"><use href="#i-close"/></svg></button>
+      <button class="viewer__nav viewer__nav--prev" type="button" data-v-prev aria-label="ผลงานก่อนหน้า"><svg aria-hidden="true"><use href="#i-chev-l"/></svg></button>
+      <button class="viewer__nav viewer__nav--next" type="button" data-v-next aria-label="ผลงานถัดไป"><svg aria-hidden="true"><use href="#i-chev-r"/></svg></button>
     </div>
   </dialog>
 
@@ -1537,7 +1373,7 @@
           })(t0);
         });
       }
-      var revealed = $$('.reveal, [data-wall]');
+      var revealed = $$('.reveal');
       if ('IntersectionObserver' in window && !reduce) {
         var io = new IntersectionObserver(function (entries) {
           entries.forEach(function (e) { if (e.isIntersecting) { onReveal(e.target); io.unobserve(e.target); } });
@@ -1568,7 +1404,7 @@
          ========================================================= */
       var monitor = $('[data-monitor]'), screen = $('[data-screen]');
       var frames = $$('[data-frames] img'), framesBox = $('[data-frames]');
-      var vclips = $$('[data-vtrack] span'), playhead = $('[data-playhead]');
+      var vclips = $$('[data-vtrack] span'), playhead = $('[data-playhead]'), tracksEl = $('.tracks');
       var tcEl = $('[data-tc]'), stateEl = $('[data-state]'), clipName = $('[data-clipname]');
       var osd = $('[data-osd]'), flash = $('[data-flash]');
       var N = frames.length, CLIP_SEC = 2.4;
@@ -1585,9 +1421,9 @@
         idx = i;
         frames.forEach(function (f, k) { f.classList.toggle('on', k === i); });
         vclips.forEach(function (c, k) { c.classList.toggle('on', k === i); });
-        clipName.textContent = 'CLIP ' + pad(i + 1) + ' · ' + frames[i].getAttribute('data-name');
+        clipName.textContent = 'CLIP ' + pad(i + 1) + '  ' + frames[i].getAttribute('data-name');
       }
-      function osdShow(txt) { osd.textContent = txt; restart(osd, 'show'); }
+      function osdShow(icon) { osd.innerHTML = '<svg><use href="#i-' + icon + '"/></svg>'; restart(osd, 'show'); }
       function cutFx() {
         if (reduce) return;
         restart(flash, 'go'); restart(framesBox, 'glitch');
@@ -1595,12 +1431,12 @@
       }
       function jump(i) { p = (((i % N) + N) % N) / N + .001; show(Math.floor(p * N)); if (mode === 'idle' || mode === 'scrub') setMode('pause'); }
       function togglePlay() {
-        if (mode === 'play') { setMode('pause'); osdShow('❚❚'); }
-        else { if (mode === 'idle') p = 0; setMode('play'); osdShow('▶'); }
+        if (mode === 'play') { setMode('pause'); osdShow('pause'); }
+        else { if (mode === 'idle') p = 0; setMode('play'); osdShow('play'); }
         show(Math.floor(p * N));
       }
-      function cut() { cutFx(); jump(idx + 1); osdShow('✂'); }
-      function shuttle(d) { cutFx(); jump(idx + d); osdShow(d > 0 ? '▶▶' : '◀◀'); }
+      function cut() { cutFx(); jump(idx + 1); osdShow('cut'); }
+      function shuttle(d) { cutFx(); jump(idx + d); osdShow(d > 0 ? 'ff' : 'rw'); }
 
       function loop(now) {
         var dt = Math.min(.1, (now - last) / 1000); last = now;
@@ -1611,7 +1447,7 @@
         } else if (mode === 'idle') {
           p = ((now - idleStart) / 7000) % 1;
         }
-        playhead.style.left = (p * 100) + '%';
+        playhead.style.translate = (p * tracksEl.clientWidth).toFixed(1) + 'px 0';
         tcEl.textContent = mode === 'idle' ? timecode((now - idleStart) / 1000) : timecode(p * N * CLIP_SEC);
         if (heroVisible) requestAnimationFrame(loop); else looping = false;
       }
@@ -1668,7 +1504,7 @@
         if (k === 'k') { press(capK); togglePlay(); }
         else if (k === 'j') shuttle(-1);
         else if (k === 'l') shuttle(1);
-        else if (k === 'escape' && mode !== 'idle') { setMode('idle'); osdShow('■'); }
+        else if (k === 'escape' && mode !== 'idle') { setMode('idle'); osdShow('stop'); }
       });
 
       /* clapperboard: Action! */
@@ -1677,7 +1513,7 @@
         restart(clap, 'clapping');
         take.textContent = pad(++takes % 100);
         var c = centerOf(clap); setTimeout(function () { confetti(c[0], c[1] - 20, 30); }, 140);
-        setTimeout(function () { p = 0; idx = -1; setMode('play'); show(0); osdShow('▶'); cutFx(); }, 200);
+        setTimeout(function () { p = 0; idx = -1; setMode('play'); show(0); osdShow('play'); cutFx(); }, 200);
       });
 
       /* floating props: parallax + drag with a springy return; taps do things */
@@ -1788,7 +1624,7 @@
             var b = document.createElement('button'), bar = document.createElement('i');
             b.type = 'button';
             b.style.setProperty('--dur', (+img.getAttribute('data-duration') || dur) + 'ms');
-            b.setAttribute('aria-label', 'Show ' + (img.getAttribute('data-caption') || 'image ' + (k + 1)));
+            b.setAttribute('aria-label', 'ดู ' + (img.getAttribute('data-caption') || 'ภาพที่ ' + (k + 1)));
             b.appendChild(bar);
             b.addEventListener('click', function (e) { e.stopPropagation(); go(k); });
             bar.addEventListener('animationend', function () { if (k === at) go(at + 1); });
@@ -1827,140 +1663,71 @@
       $$('[data-software] li').forEach(function (li) { li.addEventListener('click', function () { restart(li, 'jump'); }); });
 
       /* =========================================================
-         WORKS — print wall: filter, drag, tidy, viewer
+         WORKS — project videos, the looping strip, the viewer
          ========================================================= */
-      var wall = $('[data-wall]'), prints = $$('.print', wall), tidyBtn = $('[data-tidy]'), zTop = 40;
-      function cats(el) { return el.getAttribute('data-cat').split(' '); }
-      $$('[data-n]').forEach(function (n) {
-        var f = n.getAttribute('data-n');
-        n.textContent = f === 'all' ? prints.length : prints.filter(function (t) { return cats(t).indexOf(f) > -1; }).length;
-      });
-      var filterBtns = $$('[data-filter]');
-      filterBtns.forEach(function (b) {
-        b.addEventListener('click', function () {
-          var f = b.getAttribute('data-filter');
-          filterBtns.forEach(function (x) { x.setAttribute('aria-pressed', x === b); });
-          prints.forEach(function (t) {
-            var on = f === 'all' || cats(t).indexOf(f) > -1;
-            t.classList.toggle('dim', !on);
-            t.tabIndex = on ? 0 : -1;
-            t.setAttribute('aria-hidden', on ? 'false' : 'true');
-          });
-        });
-      });
-
-      prints.forEach(function (card) {
-        card._x = 0; card._y = 0;
-        var d = null;
-        card.addEventListener('pointerdown', function (e) {
-          if (e.button) return;
-          d = { sx: e.clientX, sy: e.clientY, ox: card._x, oy: card._y, lx: e.clientX, id: e.pointerId, moved: false, type: e.pointerType };
-        });
-        card.addEventListener('pointermove', function (e) {
-          if (!d) return;
-          if (!d.moved) {
-            if (d.type === 'touch') return;                 /* on touch, a drag is a scroll */
-            if (Math.abs(e.clientX - d.sx) + Math.abs(e.clientY - d.sy) < 6) return;
-            d.moved = true;
-            try { card.setPointerCapture(d.id); } catch (err) {}
-            card.classList.add('dragging');
-            card.style.zIndex = ++zTop;
-            tidyBtn.disabled = false;
-          }
-          card._x = d.ox + e.clientX - d.sx; card._y = d.oy + e.clientY - d.sy;
-          var vx = e.clientX - d.lx; d.lx = e.clientX;
-          card.style.setProperty('--dx', card._x + 'px');
-          card.style.setProperty('--dy', card._y + 'px');
-          card.style.setProperty('--tilt', Math.max(-16, Math.min(16, vx * 1.4)).toFixed(1) + 'deg');
-        });
-        function up() {
-          if (!d) return;
-          if (d.moved) { card._dragged = true; card.classList.remove('dragging'); card.style.setProperty('--tilt', '0deg'); }
-          d = null;
-        }
-        card.addEventListener('pointerup', up);
-        card.addEventListener('pointercancel', up);
-        card.addEventListener('click', function () {
-          if (card._dragged) { card._dragged = false; return; }
-          openViewer(prints.indexOf(card));
-        });
-      });
-      $$('.print__video', wall).forEach(function (v) {
-        var list = (v.getAttribute('data-loop') || v.getAttribute('src')).split('|'), names = (v.getAttribute('data-loop-names') || '').split('|');
-        var label = v.parentNode.querySelector('[data-ver]'), k = 0;
-        v.addEventListener('ended', function () {
-          k = (k + 1) % list.length; v.src = list[k];
-          if (label && names[k]) label.textContent = names[k];
-          var pr = v.play(); if (pr) pr.catch(function () {});
-        });
+      function playWhenVisible(v) {
         if (reduce || !('IntersectionObserver' in window)) return;
         new IntersectionObserver(function (e) {
-          if (e[0].isIntersecting) { var pr = v.play(); if (pr) pr.catch(function () {}); } else v.pause();
-        }, { threshold: .25 }).observe(v);
-      });
+          if (e[0].isIntersecting) {
+            if (!v.src && v.dataset.src) v.src = v.dataset.src;
+            var pr = v.play(); if (pr) pr.catch(function () {});
+          } else if (!v.paused) v.pause();
+        }, { threshold: .2 }).observe(v);
+      }
+      $$('.proj__media video').forEach(playWhenVisible);
 
-      tidyBtn.addEventListener('click', function () {
-        prints.forEach(function (c) { c._x = c._y = 0; c.style.setProperty('--dx', '0px'); c.style.setProperty('--dy', '0px'); c.style.zIndex = ''; });
-        tidyBtn.disabled = true;
+      var items = $$('.loop .lp');
+      $$('[data-loop] .loop__track').forEach(function (t) {
+        $$('.lp', t).forEach(function (el) {
+          var c = el.cloneNode(true);
+          c.setAttribute('data-clone', ''); c.setAttribute('aria-hidden', 'true'); c.tabIndex = -1;
+          c.addEventListener('click', function () { el.click(); });
+          t.appendChild(c);
+        });
       });
+      $$('.loop video').forEach(playWhenVisible);
 
       var viewer = $('[data-viewer]'), vCard = $('[data-v-card]'), cur = 0;
       var vImg = $('[data-v-img]'), vCat = $('[data-v-cat]'), vTitle = $('[data-v-title]'), vKicker = $('[data-v-kicker]');
       var vDesc = $('[data-v-desc]'), vTools = $('[data-v-tools]'), vLink = $('[data-v-link]'), vCount = $('[data-v-count]');
-      var vVideo = $('[data-v-video]'), vVersions = $('[data-v-versions]'), vLinkLabel = $('[data-v-link-label]');
+      var vVideo = $('[data-v-video]'), vYt = $('[data-v-yt]'), vVersions = $('[data-v-versions]'), vLinkLabel = $('[data-v-link-label]');
       var CAT_STYLE = { video: ['var(--blue)', '#fff'], graphic: ['var(--red)', '#fff'], '3d': ['var(--yellow)', '#4A3300'] };
-      function visible() { return prints.filter(function (c) { return !c.classList.contains('dim'); }); }
       function fill() {
-        var c = prints[cur], list = visible(), s = CAT_STYLE[cats(c)[0]];
-        var vids = (c.getAttribute('data-videos') || '').split('|').filter(Boolean);
-        var vNames = (c.getAttribute('data-version-names') || '').split('|'), vLinks = (c.getAttribute('data-links') || '').split('|');
-        var ar = (getComputedStyle(c).getPropertyValue('--ar') || '4/3').split('/'), ratio = (+ar[0] || 4) / (+ar[1] || 3);
-        vCard.classList.toggle('wide', ratio > 2.2);
-        vCard.style.setProperty('--var', ratio > 2.2 ? ratio : '');
+        var c = items[cur], s2 = CAT_STYLE[c.getAttribute('data-cat')] || CAT_STYLE.video;
+        var vids = (c.getAttribute('data-videos') || '').split('|').filter(Boolean), yt = c.getAttribute('data-youtube');
+        vCard.classList.remove('wide');
+        vCard.classList.toggle('yt', !!yt);
         vVersions.innerHTML = '';
-        if (vids.length) {
-          vImg.hidden = true; vVideo.hidden = false;
-          var pick = function (k) {
-            vVideo.src = vids[k]; var pr = vVideo.play(); if (pr) pr.catch(function () {});
-            if (vLinks[k]) vLink.href = vLinks[k];
-            $$('button', vVersions).forEach(function (b, j) { b.setAttribute('aria-pressed', j === k); });
-          };
-          if (vids.length > 1) vids.forEach(function (src, k) {
-            var b = document.createElement('button'); b.type = 'button'; b.textContent = vNames[k] || ('Version ' + (k + 1));
-            b.addEventListener('click', function () { pick(k); });
-            vVersions.appendChild(b);
-          });
-          setTimeout(function () { pick(0); }, 0);
-        } else {
-          vVideo.pause(); vVideo.removeAttribute('src'); vVideo.hidden = true; vImg.hidden = false;
-          vImg.src = c.querySelector('img').src;
-        }
-        vImg.alt = c.getAttribute('data-title');
+        vVideo.pause(); vVideo.removeAttribute('src'); vVideo.hidden = true;
+        vYt.removeAttribute('src'); vYt.hidden = true;
+        vImg.hidden = true;
+        if (yt) { vYt.src = 'https://www.youtube-nocookie.com/embed/' + yt + '?autoplay=1&rel=0'; vYt.hidden = false; }
+        else if (vids.length) { vVideo.hidden = false; vVideo.src = vids[0]; var pr = vVideo.play(); if (pr) pr.catch(function () {}); }
+        else { vImg.hidden = false; vImg.src = c.querySelector('img').src; vImg.alt = c.getAttribute('data-title'); }
         vCat.textContent = c.getAttribute('data-label');
-        vCat.style.setProperty('--sc', s[0]); vCat.style.setProperty('--st', s[1]);
+        vCat.style.setProperty('--sc', s2[0]); vCat.style.setProperty('--st', s2[1]);
         vTitle.textContent = c.getAttribute('data-title');
         vKicker.textContent = c.getAttribute('data-kicker');
         vDesc.textContent = c.getAttribute('data-desc');
         vTools.innerHTML = '';
-        c.getAttribute('data-tools').split(',').forEach(function (t) { var s2 = document.createElement('span'); s2.textContent = t.trim(); vTools.appendChild(s2); });
+        c.getAttribute('data-tools').split(',').forEach(function (t) { var sp = document.createElement('span'); sp.textContent = t.trim(); vTools.appendChild(sp); });
         var href = c.getAttribute('data-href');
         vLink.hidden = !href;
         if (href) vLink.href = href;
-        vLinkLabel.textContent = c.getAttribute('data-link-label') || 'Open project';
-        vCount.textContent = pad(list.indexOf(c) + 1) + ' / ' + pad(list.length);
+        vLinkLabel.textContent = c.getAttribute('data-link-label') || 'ดูโปรเจกต์';
+        vCount.textContent = pad(cur + 1) + ' / ' + pad(items.length);
       }
       function openViewer(i) {
         cur = i; fill();
         if (typeof viewer.showModal === 'function') { if (!viewer.open) viewer.showModal(); }
-        else location.href = prints[i].getAttribute('data-href');
       }
       function step(dir) {
-        var list = visible(), at = list.indexOf(prints[cur]);
-        cur = prints.indexOf(list[(at + dir + list.length) % list.length]);
+        cur = (cur + dir + items.length) % items.length;
         fill();
         vCard.style.setProperty('--from', (dir > 0 ? 50 : -50) + 'px');
         restart(vCard, 'swap');
       }
+      items.forEach(function (el, i) { el.addEventListener('click', function () { openViewer(i); }); });
       $('[data-v-prev]').addEventListener('click', function () { step(-1); });
       $('[data-v-next]').addEventListener('click', function () { step(1); });
       $('[data-v-close]').addEventListener('click', function () { viewer.close(); });
@@ -1969,7 +1736,10 @@
         if (e.key === 'ArrowRight') { e.preventDefault(); step(1); }
         if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1); }
       });
-      viewer.addEventListener('close', function () { vVideo.pause(); vCard.classList.remove('swap'); prints[cur].focus({ preventScroll: true }); });
+      viewer.addEventListener('close', function () {
+        vVideo.pause(); vYt.removeAttribute('src'); vCard.classList.remove('swap');
+        items[cur].focus({ preventScroll: true });
+      });
 
       /* =========================================================
          CONTACT — copy email
@@ -1977,7 +1747,7 @@
       $$('[data-copy]').forEach(function (b) {
         b.addEventListener('click', function () {
           var v = b.getAttribute('data-copy'), c = centerOf(b);
-          var done = function () { say('Copied ' + v); confetti(c[0], c[1], 18); };
+          var done = function () { say('คัดลอกแล้ว: ' + v); confetti(c[0], c[1], 18); };
           if (navigator.clipboard) navigator.clipboard.writeText(v).then(done, function () { say(v); });
           else say(v);
         });
